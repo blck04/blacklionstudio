@@ -49,16 +49,16 @@
     --popover-foreground: 0 0% 69%;
     --primary: 0 0% 69%; /* #B0B0B0 */
     --primary-foreground: 0 0% 7.1%; /* #121212 */
-    --secondary: 0 0% 20%; /* #333333 */
+    --secondary: 232 62% 9%; /* #0B0E23 */
     --secondary-foreground: 0 0% 69%;
-    --muted: 0 0% 20%;
+    --muted: 232 62% 9%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 20%; /* #333333 */
+    --accent: 232 62% 9%; /* #0B0E23 */
     --accent-foreground: 0 0% 69%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%; /* #333333 */
-    --input: 0 0% 20%;
+    --border: 232 62% 9%; /* #0B0E23 */
+    --input: 232 62% 9%;
     --ring: 0 0% 69%; /* #B0B0B0 */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
