@@ -41,8 +41,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
               Back to Portfolio
             </Link>
-            <Separator className="mb-6 md:mb-8 bg-foreground/30" />
-            <h1 className="font-headline text-5xl font-bold tracking-tighter text-foreground md:text-7xl lg:text-9xl">
+            <Separator className="mb-6 md:mb-8 bg-destructive-foreground/30" />
+            <h1 className="font-headline text-5xl font-bold tracking-tighter text-destructive-foreground md:text-7xl lg:text-9xl">
               <span className="text-destructive">{projectTitleUpper.charAt(0)}</span>{projectTitleUpper.slice(1)}
             </h1>
           </div>
@@ -53,7 +53,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               viewBox="0 0 28 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-7 text-foreground/80 animate-bounce"
+              className="h-10 w-7 text-destructive-foreground/80 animate-bounce"
             >
               <path
                 d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
