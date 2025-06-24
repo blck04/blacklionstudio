@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
+import { ThemeToggle } from './theme-toggle';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,8 +42,20 @@ export function Header() {
     }
     
     e.preventDefault();
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+
     if (isHomePage) {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+        if (targetElement) {
+            const headerOffset = 96; // Corresponds to h-24 in Tailwind
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+        }
     } else {
       router.push(`/${href}`);
     }
@@ -52,7 +65,16 @@ export function Header() {
   const handleLetsTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (isHomePage) {
-        document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            const headerOffset = 96; // Corresponds to h-24 in Tailwind
+            const elementPosition = contactSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
     } else {
         router.push('/#contact');
     }
@@ -96,11 +118,14 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-            <Link href="#contact" onClick={handleLetsTalkClick}>
-              Let's Talk
-            </Link>
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+              <Link href="#contact" onClick={handleLetsTalkClick}>
+                Let's Talk
+              </Link>
+            </Button>
+          </div>
         </div>
         <div className="lg:hidden">
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -112,8 +137,9 @@ export function Header() {
                 <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-sm p-0">
                     <SheetTitle className="sr-only">Menu</SheetTitle>
                     <div className="flex flex-col h-full">
-                        <div className="p-6 border-b">
+                        <div className="p-6 border-b flex justify-between items-center">
                             <Logo showText={false} logoSrc="/HEADER-LOGO.png" />
+                            <ThemeToggle />
                         </div>
                         <nav className="flex flex-col gap-1 p-6">
                             {navLinks.map((link) => (

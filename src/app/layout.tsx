@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import ScrollRestoration from '@/components/scroll-restoration';
 import { PageWrapper } from '@/components/page-wrapper';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: 'BLACK LION STUDIO',
@@ -16,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -24,11 +25,16 @@ export default function RootLayout({
         <link href="https://fonts.cdnfonts.com/css/formula-condensed" rel="stylesheet" />
       </head>
       <body className={cn("font-body antialiased")}>
-        <PageWrapper>
-          <ScrollRestoration />
-          {children}
-          <Toaster />
-        </PageWrapper>
+        <ThemeProvider
+          defaultTheme="dark"
+          storageKey="bls-theme"
+        >
+          <PageWrapper>
+            <ScrollRestoration />
+            {children}
+            <Toaster />
+          </PageWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );
