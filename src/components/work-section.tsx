@@ -46,7 +46,6 @@ export function WorkSection() {
                       alt={project.title}
                       width={800}
                       height={600}
-                      data-ai-hint={project.dataAiHint}
                       className="object-cover w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-110"
                     />
                   </div>

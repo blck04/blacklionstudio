@@ -22,7 +22,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <section className="relative w-full flex flex-col justify-center py-24 md:py-32">
           <div className="absolute inset-0">
             <Image
-              src="/project-img.jpg"
+              src={project.imageUrl}
               alt={project.title}
               fill
               priority
