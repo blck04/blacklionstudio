@@ -51,7 +51,7 @@ export function Header() {
       <div className="container mx-auto flex h-20 md:h-24 items-center justify-between px-4 md:px-6">
         <Logo />
         <div className="hidden lg:flex items-center gap-6">
-          <nav className="flex items-center gap-8 text-sm font-medium">
+          <nav className="flex items-center gap-8">
             {navLinks.map((link) => {
               const href = isHomePage
                 ? link.href
@@ -64,7 +64,7 @@ export function Header() {
                   key={link.name}
                   href={href}
                   onClick={(e) => handleNavClick(e, href)}
-                  className="relative group py-2 text-destructive uppercase tracking-wider text-xs"
+                  className="relative group py-2 text-destructive uppercase tracking-wider text-sm font-bold"
                 >
                   {link.name}
                   <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
