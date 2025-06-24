@@ -103,7 +103,7 @@ export function Header() {
       )}
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
-        <div className="flex flex-1 justify-start">
+        <div className="flex flex-1 justify-start h-full items-center">
             <Logo showText={false} logoSrc="/HEADER-LOGO.png"/>
         </div>
         
