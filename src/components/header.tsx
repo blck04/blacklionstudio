@@ -114,11 +114,11 @@ export function Header() {
       )}
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
-        <div className="flex flex-1 justify-start h-full items-center">
+        <div className="flex-1 flex justify-start h-full items-center">
             <Logo showText={false} logoSrc={headerLogo}/>
         </div>
         
-        <nav className="hidden lg:flex flex-1 justify-center items-center gap-8">
+        <nav className="hidden lg:flex justify-center items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
