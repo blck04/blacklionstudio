@@ -102,10 +102,12 @@ export function Header() {
         scrolled ? "bg-background/80 backdrop-blur-sm border-b border-border" : "bg-transparent"
       )}
     >
-      <div className="container mx-auto flex h-20 md:h-24 items-center justify-between px-4 md:px-6">
-        <Logo showText={false} logoSrc="/HEADER-LOGO.png"/>
-        <div className="hidden lg:flex items-center gap-6">
-          <nav className="flex items-center gap-8">
+      <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
+        <div className="flex flex-1 justify-start">
+            <Logo showText={false} logoSrc="/HEADER-LOGO.png"/>
+        </div>
+        
+        <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -117,52 +119,54 @@ export function Header() {
                 <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
               </Link>
             ))}
-          </nav>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-              <Link href="#contact" onClick={handleLetsTalkClick}>
-                Let's Talk
-              </Link>
-            </Button>
-          </div>
-        </div>
-        <div className="lg:hidden">
-            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-                <SheetTrigger asChild>
-                    <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl hover:bg-transparent">
-                        Menu
-                    </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-sm p-0">
-                    <SheetTitle className="sr-only">Menu</SheetTitle>
-                    <div className="flex flex-col h-full">
-                        <div className="p-6 border-b flex justify-between items-center">
-                            <Logo showText={false} logoSrc="/HEADER-LOGO.png" />
-                            <ThemeToggle />
+        </nav>
+        
+        <div className="flex-1 flex justify-end">
+            <div className="hidden lg:flex items-center gap-2">
+                <ThemeToggle />
+                <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                <Link href="#contact" onClick={handleLetsTalkClick}>
+                    Let's Talk
+                </Link>
+                </Button>
+            </div>
+            <div className="lg:hidden">
+                <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+                    <SheetTrigger asChild>
+                        <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl hover:bg-transparent">
+                            Menu
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-sm p-0">
+                        <SheetTitle className="sr-only">Menu</SheetTitle>
+                        <div className="flex flex-col h-full">
+                            <div className="p-6 border-b flex justify-between items-center">
+                                <Logo showText={false} logoSrc="/HEADER-LOGO.png" />
+                                <ThemeToggle />
+                            </div>
+                            <nav className="flex flex-col gap-1 p-6">
+                                {navLinks.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        href={getHref(link)}
+                                        onClick={(e) => handleNavClick(e, link.href)}
+                                        className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
+                                    >
+                                    <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
+                                    </Link>
+                                ))}
+                            </nav>
+                            <div className="mt-auto p-6">
+                                <Button asChild size="lg" className="w-full rounded-full">
+                                    <Link href="#contact" onClick={handleLetsTalkClick}>
+                                        Let's Talk
+                                    </Link>
+                                </Button>
+                            </div>
                         </div>
-                        <nav className="flex flex-col gap-1 p-6">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={getHref(link)}
-                                    onClick={(e) => handleNavClick(e, link.href)}
-                                    className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
-                                >
-                                  <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
-                                </Link>
-                            ))}
-                        </nav>
-                        <div className="mt-auto p-6">
-                            <Button asChild size="lg" className="w-full rounded-full">
-                                <Link href="#contact" onClick={handleLetsTalkClick}>
-                                    Let's Talk
-                                </Link>
-                            </Button>
-                        </div>
-                    </div>
-                </SheetContent>
-            </Sheet>
+                    </SheetContent>
+                </Sheet>
+            </div>
         </div>
       </div>
     </header>
