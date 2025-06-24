@@ -101,7 +101,7 @@ export function Header() {
         <div className="lg:hidden">
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl">
+                    <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl hover:bg-transparent">
                         Menu
                     </Button>
                 </SheetTrigger>
