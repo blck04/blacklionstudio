@@ -12,10 +12,10 @@ const services = [
     title: 'Branding',
     imageUrl: 'https://placehold.co/200x125.png',
     dataAiHint: 'people portrait',
-    details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis urna ligula. Nam convallis nunc in felis mattis, a sollicitudin ligula molestie. Donec tincidunt eu lorem eget varius. Vestibulum ac efficitur ante. Aenean accumsan, justo vel placerat fermentum, elit neque lobortis velit, a varius nibh lorem in tellus.'
+    details: "We build memorable brands that stand out. Our branding process involves deep-diving into your company's essence to create a visual identity and messaging that connects with your audience and builds lasting loyalty."
   },
   {
-    title: 'Web Design',
+    title: 'Web Development',
     imageUrl: 'https://placehold.co/200x125.png',
     dataAiHint: 'website cafe',
     details: 'Our web design services focus on creating stunning, user-centric websites that are both beautiful and highly functional. We blend creativity with the latest technology to build responsive, fast, and SEO-friendly sites that drive results.'
@@ -91,7 +91,7 @@ export function ServicesSection() {
                             <X className="h-6 w-6" />
                           </Button>
                         )}
-                        <span className="text-xl md:text-2xl font-code text-muted-foreground">
+                        <span className="text-xl md:text-2xl font-code text-primary">
                           {`0${index + 1}`}
                         </span>
                         <h3 className="font-headline text-3xl md:text-6xl font-bold tracking-tighter text-left">
