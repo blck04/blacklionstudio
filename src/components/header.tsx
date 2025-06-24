@@ -73,7 +73,7 @@ export function Header() {
             })}
           </nav>
           <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-            <Link href="mailto:hello@blacklionstudio.com">
+            <Link href="#contact">
               Let's Talk
             </Link>
           </Button>
@@ -115,9 +115,11 @@ export function Header() {
                         </nav>
                         <div className="mt-auto p-6">
                             <Button asChild size="lg" className="w-full rounded-full">
-                                <Link href="mailto:hello@blacklionstudio.com">
-                                Let's Talk
-                                </Link>
+                                <SheetClose asChild>
+                                    <Link href="#contact">
+                                        Let's Talk
+                                    </Link>
+                                </SheetClose>
                             </Button>
                         </div>
                     </div>
