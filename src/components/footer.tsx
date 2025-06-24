@@ -27,7 +27,7 @@ export function Footer() {
             />
           </div>
           <div className="relative font-headline font-bold uppercase text-center">
-            <div className="text-muted-foreground text-[15vw] md:text-[12vw] lg:text-[13rem] tracking-tighter -mx-4">
+            <div className="text-foreground text-[15vw] md:text-[12vw] lg:text-[13rem] tracking-tighter -mx-4">
                 <span className="text-destructive">B</span>LACK LION STUDIO
             </div>
           </div>
