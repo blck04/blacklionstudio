@@ -22,7 +22,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Header />
       <main className="flex-1">
-        <section className="relative w-full flex flex-col justify-center py-24 md:py-32">
+        <section className="relative w-full flex flex-col justify-center py-12 md:py-16">
           <div className="absolute inset-0">
             <Image
               src="/project-img.jpg"
