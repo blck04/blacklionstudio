@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -86,7 +85,7 @@ export function Header() {
                 key={link.name}
                 href={getHref(link)}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="relative group py-2 text-destructive uppercase tracking-wider text-sm font-bold"
+                className="relative group py-2 text-destructive uppercase tracking-wider text-base font-bold"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
@@ -102,9 +101,8 @@ export function Header() {
         <div className="lg:hidden">
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                        <Menu className="h-8 w-8 text-destructive" />
-                        <span className="sr-only">Open menu</span>
+                    <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-lg">
+                        Menu
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-sm p-0">
