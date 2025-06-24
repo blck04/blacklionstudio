@@ -7,6 +7,7 @@ import { Header } from '@/components/header';
 import { ContactSection } from '@/components/contact-section';
 import { Separator } from '@/components/ui/separator';
 import { Footer } from '@/components/footer';
+import { cn } from '@/lib/utils';
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
@@ -90,7 +91,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             
             <div className="mt-16 md:mt-20 grid grid-cols-1 gap-4 md:gap-8 md:grid-cols-2">
               {project.galleryImages.map((image, index) => (
-                <div key={index} className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                <div key={index} className="relative overflow-hidden rounded-2xl aspect-[4/3] shadow-[0_0_0_2px_hsl(var(--secondary)),0_0_0_4px_hsl(var(--destructive))]">
                     <Image 
                         src={image.url}
                         alt={image.alt}

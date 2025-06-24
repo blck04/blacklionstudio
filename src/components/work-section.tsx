@@ -40,7 +40,7 @@ export function WorkSection() {
                       {project.category}
                     </p>
                   </div>
-                  <div className="relative overflow-hidden rounded-2xl md:rounded-3xl aspect-[4/3]">
+                  <div className="relative overflow-hidden rounded-2xl md:rounded-3xl aspect-[4/3] shadow-[0_0_0_2px_hsl(var(--secondary)),0_0_0_4px_hsl(var(--destructive))]">
                     <Image
                       src={project.imageUrl}
                       alt={project.title}
