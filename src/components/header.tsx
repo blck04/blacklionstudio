@@ -64,10 +64,10 @@ export function Header() {
                   key={link.name}
                   href={href}
                   onClick={(e) => handleNavClick(e, href)}
-                  className="relative group py-2 text-foreground transition-colors hover:text-primary uppercase tracking-wider text-xs"
+                  className="relative group py-2 text-destructive uppercase tracking-wider text-xs"
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-primary scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
+                  <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
                 </Link>
               );
             })}
