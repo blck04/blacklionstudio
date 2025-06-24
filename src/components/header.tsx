@@ -28,11 +28,17 @@ export function Header() {
     { name: 'Services', href: '#services' },
     { name: 'Portfolio', href: '#work' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Manager', href: '/manager' },
   ];
   
   const isHomePage = pathname === '/';
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // For page links like '/manager', do nothing and let the Link component handle it.
+    if (href.startsWith('/')) {
+      return;
+    }
+    
     e.preventDefault();
     if (isHomePage) {
       document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
@@ -40,6 +46,29 @@ export function Header() {
       router.push(`/${href}`);
     }
   };
+  
+  const handleLetsTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (isHomePage) {
+        document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        router.push('/#contact');
+    }
+  };
+
+  const getHref = (link: { href: string }) => {
+    if (link.href.startsWith('/')) {
+      return link.href; // It's a page link
+    }
+    if (isHomePage) {
+      return link.href; // It's a hash on the home page
+    }
+    if (link.href === '#home') {
+      return '/'; // Special case for home
+    }
+    return `/${link.href}`; // It's a hash on another page
+  };
+
 
   return (
     <header
@@ -52,28 +81,20 @@ export function Header() {
         <Logo />
         <div className="hidden lg:flex items-center gap-6">
           <nav className="flex items-center gap-8">
-            {navLinks.map((link) => {
-              const href = isHomePage
-                ? link.href
-                : link.href === '#home'
-                ? '/'
-                : `/${link.href}`;
-              
-              return (
-                <Link
-                  key={link.name}
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className="relative group py-2 text-destructive uppercase tracking-wider text-sm font-bold"
-                >
-                  {link.name}
-                  <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={getHref(link)}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="relative group py-2 text-destructive uppercase tracking-wider text-sm font-bold"
+              >
+                {link.name}
+                <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
+              </Link>
+            ))}
           </nav>
           <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-            <Link href="#contact">
+            <Link href="#contact" onClick={handleLetsTalkClick}>
               Let's Talk
             </Link>
           </Button>
@@ -93,30 +114,22 @@ export function Header() {
                             <Logo />
                         </div>
                         <nav className="flex flex-col gap-1 p-6">
-                            {navLinks.map((link) => {
-                                const href = isHomePage
-                                ? link.href
-                                : link.href === '#home'
-                                ? '/'
-                                : `/${link.href}`;
-                                
-                                return (
+                            {navLinks.map((link) => (
                                 <SheetClose asChild key={link.name}>
                                     <Link
-                                        href={href}
-                                        onClick={(e) => handleNavClick(e, href)}
+                                        href={getHref(link)}
+                                        onClick={(e) => handleNavClick(e, link.href)}
                                         className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
                                     >
                                         {link.name}
                                     </Link>
                                 </SheetClose>
-                                );
-                            })}
+                            ))}
                         </nav>
                         <div className="mt-auto p-6">
                             <Button asChild size="lg" className="w-full rounded-full">
                                 <SheetClose asChild>
-                                    <Link href="#contact">
+                                    <Link href="#contact" onClick={handleLetsTalkClick}>
                                         Let's Talk
                                     </Link>
                                 </SheetClose>
