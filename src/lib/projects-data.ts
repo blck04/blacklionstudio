@@ -12,8 +12,8 @@ export const projects = [
       services: 'Branding, Web Design, UX/UI',
     },
     galleryImages: [
-        { url: 'https://placehold.co/800x600.png', alt: 'Project image 1', dataAiHint: 'architectural sketch' },
-        { url: 'https://placehold.co/800x600.png', alt: 'Project image 2', dataAiHint: 'building facade' },
+        { url: '/project-1.jpeg', alt: 'Project image 1', dataAiHint: 'architectural sketch' },
+        { url: '/project-1a.jpeg', alt: 'Project image 2', dataAiHint: 'building facade' },
     ],
   },
   {
@@ -29,8 +29,8 @@ export const projects = [
         services: 'Web Development, UI/UX, System Architecture',
     },
     galleryImages: [
-        { url: 'https://placehold.co/800x600.png', alt: 'Project image 1', dataAiHint: 'data chart' },
-        { url: 'https://placehold.co/800x600.png', alt: 'Project image 2', dataAiHint: 'user interface' },
+        { url: '/project-2.jpeg', alt: 'Project image 1', dataAiHint: 'data chart' },
+        { url: '/project-2a.jpeg', alt: 'Project image 2', dataAiHint: 'user interface' },
     ],
   },
   {
@@ -46,8 +46,8 @@ export const projects = [
         services: 'E-commerce, Digital Strategy, UX Design',
     },
     galleryImages: [
-        { url: 'https://placehold.co/800x600.png', alt: 'Project image 1', dataAiHint: 'fashion model' },
-        { url: 'https://placehold.co/800x600.png', alt: 'Project image 2', dataAiHint: 'product detail' },
+        { url: '/project-3.jpeg', alt: 'Project image 1', dataAiHint: 'fashion model' },
+        { url: '/project-3a.jpeg', alt: 'Project image 2', dataAiHint: 'product detail' },
     ],
   },
 ];
