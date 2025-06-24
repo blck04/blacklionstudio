@@ -14,8 +14,13 @@ export function Header() {
   const { theme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,9 +101,9 @@ export function Header() {
     return `/${link.href}`; // It's a hash on another page
   };
   
-  const headerLogo = theme === 'dark' 
-    ? '/HEADER-LOGO-DARK-MODE.png' 
-    : '/HEADER-LOGO-LIGHT-MODE.png';
+  const headerLogo = mounted && theme === 'light' 
+    ? '/HEADER-LOGO-LIGHT-MODE.png' 
+    : '/HEADER-LOGO-DARK-MODE.png';
 
 
   return (
@@ -113,7 +118,7 @@ export function Header() {
             <Logo showText={false} logoSrc={headerLogo}/>
         </div>
         
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex flex-1 justify-center items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}

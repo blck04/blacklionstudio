@@ -4,10 +4,17 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { TypingAnimation } from './typing-animation';
 import { useTheme } from './theme-provider';
+import { useState, useEffect } from 'react';
 
 export function Loader({ className }: { className?: string }) {
   const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/LOGO-DARK-MODE.png' : '/LOGO-LIGHT-MODE.png';
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const logoSrc = mounted && theme === 'light' ? '/LOGO-LIGHT-MODE.png' : '/LOGO-DARK-MODE.png';
 
   return (
     <div className={cn(

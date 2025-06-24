@@ -2,10 +2,17 @@
 
 import Image from 'next/image';
 import { useTheme } from './theme-provider';
+import { useState, useEffect } from 'react';
 
 export function Footer() {
   const { theme } = useTheme();
-  const logoSrc = theme === 'dark' ? '/LOGO-DARK-MODE.png' : '/LOGO-LIGHT-MODE.png';
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const logoSrc = mounted && theme === 'light' ? '/LOGO-LIGHT-MODE.png' : '/LOGO-DARK-MODE.png';
 
   return (
     <footer className="bg-background text-muted-foreground border-t">
