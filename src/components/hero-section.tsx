@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { SocialLinks } from '@/components/social-links';
 import { MadeWithLoveSeal } from './made-with-love-seal';
 
 export function HeroSection() {
@@ -31,10 +30,6 @@ export function HeroSection() {
         </h1>
       </div>
       
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20">
-         <SocialLinks />
-      </div>
-
       <Link 
         href="#about"
         aria-label="Scroll to about section"
