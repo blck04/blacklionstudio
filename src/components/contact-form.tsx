@@ -50,7 +50,7 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Name" {...field} className="h-14 rounded-full px-6 border-foreground/50"/>
+                  <Input placeholder="Name" {...field} className="h-14 rounded-full px-6 border-foreground/50 focus-visible:ring-destructive"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -62,7 +62,7 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Email" type="email" {...field} className="h-14 rounded-full px-6 border-foreground/50"/>
+                  <Input placeholder="Email" type="email" {...field} className="h-14 rounded-full px-6 border-foreground/50 focus-visible:ring-destructive"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -75,7 +75,7 @@ export function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="Message" {...field} className="min-h-40 rounded-[2rem] p-6 border-foreground/50" />
+                <Textarea placeholder="Message" {...field} className="min-h-40 rounded-[2rem] p-6 border-foreground/50 focus-visible:ring-destructive" />
               </FormControl>
               <FormMessage />
             </FormItem>
