@@ -16,28 +16,28 @@ export function ContactSection() {
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
                 <Link href="tel:+15551234567" aria-label="Call us">
-                  <Button variant="outline" size="icon" className="rounded-full border-muted-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-                      <Phone className="text-destructive" />
+                  <Button variant="outline" size="icon" className="group rounded-full border-muted-foreground/50 hover:bg-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                      <Phone className="text-destructive group-hover:text-primary-foreground" />
                   </Button>
                 </Link>
                 <Link href="mailto:hello@blacklionstudio.com" aria-label="Email us">
-                  <Button variant="outline" size="icon" className="rounded-full border-muted-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-                      <Mail className="text-destructive" />
+                  <Button variant="outline" size="icon" className="group rounded-full border-muted-foreground/50 hover:bg-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                      <Mail className="text-destructive group-hover:text-primary-foreground" />
                   </Button>
                 </Link>
                 <Link href="#" aria-label="Facebook">
-                  <Button variant="outline" size="icon" className="rounded-full border-muted-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-                      <Facebook className="text-destructive" />
+                  <Button variant="outline" size="icon" className="group rounded-full border-muted-foreground/50 hover:bg-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                      <Facebook className="text-destructive group-hover:text-primary-foreground" />
                   </Button>
                 </Link>
                 <Link href="#" aria-label="Twitter">
-                  <Button variant="outline" size="icon" className="rounded-full border-muted-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-                      <Twitter className="text-destructive" />
+                  <Button variant="outline" size="icon" className="group rounded-full border-muted-foreground/50 hover:bg-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                      <Twitter className="text-destructive group-hover:text-primary-foreground" />
                   </Button>
                 </Link>
                 <Link href="#" aria-label="Instagram">
-                  <Button variant="outline" size="icon" className="rounded-full border-muted-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
-                      <Instagram className="text-destructive" />
+                  <Button variant="outline" size="icon" className="group rounded-full border-muted-foreground/50 hover:bg-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                      <Instagram className="text-destructive group-hover:text-primary-foreground" />
                   </Button>
                 </Link>
               </div>
