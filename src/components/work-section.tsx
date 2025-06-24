@@ -36,7 +36,7 @@ export function WorkSection() {
                     )}>
                       {project.title}
                     </h3>
-                    <p className="mt-6 text-destructive uppercase tracking-widest text-sm">
+                    <p className="mt-6 text-destructive uppercase tracking-widest text-sm font-bold">
                       {project.category}
                     </p>
                   </div>
