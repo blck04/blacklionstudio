@@ -90,12 +90,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             
             <div className="mt-16 md:mt-20 grid grid-cols-1 gap-4 md:gap-8 md:grid-cols-2">
               {project.galleryImages.map((image, index) => (
-                <div key={index} className="overflow-hidden rounded-2xl">
+                <div key={index} className="relative overflow-hidden rounded-2xl aspect-[4/3]">
                     <Image 
                         src={image.url}
                         alt={image.alt}
-                        width={800}
-                        height={600}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                         data-ai-hint={image.dataAiHint}
                     />

@@ -40,12 +40,12 @@ export function WorkSection() {
                       {project.category}
                     </p>
                   </div>
-                  <div className="overflow-hidden rounded-2xl md:rounded-3xl">
+                  <div className="relative overflow-hidden rounded-2xl md:rounded-3xl aspect-[4/3]">
                     <Image
                       src={project.imageUrl}
                       alt={project.title}
-                      width={800}
-                      height={600}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-110"
                     />
                   </div>
