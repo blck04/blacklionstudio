@@ -15,7 +15,7 @@ export function Logo({ className }: { className?: string }) {
         )}
       />
       <span className="font-headline text-2xl md:text-5xl font-bold tracking-tighter uppercase text-foreground">
-        BLACK LION STUDIO
+        <span className="text-destructive">B</span>LACK LION STUDIO
       </span>
     </Link>
   );

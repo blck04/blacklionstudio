@@ -12,7 +12,7 @@ export function ContactSection() {
           <ScrollAnimation>
             <div className="flex flex-col gap-8">
               <h2 className="font-headline font-bold tracking-tighter text-6xl md:text-7xl lg:text-8xl text-primary text-center md:text-left">
-                LET'S WORK TOGETHER
+                <span className="text-destructive">L</span>ET'S WORK TOGETHER
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
                 <Link href="tel:+15551234567" aria-label="Call us">

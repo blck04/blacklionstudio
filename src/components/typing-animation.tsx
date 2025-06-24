@@ -17,7 +17,10 @@ export function TypingAnimation({ text, className, stagger = 0.05 }: TypingAnima
       {letters.map((letter, index) => (
         <span
           key={index}
-          className="inline-block animate-wave-in opacity-0"
+          className={cn(
+            "inline-block animate-wave-in opacity-0",
+            index === 0 && "text-destructive"
+          )}
           style={{ animationDelay: `${(index * stagger).toFixed(3)}s`, animationFillMode: 'forwards' }}
         >
           {letter === " " ? "\u00A0" : letter}
