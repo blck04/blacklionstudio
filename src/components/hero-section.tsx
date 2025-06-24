@@ -18,7 +18,7 @@ export function HeroSection() {
       {/* Content */}
       <div className="container mx-auto px-4 md:px-6 z-10">
         <h1 
-          className="font-headline font-bold tracking-tighter text-6xl md:text-8xl lg:text-9xl text-balance animate-fade-in-up opacity-0 text-center uppercase text-primary-foreground"
+          className="font-headline font-bold tracking-tighter text-6xl md:text-8xl lg:text-9xl text-balance animate-fade-in-up opacity-0 text-center uppercase text-destructive-foreground"
           style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
         >
           <span className="block">We Craft Digital</span>
