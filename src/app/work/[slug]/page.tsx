@@ -36,7 +36,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <div className="container relative z-10 mx-auto px-4 md:px-6">
             <Link
               href="/#work"
-              className="group mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-destructive transition-colors"
+              className="group mb-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-destructive transition-colors"
             >
               <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
               Back to Portfolio
