@@ -16,6 +16,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  const projectTitleUpper = project.title.toUpperCase();
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Header />
@@ -34,14 +36,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <div className="container relative z-10 mx-auto px-4 md:px-6">
             <Link
               href="/#work"
-              className="group mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-foreground/80 transition-colors hover:text-foreground"
+              className="group mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-destructive transition-colors"
             >
               <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
               Back to Portfolio
             </Link>
             <Separator className="mb-6 md:mb-8 bg-foreground/30" />
             <h1 className="font-headline text-5xl font-bold tracking-tighter text-foreground md:text-7xl lg:text-9xl">
-              {project.title.toUpperCase()}
+              <span className="text-destructive">{projectTitleUpper.charAt(0)}</span>{projectTitleUpper.slice(1)}
             </h1>
           </div>
           <div className="absolute bottom-10 right-10 z-10 hidden md:block">
