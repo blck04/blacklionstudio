@@ -10,26 +10,22 @@ import { cn } from '@/lib/utils';
 const services = [
   {
     title: 'Branding',
-    imageUrl: 'https://placehold.co/200x125.png',
-    dataAiHint: 'people portrait',
+    imageUrl: '/branding-img.jpg',
     details: "We build memorable brands that stand out. Our branding process involves deep-diving into your company's essence to create a visual identity and messaging that connects with your audience and builds lasting loyalty."
   },
   {
     title: 'Web Development',
-    imageUrl: 'https://placehold.co/200x125.png',
-    dataAiHint: 'website cafe',
+    imageUrl: '/web-dev-img.jpg',
     details: 'Our web design services focus on creating stunning, user-centric websites that are both beautiful and highly functional. We blend creativity with the latest technology to build responsive, fast, and SEO-friendly sites that drive results.'
   },
   {
     title: 'Digital Strategy',
-    imageUrl: 'https://placehold.co/200x125.png',
-    dataAiHint: 'marketing graphs',
+    imageUrl: '/digital.strategy.png',
     details: 'We craft data-driven digital strategies that help your brand connect with its target audience. From social media management to content marketing and SEO, we develop a comprehensive plan to boost your online presence and achieve your business goals.'
   },
   {
     title: 'UI/UX Design',
-    imageUrl: 'https://placehold.co/200x125.png',
-    dataAiHint: 'wireframe sketch',
+    imageUrl: '/ui-ux-design-img.png',
     details: 'We create intuitive and engaging user interfaces and experiences. Our process is user-centered, focusing on research, wireframing, prototyping, and user testing to deliver products that are not only beautiful but also easy and enjoyable to use.'
   }
 ];
@@ -120,7 +116,6 @@ export function ServicesSection() {
                               "object-cover w-full h-full transition-transform duration-500 ease-in-out",
                               "group-hover:scale-110"
                           )}
-                          data-ai-hint={service.dataAiHint}
                         />
                       </div>
                     )}
