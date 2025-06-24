@@ -103,7 +103,7 @@ export function Header() {
             <Sheet>
                 <SheetTrigger asChild>
                     <Button variant="ghost" size="icon">
-                        <Menu className="h-8 w-8" />
+                        <Menu className="h-8 w-8 text-destructive" />
                         <span className="sr-only">Open menu</span>
                     </Button>
                 </SheetTrigger>
@@ -121,7 +121,7 @@ export function Header() {
                                         onClick={(e) => handleNavClick(e, link.href)}
                                         className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
                                     >
-                                        {link.name}
+                                      <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
                                     </Link>
                                 </SheetClose>
                             ))}
