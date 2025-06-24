@@ -78,7 +78,7 @@ export function Header() {
       )}
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center justify-between px-4 md:px-6">
-        <Logo />
+        <Logo showText={false} logoSrc="/HEADER-LOGO.png"/>
         <div className="hidden lg:flex items-center gap-6">
           <nav className="flex items-center gap-8">
             {navLinks.map((link) => (
@@ -111,7 +111,7 @@ export function Header() {
                     <SheetTitle className="sr-only">Menu</SheetTitle>
                     <div className="flex flex-col h-full">
                         <div className="p-6 border-b">
-                            <Logo />
+                            <Logo showText={false} logoSrc="/HEADER-LOGO.png" />
                         </div>
                         <nav className="flex flex-col gap-1 p-6">
                             {navLinks.map((link) => (

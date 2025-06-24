@@ -9,7 +9,7 @@ export function Loader({ className }: { className?: string }) {
         className
     )}>
         <Image
-            src="/logo.png"
+            src="/HEADER-LOGO.png"
             alt="BLACK LION STUDIO Logo"
             width={250}
             height={66}
@@ -17,7 +17,7 @@ export function Loader({ className }: { className?: string }) {
             priority
         />
         <div className="mt-6">
-            <TypingAnimation text="BLACK LION STUDIO" />
+            <TypingAnimation text="DISTINCT . REFINED . TIMELESS" />
         </div>
     </div>
   );
