@@ -6,10 +6,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
-import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -33,8 +34,9 @@ export function Header() {
   const isHomePage = pathname === '/';
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // For page links like '/manager', do nothing and let the Link component handle it.
+    // For page links like '/manager', let the Link component handle it.
     if (href.startsWith('/')) {
+      setIsSheetOpen(false);
       return;
     }
     
@@ -44,6 +46,7 @@ export function Header() {
     } else {
       router.push(`/${href}`);
     }
+    setIsSheetOpen(false);
   };
   
   const handleLetsTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -53,6 +56,7 @@ export function Header() {
     } else {
         router.push('/#contact');
     }
+    setIsSheetOpen(false);
   };
 
   const getHref = (link: { href: string }) => {
@@ -99,7 +103,7 @@ export function Header() {
           </Button>
         </div>
         <div className="lg:hidden">
-            <Sheet>
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                 <SheetTrigger asChild>
                     <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl hover:bg-transparent">
                         Menu
@@ -113,24 +117,21 @@ export function Header() {
                         </div>
                         <nav className="flex flex-col gap-1 p-6">
                             {navLinks.map((link) => (
-                                <SheetClose asChild key={link.name}>
-                                    <Link
-                                        href={getHref(link)}
-                                        onClick={(e) => handleNavClick(e, link.href)}
-                                        className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
-                                    >
-                                      <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
-                                    </Link>
-                                </SheetClose>
+                                <Link
+                                    key={link.name}
+                                    href={getHref(link)}
+                                    onClick={(e) => handleNavClick(e, link.href)}
+                                    className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
+                                >
+                                  <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
+                                </Link>
                             ))}
                         </nav>
                         <div className="mt-auto p-6">
                             <Button asChild size="lg" className="w-full rounded-full">
-                                <SheetClose asChild>
-                                    <Link href="#contact" onClick={handleLetsTalkClick}>
-                                        Let's Talk
-                                    </Link>
-                                </SheetClose>
+                                <Link href="#contact" onClick={handleLetsTalkClick}>
+                                    Let's Talk
+                                </Link>
                             </Button>
                         </div>
                     </div>

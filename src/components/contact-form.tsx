@@ -81,7 +81,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" size="lg" className="group rounded-full px-8 py-7 text-lg w-full">
+        <Button type="submit" size="lg" className="group rounded-full px-8 py-7 text-lg w-full border border-destructive">
           Send Message
           <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
