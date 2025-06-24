@@ -9,7 +9,7 @@ export function Loader({ className }: { className?: string }) {
         className
     )}>
         <Image
-            src="/HEADER-LOGO.png"
+            src="/logo.png"
             alt="BLACK LION STUDIO Logo"
             width={250}
             height={66}
