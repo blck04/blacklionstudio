@@ -1,13 +1,19 @@
+"use client";
+
 import Image from 'next/image';
+import { useTheme } from './theme-provider';
 
 export function Footer() {
+  const { theme } = useTheme();
+  const logoSrc = theme === 'dark' ? '/LOGO-DARK-MODE.png' : '/LOGO-LIGHT-MODE.png';
+
   return (
     <footer className="bg-background text-muted-foreground border-t">
       <div className="container mx-auto px-4 md:px-6 pt-8 md:pt-12 pb-4">
         <div className="flex flex-col items-center">
           <div className="mb-4">
             <Image
-              src="/logo.png"
+              src={logoSrc}
               alt="BLACK LION STUDIO Logo"
               width={200}
               height={53}

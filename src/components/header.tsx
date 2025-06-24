@@ -8,8 +8,10 @@ import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { ThemeToggle } from './theme-toggle';
+import { useTheme } from './theme-provider';
 
 export function Header() {
+  const { theme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const pathname = usePathname();
@@ -93,6 +95,10 @@ export function Header() {
     }
     return `/${link.href}`; // It's a hash on another page
   };
+  
+  const headerLogo = theme === 'dark' 
+    ? '/HEADER-LOGO-DARK-MODE.png' 
+    : '/HEADER-LOGO-LIGHT-MODE.png';
 
 
   return (
@@ -104,7 +110,7 @@ export function Header() {
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
         <div className="flex flex-1 justify-start h-full items-center">
-            <Logo showText={false} logoSrc="/HEADER-LOGO.png"/>
+            <Logo showText={false} logoSrc={headerLogo}/>
         </div>
         
         <nav className="hidden lg:flex items-center gap-8">
@@ -141,7 +147,7 @@ export function Header() {
                         <SheetTitle className="sr-only">Menu</SheetTitle>
                         <div className="flex flex-col h-full">
                             <div className="p-6 border-b flex justify-between items-center">
-                                <Logo showText={false} logoSrc="/HEADER-LOGO.png" />
+                                <Logo showText={false} logoSrc={headerLogo} />
                                 <ThemeToggle />
                             </div>
                             <nav className="flex flex-col gap-1 p-6">
