@@ -26,6 +26,12 @@ const services = [
     dataAiHint: 'marketing graphs',
     details: 'We craft data-driven digital strategies that help your brand connect with its target audience. From social media management to content marketing and SEO, we develop a comprehensive plan to boost your online presence and achieve your business goals.'
   },
+  {
+    title: 'UI/UX Design',
+    imageUrl: 'https://placehold.co/200x125.png',
+    dataAiHint: 'wireframe sketch',
+    details: 'We create intuitive and engaging user interfaces and experiences. Our process is user-centered, focusing on research, wireframing, prototyping, and user testing to deliver products that are not only beautiful but also easy and enjoyable to use.'
+  }
 ];
 
 export function ServicesSection() {
