@@ -27,7 +27,7 @@ export function AboutSection() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
             <div className="text-center md:text-left">
               <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-primary">
-                ABOUT
+                <span className="text-destructive">A</span>BOUT
               </h2>
             </div>
             <div className="text-center md:text-left">

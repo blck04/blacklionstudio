@@ -12,7 +12,7 @@ export function WorkSection() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
             <div className="text-center md:text-left">
               <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-primary">
-                OUR WORK
+                <span className="text-destructive">O</span>UR WORK
               </h2>
             </div>
             <div className="text-center md:text-right">
@@ -36,7 +36,7 @@ export function WorkSection() {
                     )}>
                       {project.title}
                     </h3>
-                    <p className="mt-6 text-muted-foreground uppercase tracking-widest text-sm">
+                    <p className="mt-6 text-destructive uppercase tracking-widest text-sm">
                       {project.category}
                     </p>
                   </div>

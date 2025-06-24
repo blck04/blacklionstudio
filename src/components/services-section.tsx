@@ -44,7 +44,7 @@ export function ServicesSection() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
             <div className="text-center md:order-last md:text-right">
               <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-primary text-center md:text-right">
-                SERVICES
+                <span className="text-destructive">S</span>ERVICES
               </h2>
             </div>
             <div className="text-center md:text-left">
@@ -87,7 +87,7 @@ export function ServicesSection() {
                             <X className="h-6 w-6" />
                           </Button>
                         )}
-                        <span className="text-xl md:text-2xl font-code text-primary">
+                        <span className="text-xl md:text-2xl font-code text-destructive">
                           {`0${index + 1}`}
                         </span>
                         <h3 className="font-headline text-3xl md:text-6xl font-bold tracking-tighter text-left">
