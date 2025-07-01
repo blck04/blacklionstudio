@@ -16,7 +16,7 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="container px-4 md:px-6 z-10">
-        <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-[#121212] text-balance">
+        <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-[#121212] text-balance">
             We Craft Digital<br />
             Experiences That<br />
             Resonate.
