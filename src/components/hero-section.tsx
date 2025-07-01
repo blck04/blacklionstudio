@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative w-full h-screen flex flex-col justify-center items-center text-center text-foreground overflow-hidden">
+    <section id="home" className="relative w-full h-screen flex flex-col justify-center items-start text-left text-foreground overflow-hidden">
       {/* Background Image */}
       <Image
         src="/lion-hero.png"
@@ -15,7 +15,12 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-black/0 -z-10" />
 
       {/* Content */}
-      <div className="container mx-auto px-4 md:px-6 z-10">
+      <div className="container px-4 md:px-6 z-10">
+        <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-[#121212] text-balance">
+            We Craft Digital<br />
+            Experiences That<br />
+            Resonate
+        </h1>
       </div>
       
       <Link 
