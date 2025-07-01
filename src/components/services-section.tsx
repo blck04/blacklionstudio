@@ -40,10 +40,10 @@ export function ServicesSection() {
               <ScrollAnimation key={service.title} delay={index * 150}>
                 <div
                   className={cn(
-                    "group border border-border/50 rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 transition-all duration-500 ease-in-out",
+                    "group border border-border/50 rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 transition-all duration-500 ease-in-out bg-card",
                     isExpanded 
-                      ? "bg-card/5 shadow-[0_0_25px_hsl(var(--primary)/0.3)]" 
-                      : "cursor-pointer hover:border-primary/80 hover:bg-card/5 hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]"
+                      ? "shadow-[0_0_25px_hsl(var(--primary)/0.3)]" 
+                      : "cursor-pointer hover:border-primary/80 hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]"
                   )}
                   onClick={() => !isExpanded && handleToggle(index)}
                 >
