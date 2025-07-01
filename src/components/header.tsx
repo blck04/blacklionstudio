@@ -137,7 +137,7 @@ export function Header() {
                             Menu
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-sm p-0">
+                    <SheetContent side="right" className="w-[300px] bg-background/5 backdrop-blur-md p-0">
                         <SheetTitle className="sr-only">Menu</SheetTitle>
                         <div className="flex flex-col h-full">
                             <div className="p-6 border-b flex justify-between items-center">
@@ -149,7 +149,7 @@ export function Header() {
                                         key={link.name}
                                         href={getHref(link)}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="py-3 text-4xl font-headline font-bold tracking-tighter text-foreground/80 hover:text-primary transition-colors uppercase"
+                                        className="py-3 text-4xl font-headline font-bold tracking-tighter text-destructive-foreground hover:text-primary transition-colors uppercase"
                                     >
                                     <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
                                     </Link>
