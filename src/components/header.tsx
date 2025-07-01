@@ -112,7 +112,7 @@ export function Header() {
         
         <div className="flex-1 flex justify-end">
             <div className="hidden lg:flex items-center gap-2">
-                <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
+                <Button asChild variant="default" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
                 <Link href="#contact" onClick={handleLetsTalkClick}>
                     Let's Talk
                 </Link>
