@@ -6,7 +6,7 @@ import { ScrollAnimation } from './scroll-animation';
 
 export function WorkSection() {
   return (
-    <section id="work" className="py-20 md:py-32 text-foreground border-b overflow-hidden">
+    <section id="work" className="py-20 md:py-32 text-foreground border-t-2 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <ScrollAnimation>
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">

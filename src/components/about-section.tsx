@@ -21,7 +21,7 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-16 md:py-24 text-foreground border-t border-b overflow-hidden">
+    <section id="about" className="py-16 md:py-24 text-foreground border-t-2 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <ScrollAnimation>
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">

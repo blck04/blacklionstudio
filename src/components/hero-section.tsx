@@ -4,7 +4,7 @@ import { MadeWithLoveSeal } from './made-with-love-seal';
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative w-full h-[calc(100svh-5rem)] md:h-[calc(100vh-6rem)] flex flex-col justify-center items-center text-center text-foreground overflow-hidden border-t">
+    <section id="home" className="relative w-full h-[calc(100svh-5rem)] md:h-[calc(100vh-6rem)] flex flex-col justify-center items-center text-center text-foreground overflow-hidden border-t-2">
       {/* Background Image */}
       <Image
         src="/hero-bg-img.jpg"
