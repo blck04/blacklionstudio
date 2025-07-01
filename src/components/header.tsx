@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -89,7 +89,7 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent"
+      className="fixed top-0 z-50 w-full transition-all duration-300 bg-transparent"
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
         <div className="flex-1 flex justify-start h-full items-center">
