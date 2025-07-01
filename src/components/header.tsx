@@ -104,7 +104,7 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
+        scrolled ? "bg-background/[.03] backdrop-blur-sm" : "bg-transparent"
       )}
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
