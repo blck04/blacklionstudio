@@ -11,7 +11,7 @@ export function ContactSection() {
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
           <ScrollAnimation>
             <div className="flex flex-col gap-8">
-              <h2 className="font-headline font-bold tracking-tighter text-6xl md:text-7xl lg:text-8xl text-primary text-center md:text-left">
+              <h2 className="font-headline font-bold tracking-tighter text-6xl md:text-8xl lg:text-9xl text-primary text-center md:text-left">
                 <span className="text-destructive">L</span>ET'S WORK TOGETHER
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
