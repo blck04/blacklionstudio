@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MadeWithLoveSeal } from './made-with-love-seal';
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative w-full h-[calc(100svh-5rem)] md:h-[calc(100vh-6rem)] flex flex-col justify-center items-center text-center text-foreground overflow-hidden border-t-2">
+    <section id="home" className="relative w-full h-screen flex flex-col justify-center items-center text-center text-foreground overflow-hidden">
       {/* Background Image */}
       <Image
         src="/lion-hero.png"

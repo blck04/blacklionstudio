@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -9,18 +9,9 @@ import { Logo } from '@/components/logo';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -98,10 +89,7 @@ export function Header() {
 
   return (
     <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-sm border-b border-border" : "bg-transparent"
-      )}
+      className="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent"
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">
         <div className="flex-1 flex justify-start h-full items-center">
