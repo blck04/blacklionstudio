@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export default function ManagerPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
         <div className="flex items-center justify-between mb-8">

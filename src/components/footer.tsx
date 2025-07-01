@@ -15,7 +15,7 @@ export function Footer() {
   const logoSrc = mounted && theme === 'light' ? '/LOGO-LIGHT-MODE.png' : '/LOGO-DARK-MODE.png';
 
   return (
-    <footer className="bg-background text-muted-foreground border-t">
+    <footer className="text-muted-foreground border-t">
       <div className="container mx-auto px-4 md:px-6 pt-8 md:pt-12 pb-4">
         <div className="flex flex-col items-center">
           <div className="mb-4">

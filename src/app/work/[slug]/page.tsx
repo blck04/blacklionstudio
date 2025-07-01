@@ -19,7 +19,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const projectTitleUpper = project.title.toUpperCase();
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="flex flex-col min-h-screen text-foreground">
       <Header />
       <main className="flex-1">
         <section className="relative w-full flex flex-col justify-center py-12 md:py-16">
