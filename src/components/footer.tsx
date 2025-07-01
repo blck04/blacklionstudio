@@ -1,18 +1,9 @@
 "use client";
 
 import Image from 'next/image';
-import { useTheme } from './theme-provider';
-import { useState, useEffect } from 'react';
 
 export function Footer() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const logoSrc = mounted && theme === 'light' ? '/LOGO-LIGHT-MODE.png' : '/LOGO-DARK-MODE.png';
+  const logoSrc = '/LOGO-LIGHT-MODE.png';
 
   return (
     <footer className="text-muted-foreground border-t-2">

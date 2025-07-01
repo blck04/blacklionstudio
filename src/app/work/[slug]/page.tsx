@@ -31,7 +31,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/0 dark:bg-black/50" />
+            <div className="absolute inset-0 bg-black/0" />
           </div>
           <div className="container relative z-10 mx-auto px-4 md:px-6">
             <Link

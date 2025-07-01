@@ -7,20 +7,12 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
-import { ThemeToggle } from './theme-toggle';
-import { useTheme } from './theme-provider';
 
 export function Header() {
-  const { theme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,9 +93,7 @@ export function Header() {
     return `/${link.href}`; // It's a hash on another page
   };
   
-  const headerLogo = mounted && theme === 'light' 
-    ? '/HEADER-LOGO-LIGHT-MODE.png' 
-    : '/HEADER-LOGO-DARK-MODE.png';
+  const headerLogo = '/HEADER-LOGO-LIGHT-MODE.png';
 
 
   return (
@@ -134,7 +124,6 @@ export function Header() {
         
         <div className="flex-1 flex justify-end">
             <div className="hidden lg:flex items-center gap-2">
-                <ThemeToggle />
                 <Button asChild variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-foreground/50 hover:border-primary hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]">
                 <Link href="#contact" onClick={handleLetsTalkClick}>
                     Let's Talk
@@ -153,7 +142,6 @@ export function Header() {
                         <div className="flex flex-col h-full">
                             <div className="p-6 border-b flex justify-between items-center">
                                 <Logo showText={false} logoSrc={headerLogo} />
-                                <ThemeToggle />
                             </div>
                             <nav className="flex flex-col gap-1 p-6">
                                 {navLinks.map((link) => (
