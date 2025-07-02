@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative w-full h-screen flex flex-col justify-center items-center text-center text-foreground overflow-hidden">
+    <section id="home" className="relative w-full h-screen flex flex-col justify-center items-start text-left text-foreground overflow-hidden">
       {/* Content */}
       <div className="container mx-auto px-4 md:px-6">
         <h1 className={cn(
@@ -12,7 +12,7 @@ export function HeroSection() {
         )}>
             WE CRAFT DIGITAL<br />
             EXPERIENCES THAT<br />
-            RESONATE
+            RESONATE...
         </h1>
       </div>
 
