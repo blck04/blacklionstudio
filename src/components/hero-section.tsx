@@ -6,8 +6,8 @@ export function HeroSection() {
     <section id="home" className="relative w-full h-screen flex flex-col justify-center items-start text-left text-foreground overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/lionv1.jpg"
-        alt="Hero image of a lion"
+        src="/hero-dunes.jpg"
+        alt="Desert dunes at sunset"
         fill
         className="-z-10 object-cover"
         priority
