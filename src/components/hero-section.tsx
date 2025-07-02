@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { SocialLinks } from './social-links';
 
 export function HeroSection() {
   return (
@@ -14,6 +15,10 @@ export function HeroSection() {
             EXPERIENCES THAT<br />
             RESONATE...
         </h1>
+      </div>
+
+      <div className="absolute top-1/2 -translate-y-1/2 right-10 z-20">
+        <SocialLinks />
       </div>
 
       {/* Scroll Down Arrow */}
