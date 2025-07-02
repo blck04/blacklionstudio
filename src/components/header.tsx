@@ -118,10 +118,10 @@ export function Header() {
                 key={link.name}
                 href={getHref(link)}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="relative group py-2 text-[#121212] uppercase tracking-wider text-base font-bold"
+                className="relative group py-2 text-[#6a0000] uppercase tracking-wider text-base font-bold"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-[#121212] scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
+                <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-[#6a0000] scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
               </Link>
             ))}
         </nav>
@@ -137,7 +137,7 @@ export function Header() {
             <div className="lg:hidden">
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                     <SheetTrigger asChild>
-                        <Button variant="ghost" className="font-headline text-[#121212] uppercase tracking-widest font-bold text-2xl hover:bg-transparent">
+                        <Button variant="ghost" className="font-headline text-[#6a0000] uppercase tracking-widest font-bold text-2xl hover:bg-transparent">
                             Menu
                         </Button>
                     </SheetTrigger>
@@ -153,7 +153,7 @@ export function Header() {
                                         key={link.name}
                                         href={getHref(link)}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="py-3 text-4xl font-headline font-bold tracking-tighter hover:text-primary transition-colors uppercase text-[#121212]"
+                                        className="py-3 text-4xl font-headline font-bold tracking-tighter hover:text-primary transition-colors uppercase text-[#6a0000]"
                                     >
                                     {link.name}
                                     </Link>
