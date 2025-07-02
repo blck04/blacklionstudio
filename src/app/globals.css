@@ -56,7 +56,7 @@
   }
   .text-outline-destructive {
     -webkit-text-stroke: 2px hsl(var(--destructive));
-    color: #b1b1b1;
+    color: transparent;
   }
 
   @screen md {
