@@ -1,28 +1,11 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 export function HeroSection() {
   return (
     <section id="home" className="relative w-full h-screen flex flex-col justify-center items-center text-center text-foreground overflow-hidden">
-      {/* Background Image */}
-      <Image
-        src="/hero-dunes.jpg"
-        alt="Desert dunes at sunset"
-        fill
-        className="-z-10 object-cover"
-        priority
-        style={{
-          maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
-        }}
-      />
-      
-      {/* Frosted Glass Overlay */}
-      <div className="absolute inset-0 bg-background/[.02] backdrop-blur-sm" />
-
       {/* Content */}
-      <div className="container mx-auto px-4 md:px-6 z-10">
+      <div className="container mx-auto px-4 md:px-6">
         <h1 className={cn(
           "font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-wider text-balance uppercase",
           "text-outline-destructive"
