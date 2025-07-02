@@ -24,7 +24,7 @@ export function HeroSection() {
       {/* Content */}
       <div className="container mx-auto px-4 md:px-6 z-10">
         <h1 className={cn(
-          "font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-balance uppercase",
+          "font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-wider text-balance uppercase",
           "text-outline-destructive"
         )}>
             WE CRAFT DIGITAL<br />
