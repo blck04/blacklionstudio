@@ -55,8 +55,8 @@
     text-wrap: balance;
   }
   .text-outline-destructive {
-    -webkit-text-stroke: 2px hsl(var(--foreground));
-    color: hsl(var(--destructive));
+    -webkit-text-stroke: 2px hsl(var(--destructive));
+    color: #b1b1b1;
   }
 
   @screen md {
