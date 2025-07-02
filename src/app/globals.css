@@ -54,4 +54,14 @@
   .text-balance {
     text-wrap: balance;
   }
+  .text-outline-destructive {
+    -webkit-text-stroke: 1px hsl(var(--destructive));
+    color: transparent;
+  }
+
+  @screen md {
+    .text-outline-destructive {
+      -webkit-text-stroke-width: 2px;
+    }
+  }
 }
