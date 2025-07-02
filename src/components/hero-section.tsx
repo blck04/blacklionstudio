@@ -18,6 +18,9 @@ export function HeroSection() {
         }}
       />
       
+      {/* Frosted Glass Overlay */}
+      <div className="absolute inset-0 bg-background/[.03] backdrop-blur-sm" />
+
       {/* Content */}
       <div className="container mx-auto px-4 md:px-6 z-10">
         <h1 className={cn(
