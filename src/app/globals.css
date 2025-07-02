@@ -55,13 +55,13 @@
     text-wrap: balance;
   }
   .text-outline-destructive {
-    -webkit-text-stroke: 1px hsl(var(--destructive));
+    -webkit-text-stroke: 2px hsl(var(--destructive));
     color: transparent;
   }
 
   @screen md {
     .text-outline-destructive {
-      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-width: 3px;
     }
   }
 }
