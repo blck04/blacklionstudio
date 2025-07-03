@@ -1,7 +1,6 @@
 "use client";
 
 import { NavCard } from "./nav-card";
-import { AnimatedText } from "./animated-text";
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 
@@ -42,11 +41,21 @@ export function HeroSection() {
       >
         <NavCard />
         <div className="absolute bottom-16 left-16">
-          <AnimatedText 
-            text="BLACK LION STUDIO" 
-            className="font-headline text-5xl md:text-7xl lg:text-9xl font-bold text-primary-foreground text-left tracking-tighter leading-none"
-            stagger={0.02}
-          />
+          <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground text-left tracking-tighter">
+            {"BLACK LION STUDIO".split(" ").map((word, i) => (
+              <div key={i} className="overflow-hidden pb-4">
+                <span
+                  className="inline-block animate-fade-in-up opacity-0"
+                  style={{
+                    animationDelay: `${i * 0.1}s`,
+                    animationFillMode: "forwards",
+                  }}
+                >
+                  {word}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
