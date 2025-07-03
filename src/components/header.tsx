@@ -159,9 +159,9 @@ export function Header() {
                                         key={link.name}
                                         href={getHref(link)}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="py-3 text-4xl font-headline font-bold tracking-tighter hover:text-primary transition-colors uppercase text-destructive"
+                                        className="py-3 text-4xl font-headline font-bold tracking-tighter transition-colors uppercase text-destructive-foreground"
                                     >
-                                    {link.name}
+                                      <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
                                     </Link>
                                 ))}
                             </nav>
