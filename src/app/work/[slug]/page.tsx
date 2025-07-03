@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { Header } from '@/components/header';
+
 import { ContactSection } from '@/components/contact-section';
 import { Separator } from '@/components/ui/separator';
 import { Footer } from '@/components/footer';
@@ -20,7 +20,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex flex-col min-h-screen text-foreground">
-      <Header />
+      
       <main className="flex-1">
         <section className="relative w-full flex flex-col justify-center py-12 md:py-16">
           <div className="absolute inset-0">

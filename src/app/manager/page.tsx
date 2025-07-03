@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
-import { Header } from '@/components/header';
+
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
 
 export default function ManagerPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
         <div className="flex items-center justify-between mb-8">
             <h1 className="text-4xl font-bold tracking-tighter">Manager Dashboard</h1>
