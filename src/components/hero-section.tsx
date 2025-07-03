@@ -101,11 +101,7 @@ export function HeroSection() {
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
               <div key={i} className="overflow-hidden pb-4">
                 <span
-                  className="inline-block animate-fade-in-up opacity-0 py-2"
-                  style={{
-                    animationDelay: `${i * 0.1}s`,
-                    animationFillMode: "forwards",
-                  }}
+                  className="inline-block py-2"
                 >
                   {word}
                 </span>
