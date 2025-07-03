@@ -43,8 +43,8 @@ export function HeroSection() {
         <NavCard />
         <div className="absolute bottom-16 left-16">
           <AnimatedText 
-            text="WE CRAFT DIGITAL EXPERIENCES THAT RESONATE." 
-            className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground max-w-4xl text-left tracking-tighter leading-none"
+            text="BLACK LION STUDIO" 
+            className="font-headline text-5xl md:text-7xl lg:text-9xl font-bold text-primary-foreground text-left tracking-tighter leading-none"
             stagger={0.02}
           />
         </div>
