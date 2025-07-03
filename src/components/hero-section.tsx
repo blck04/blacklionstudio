@@ -54,9 +54,10 @@ export function HeroSection() {
   ];
 
   return (
-    <section id="home" className="relative w-full h-screen flex justify-end items-center text-foreground overflow-hidden">
-      <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-[15vw] flex flex-col gap-6 items-center text-center">
-        <div className="w-[6vw] min-w-[80px]">
+    <section id="home" className="relative w-full h-screen flex flex-col md:flex-row items-center text-foreground overflow-hidden">
+      {/* Left Column */}
+      <div className="md:w-[20vw] w-full p-8 md:p-4 flex flex-col gap-6 items-center justify-center text-center order-2 md:order-1 h-1/2 md:h-full">
+        <div className="w-24 md:w-[6vw] md:min-w-[80px]">
             <Image 
                 src="/LOGO-LIGHT-MODE.png"
                 alt="BLACK LION STUDIO Logo"
@@ -65,7 +66,7 @@ export function HeroSection() {
                 className="w-full h-auto"
             />
         </div>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-sm hidden md:block">
             In a world overflowing with digital noise, your brand deserves more than just a presence – it deserves a voice that cuts through and connects. We craft digital experiences that resonate, meticulously designing every detail to not only capture attention, but to genuinely engage your audience, build lasting connections, and drive measurable results. Let us transform your vision into an unforgettable online journey that leaves a lasting impact.
         </p>
         <Button asChild variant="default" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
@@ -74,18 +75,19 @@ export function HeroSection() {
             </Link>
         </Button>
       </div>
-      {/* Card with background image */}
+
+      {/* Right Card with background image */}
       <div
-        className="relative w-[80vw] h-[95vh] rounded-l-3xl bg-cover bg-center flex justify-start items-start p-4"
+        className="relative md:w-[80vw] w-full h-1/2 md:h-[95vh] order-1 md:order-2 md:rounded-l-3xl bg-cover bg-center flex justify-start items-start p-4"
         style={{ backgroundImage: "url('/bls-hero.png')" }}
       >
-        <nav className="flex justify-start items-center gap-4">
+        <nav className="hidden md:flex justify-start items-center gap-4">
             {navLinks.map((link) => (
               <Button
                 key={link.name}
                 asChild
                 variant="ghost"
-                className="relative group py-2 w-32 text-primary-foreground hover:text-white uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md shadow-lg hover:bg-black/30 border border-white/20"
+                className="relative group py-2 w-32 text-primary-foreground hover:text-white uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md hover:bg-black/30 border border-white/20"
               >
                 <Link
                   href={link.href}
@@ -96,7 +98,7 @@ export function HeroSection() {
               </Button>
             ))}
         </nav>
-        <div className="absolute top-1/2 -translate-y-1/2 right-16 text-right">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center md:left-auto md:translate-x-0 md:right-16 md:text-right">
           <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
             <div>
               <span>
@@ -116,6 +118,8 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Scroll Arrow */}
       <div className="absolute bottom-10 right-10 z-10 hidden md:block">
         <svg
           width="28"
