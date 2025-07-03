@@ -119,7 +119,7 @@ export function HeroSection() {
         </div>
 
         {/* Mobile View */}
-        <div className="flex flex-col items-center justify-center text-center md:hidden w-full">
+        <div className="flex flex-col items-center justify-start pt-8 text-center md:hidden w-full h-full">
             <nav className="flex w-full max-w-sm justify-center items-center gap-2 mb-4 px-4">
                 {navLinks.map((link) => (
                     <Button
