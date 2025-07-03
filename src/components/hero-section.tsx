@@ -99,9 +99,9 @@ export function HeroSection() {
         <div className="absolute top-1/2 -translate-y-1/2 right-16 text-right">
           <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
-              <div key={i} className="overflow-hidden pb-4">
+              <div key={i} className="overflow-hidden">
                 <span
-                  className="inline-block py-2"
+                  className="inline-block"
                 >
                   {word}
                 </span>
