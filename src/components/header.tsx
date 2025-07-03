@@ -98,7 +98,7 @@ export function Header() {
     return `/${link.href}`; // It's a hash on another page
   };
   
-  const headerLogo = '/HEADER-LOGO-LIGHT-MODE.png';
+  const headerLogo = '/LOGO-LIGHT-MODE.png';
 
 
   return (
