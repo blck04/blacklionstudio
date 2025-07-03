@@ -78,31 +78,29 @@ export function HeroSection() {
         className="relative w-[80vw] h-[95vh] rounded-l-3xl bg-cover bg-center shadow-2xl flex justify-center items-start p-4"
         style={{ backgroundImage: "url('/bls-hero.png')" }}
       >
-        <div className="bg-background/5 backdrop-blur-lg rounded-full p-1 w-auto flex items-center shadow-lg">
-            <nav className="flex justify-center items-center gap-1 md:gap-2">
-                {navLinks.map((link) => (
-                  <Button
-                    key={link.name}
-                    asChild
-                    variant="ghost"
-                    className="relative group py-1 px-3 md:px-4 text-primary-foreground hover:text-white uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full hover:bg-white/10"
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={(e) => link.href.startsWith('#') && handleScrollTo(e, link.href.substring(1))}
-                    >
-                      {link.name}
-                    </Link>
-                  </Button>
-                ))}
-            </nav>
-        </div>
+        <nav className="flex justify-center items-center gap-4">
+            {navLinks.map((link) => (
+              <Button
+                key={link.name}
+                asChild
+                variant="ghost"
+                className="relative group py-2 px-4 md:px-6 text-primary-foreground hover:text-white uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md shadow-lg hover:bg-black/30 border border-white/20"
+              >
+                <Link
+                  href={link.href}
+                  onClick={(e) => link.href.startsWith('#') && handleScrollTo(e, link.href.substring(1))}
+                >
+                  {link.name}
+                </Link>
+              </Button>
+            ))}
+        </nav>
         <div className="absolute bottom-16 right-16 text-right">
           <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
               <div key={i} className="overflow-hidden pb-4">
                 <span
-                  className="inline-block animate-fade-in-up opacity-0"
+                  className="inline-block animate-fade-in-up opacity-0 py-2"
                   style={{
                     animationDelay: `${i * 0.1}s`,
                     animationFillMode: "forwards",
