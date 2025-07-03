@@ -14,12 +14,15 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const isHomePage = pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -35,8 +38,6 @@ export function Header() {
     { name: 'Manager', href: '/manager' },
   ];
   
-  const isHomePage = pathname === '/';
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // For page links like '/manager', let the Link component handle it.
     if (href.startsWith('/')) {
@@ -103,8 +104,13 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "bg-background/[.03] backdrop-blur-sm" : "bg-transparent"
+        "fixed top-0 z-50 w-full transition-all duration-500",
+        isHomePage && !scrolled
+          ? "opacity-0 -translate-y-full"
+          : "opacity-100 translate-y-0",
+        !isHomePage || scrolled
+          ? "bg-background/[.03] backdrop-blur-sm"
+          : "bg-transparent"
       )}
     >
       <div className="container mx-auto flex h-20 md:h-24 items-center px-4 md:px-6">

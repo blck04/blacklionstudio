@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import ScrollRestoration from '@/components/scroll-restoration';
 import { PageWrapper } from '@/components/page-wrapper';
+import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
   title: 'BLACK LION STUDIO',
@@ -25,6 +26,7 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased")}>
           <PageWrapper>
+            <Header />
             <ScrollRestoration />
             {children}
             <Toaster />
