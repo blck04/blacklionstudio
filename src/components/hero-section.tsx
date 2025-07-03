@@ -99,16 +99,39 @@ export function HeroSection() {
         <div className="absolute top-1/2 -translate-y-1/2 right-16 text-right">
           <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
-              <div key={i} className="overflow-hidden">
-                <span
-                  className="inline-block"
-                >
+              <div key={i}>
+                <span>
                   {word}
                 </span>
               </div>
             ))}
           </div>
         </div>
+      </div>
+      <div className="absolute bottom-10 right-10 z-10 hidden md:block">
+        <svg
+          width="28"
+          height="40"
+          viewBox="0 0 28 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-10 w-7 text-primary-foreground/80 animate-bounce"
+        >
+          <path
+            d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M14 1V33"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
     </section>
   );
