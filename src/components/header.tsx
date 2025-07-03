@@ -16,6 +16,13 @@ export function Header() {
 
   const isHomePage = pathname === '/';
 
+  const isProjectPage = pathname.startsWith('/work/');
+  const isManagerPage = pathname === '/manager';
+
+  if (isProjectPage || isManagerPage) {
+    return null;
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
