@@ -1,3 +1,4 @@
+
 "use client";
 
 import { usePathname, useRouter } from 'next/navigation';
@@ -75,7 +76,7 @@ export function HeroSection() {
       </div>
       {/* Card with background image */}
       <div
-        className="relative w-[80vw] h-[95vh] rounded-l-3xl bg-cover bg-center shadow-2xl flex justify-center items-start p-4"
+        className="relative w-[80vw] h-[95vh] rounded-l-3xl bg-cover bg-center shadow-2xl flex justify-start items-start p-4"
         style={{ backgroundImage: "url('/bls-hero.png')" }}
       >
         <nav className="flex justify-center items-center gap-4">
