@@ -79,7 +79,7 @@ export function HeroSection() {
         className="relative w-[80vw] h-[95vh] rounded-l-3xl bg-cover bg-center shadow-2xl flex justify-start items-start p-4"
         style={{ backgroundImage: "url('/bls-hero.png')" }}
       >
-        <nav className="flex justify-center items-center gap-4">
+        <nav className="flex justify-start items-center gap-4">
             {navLinks.map((link) => (
               <Button
                 key={link.name}
@@ -96,7 +96,7 @@ export function HeroSection() {
               </Button>
             ))}
         </nav>
-        <div className="absolute bottom-16 right-16 text-right">
+        <div className="absolute top-1/2 -translate-y-1/2 right-16 text-right">
           <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
               <div key={i} className="overflow-hidden pb-4">
