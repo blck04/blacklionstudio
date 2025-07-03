@@ -120,7 +120,7 @@ export function HeroSection() {
 
         {/* Mobile View */}
         <div className="flex flex-col items-center justify-between p-8 text-center md:hidden w-full h-full">
-            <nav className="flex w-full max-w-sm justify-center items-center gap-2 mb-12 px-4">
+            <nav className="flex w-full justify-center items-center gap-2 mb-12">
                 {navLinks.map((link) => (
                     <Button
                         key={link.name}
