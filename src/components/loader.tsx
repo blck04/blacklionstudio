@@ -9,7 +9,7 @@ export function Loader({ className }: { className?: string }) {
     <div className={cn(
         "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background",
         className
-    )}>
+    )} style={{ backgroundImage: "url('/asfalt-dark.png')" }}>
         <h1 className="font-headline font-bold text-5xl md:text-6xl lg:text-7xl tracking-tighter uppercase animate-heartbeat text-foreground">
             BLACK LION STUDIO
         </h1>
