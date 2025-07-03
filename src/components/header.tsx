@@ -15,18 +15,17 @@ export function Header() {
   const router = useRouter();
 
   const isHomePage = pathname === '/';
-
   const isProjectPage = pathname.startsWith('/work/');
   const isManagerPage = pathname === '/manager';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
     if (isProjectPage || isManagerPage) {
       return;
     }
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
@@ -62,7 +61,7 @@ export function Header() {
 
     if (isHomePage) {
         if (targetElement) {
-            const headerOffset = 96; // Corresponds to h-24 in Tailwind
+            const headerOffset = 0; // No offset
             const elementPosition = targetElement.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
       
@@ -82,7 +81,7 @@ export function Header() {
     if (isHomePage) {
         const contactSection = document.getElementById('contact');
         if (contactSection) {
-            const headerOffset = 96; // Corresponds to h-24 in Tailwind
+            const headerOffset = 0; // No offset
             const elementPosition = contactSection.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             window.scrollTo({

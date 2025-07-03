@@ -17,7 +17,7 @@ export function HeroSection() {
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-        const headerOffset = 96; // Corresponds to h-24 in Tailwind for aesthetic spacing
+        const headerOffset = 0; // No offset
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
   
@@ -33,7 +33,7 @@ export function HeroSection() {
     if (isHomePage) {
         const element = document.getElementById(id);
         if (element) {
-            const headerOffset = 96;
+            const headerOffset = 0; // No offset
             const elementPosition = element.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
     
@@ -98,13 +98,21 @@ export function HeroSection() {
         </nav>
         <div className="absolute top-1/2 -translate-y-1/2 right-16 text-right">
           <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
-            {"BLACK LION STUDIO".split(" ").map((word, i) => (
-              <div key={i}>
-                <span>
-                  {word}
-                </span>
-              </div>
-            ))}
+            <div>
+              <span>
+                BLACK
+              </span>
+            </div>
+            <div>
+              <span>
+                LION
+              </span>
+            </div>
+            <div>
+              <span>
+                STUDIO
+              </span>
+            </div>
           </div>
         </div>
       </div>
