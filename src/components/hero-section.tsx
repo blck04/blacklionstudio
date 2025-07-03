@@ -3,6 +3,7 @@
 import { NavCard } from "./nav-card";
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function HeroSection() {
   const handleLetsTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -24,7 +25,16 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative w-full h-screen flex justify-end items-center text-foreground overflow-hidden">
-      <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-[15vw] flex flex-col gap-6 items-start">
+      <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-[15vw] flex flex-col gap-6 items-center text-center">
+        <div className="w-[6vw] min-w-[80px]">
+            <Image 
+                src="/LOGO-LIGHT-MODE.png"
+                alt="BLACK LION STUDIO Logo"
+                width={150}
+                height={40}
+                className="w-full h-auto"
+            />
+        </div>
         <p className="text-muted-foreground text-sm">
             In a world overflowing with digital noise, your brand deserves more than just a presence – it deserves a voice that cuts through and connects. We craft digital experiences that resonate, meticulously designing every detail to not only capture attention, but to genuinely engage your audience, build lasting connections, and drive measurable results. Let us transform your vision into an unforgettable online journey that leaves a lasting impact.
         </p>
@@ -40,8 +50,8 @@ export function HeroSection() {
         style={{ backgroundImage: "url('/bls-hero.png')" }}
       >
         <NavCard />
-        <div className="absolute bottom-16 right-16">
-          <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground text-right tracking-tighter">
+        <div className="absolute bottom-16 right-16 text-right">
+          <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
               <div key={i} className="overflow-hidden pb-4">
                 <span
