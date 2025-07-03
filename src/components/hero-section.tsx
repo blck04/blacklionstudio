@@ -23,7 +23,7 @@ export function HeroSection() {
         <div className="absolute bottom-16 left-16">
           <AnimatedText 
             text="WE CRAFT DIGITAL EXPERIENCES THAT RESONATE." 
-            className="font-headline text-5xl md:text-7xl font-bold text-primary-foreground max-w-2xl text-left"
+            className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground max-w-4xl text-left"
             stagger={0.02}
           />
         </div>
