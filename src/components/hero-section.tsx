@@ -55,7 +55,34 @@ export function HeroSection() {
   return (
     <section id="home" className="relative w-full h-svh flex flex-col md:flex-row items-center text-foreground overflow-hidden">
       {/* Left Column (on desktop) / Bottom section (on mobile) */}
-      <div className="md:w-[20vw] w-full p-8 md:p-4 flex flex-col gap-6 items-center justify-center text-center order-2 md:order-1 h-1/2 md:h-full">
+      <div className="relative md:w-[20vw] w-full p-8 md:p-4 flex flex-col gap-6 items-center justify-center text-center order-2 md:order-1 h-1/2 md:h-full">
+        {/* Mobile Scroll Arrow */}
+        <div className="absolute left-8 bottom-8 z-10 md:hidden">
+            <svg
+              width="28"
+              height="40"
+              viewBox="0 0 28 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-10 w-7 text-muted-foreground animate-bounce"
+            >
+              <path
+                d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M14 1V33"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+        </div>
+
         <div className="w-[20vw] md:w-[6vw]">
             <Image 
                 src="/LOGO-LIGHT-MODE.png"
