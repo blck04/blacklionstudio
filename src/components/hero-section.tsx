@@ -53,10 +53,10 @@ export function HeroSection() {
   ];
 
   return (
-    <section id="home" className="relative w-full h-screen flex flex-col md:flex-row items-center text-foreground overflow-hidden">
+    <section id="home" className="relative w-full h-svh flex flex-col md:flex-row items-center text-foreground overflow-hidden">
       {/* Left Column (on desktop) / Bottom section (on mobile) */}
       <div className="md:w-[20vw] w-full p-8 md:p-4 flex flex-col gap-6 items-center justify-center text-center order-2 md:order-1 h-1/2 md:h-full">
-        <div className="w-24 md:w-[6vw] md:min-w-[80px]">
+        <div className="w-[20vw] md:w-[6vw]">
             <Image 
                 src="/LOGO-LIGHT-MODE.png"
                 alt="BLACK LION STUDIO Logo"
@@ -119,15 +119,15 @@ export function HeroSection() {
         </div>
 
         {/* Mobile View */}
-        <div className="flex flex-col items-center justify-center text-center md:hidden">
-            <nav className="flex justify-center items-center gap-2 mb-4">
+        <div className="flex flex-col items-center justify-center text-center md:hidden w-full">
+            <nav className="flex w-full max-w-sm justify-center items-center gap-2 mb-2 px-4">
                 {navLinks.map((link) => (
                     <Button
                         key={link.name}
                         asChild
                         size="sm"
                         variant="ghost"
-                        className="relative group py-2 px-3 text-primary-foreground hover:text-white uppercase tracking-wider text-xs font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md hover:bg-black/30 border border-white/20"
+                        className="flex-1 relative group py-2 px-3 text-primary-foreground hover:text-white uppercase tracking-wider text-xs font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md hover:bg-black/30 border border-white/20"
                     >
                         <Link
                             href={link.href}
@@ -138,7 +138,7 @@ export function HeroSection() {
                     </Button>
                 ))}
             </nav>
-            <div className="font-headline text-6xl font-bold text-primary-foreground tracking-tighter">
+            <div className="font-headline text-7xl font-bold text-primary-foreground tracking-tighter">
                 <div><span>BLACK</span></div>
                 <div><span>LION</span></div>
                 <div><span>STUDIO</span></div>
