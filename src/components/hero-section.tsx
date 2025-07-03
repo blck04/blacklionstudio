@@ -40,8 +40,8 @@ export function HeroSection() {
         style={{ backgroundImage: "url('/bls-hero.png')" }}
       >
         <NavCard />
-        <div className="absolute bottom-16 left-16">
-          <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground text-left tracking-tighter">
+        <div className="absolute bottom-16 right-16">
+          <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground text-right tracking-tighter">
             {"BLACK LION STUDIO".split(" ").map((word, i) => (
               <div key={i} className="overflow-hidden pb-4">
                 <span
