@@ -19,14 +19,14 @@ export function Header() {
   const isProjectPage = pathname.startsWith('/work/');
   const isManagerPage = pathname === '/manager';
 
-  if (isProjectPage || isManagerPage) {
-    return null;
-  }
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+
+    if (isProjectPage || isManagerPage) {
+      return;
+    }
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
@@ -34,7 +34,11 @@ export function Header() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [pathname, isProjectPage, isManagerPage]);
+
+  if (isProjectPage || isManagerPage) {
+    return null;
+  }
 
   const navLinks = [
     { name: 'Home', href: '#home' },
