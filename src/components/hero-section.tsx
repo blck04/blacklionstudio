@@ -84,7 +84,7 @@ export function HeroSection() {
                 key={link.name}
                 asChild
                 variant="ghost"
-                className="relative group py-2 px-4 md:px-6 text-primary-foreground hover:text-white uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md shadow-lg hover:bg-black/30 border border-white/20"
+                className="relative group py-2 w-32 text-primary-foreground hover:text-white uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md shadow-lg hover:bg-black/30 border border-white/20"
               >
                 <Link
                   href={link.href}
