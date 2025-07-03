@@ -116,7 +116,7 @@ export function Header() {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-500",
         isHomePage && !scrolled
-          ? "opacity-0 -translate-y-full"
+          ? "opacity-100 translate-y-0 md:opacity-0 md:-translate-y-full"
           : "opacity-100 translate-y-0",
         !isHomePage || scrolled
           ? "bg-background/[.03] backdrop-blur-sm"

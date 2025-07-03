@@ -146,25 +146,7 @@ export function HeroSection() {
         </div>
 
         {/* Mobile View */}
-        <div className="flex flex-col items-center justify-between p-8 text-center md:hidden w-full h-full">
-            <nav className="flex w-full justify-center items-center gap-2 mb-12">
-                {navLinks.map((link) => (
-                    <Button
-                        key={link.name}
-                        asChild
-                        size="sm"
-                        variant="ghost"
-                        className="flex-1 relative group py-2 px-3 text-primary-foreground hover:text-white uppercase tracking-wider text-xs font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md hover:bg-black/30 border border-white/20"
-                    >
-                        <Link
-                            href={link.href}
-                            onClick={(e) => link.href.startsWith('#') && handleScrollTo(e, link.href.substring(1))}
-                        >
-                            {link.name}
-                        </Link>
-                    </Button>
-                ))}
-            </nav>
+        <div className="flex flex-col items-center justify-center p-8 text-center md:hidden w-full h-full">
             <div className="font-headline text-7xl font-bold text-primary-foreground tracking-tighter">
                 <div><span>BLACK</span></div>
                 <div><span>LION</span></div>
