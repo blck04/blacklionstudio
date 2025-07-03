@@ -36,7 +36,7 @@ export function NavCard() {
   };
   
   return (
-    <div className="bg-background/20 backdrop-blur-lg border border-white/10 rounded-full p-1 w-auto flex items-center shadow-lg">
+    <div className="bg-background/5 backdrop-blur-lg rounded-full p-1 w-auto flex items-center shadow-lg">
         <nav className="flex justify-center items-center gap-1 md:gap-2">
             {navLinks.map((link) => (
               <Link
