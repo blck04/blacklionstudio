@@ -19,21 +19,19 @@ export function Header() {
   const isManagerPage = pathname === '/manager';
 
   useEffect(() => {
-    if (isProjectPage || isManagerPage) {
-      return;
+    if (isProjectPage || isManagerPage || isHomePage) {
+      const handleScroll = () => {
+        const isScrolled = window.scrollY > 20;
+        setScrolled(isScrolled);
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll(); // Check on mount
+      
+      return () => window.removeEventListener('scroll', handleScroll);
     }
+  }, [pathname, isProjectPage, isManagerPage, isHomePage]);
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [pathname, isProjectPage, isManagerPage]);
 
   if (isProjectPage || isManagerPage) {
     return null;
@@ -115,9 +113,8 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-500",
-        isHomePage && !scrolled
-          ? "opacity-100 translate-y-0 md:opacity-0 md:-translate-y-full"
-          : "opacity-100 translate-y-0",
+        "md:opacity-100 md:translate-y-0",
+        isHomePage && !scrolled && "md:opacity-0 md:-translate-y-full",
         !isHomePage || scrolled
           ? "bg-background/[.03] backdrop-blur-sm"
           : "bg-transparent"
@@ -153,7 +150,7 @@ export function Header() {
             <div className="lg:hidden">
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                     <SheetTrigger asChild>
-                        <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl bg-background/[.03] backdrop-blur-sm rounded-full px-4 py-1 hover:bg-background/10 transition-colors">
+                        <Button variant="ghost" className="font-headline text-destructive uppercase tracking-widest font-bold text-2xl bg-background/[.03] backdrop-blur-sm rounded-full px-4 py-2 hover:bg-background/10 transition-colors border border-destructive/30">
                             Menu
                         </Button>
                     </SheetTrigger>
