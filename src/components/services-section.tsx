@@ -26,7 +26,7 @@ export function ServicesSection() {
               </h2>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-muted-foreground md:text-lg text-balance text-center md:text-left">
+              <p className="text-muted-foreground text-balance text-center md:text-left">
                 We use the power of design to solve complex problems and cultivate business solutions.
               </p>
             </div>
