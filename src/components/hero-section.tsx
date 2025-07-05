@@ -126,7 +126,7 @@ export function HeroSection() {
             ))}
         </nav>
         <div className="absolute hidden md:block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center md:left-auto md:translate-x-0 md:right-16 md:text-right">
-          <div className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground tracking-tighter">
+          <div className="font-headline text-6xl md:text-9xl lg:text-[11rem] lg:leading-none font-bold text-primary-foreground tracking-tighter">
             <div>
               <span>
                 BLACK
