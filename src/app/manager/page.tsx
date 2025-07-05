@@ -29,6 +29,7 @@ const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
   category: z.string().min(1, "Category is required"),
   imageUrl: z.any(),
+  secondaryImageUrl: z.any().optional(),
   about: z.string().min(10, "About section is required"),
   client: z.string().min(1, "Client is required"),
   year: z.string().min(4, "Year is required"),
@@ -98,7 +99,7 @@ export default function ManagerPage() {
 
   const handleAddProject = () => {
     setEditingProject(null);
-    projectForm.reset({ slug: '', title: '', category: '', imageUrl: null, about: '', client: '', year: '', services: '' });
+    projectForm.reset({ slug: '', title: '', category: '', imageUrl: null, secondaryImageUrl: null, about: '', client: '', year: '', services: '' });
     setIsProjectDialogOpen(true);
   };
 
@@ -109,6 +110,7 @@ export default function ManagerPage() {
         title: project.title,
         category: project.category,
         imageUrl: project.imageUrl,
+        secondaryImageUrl: project.galleryImages?.[1]?.url || null,
         about: project.about,
         client: project.details.client,
         year: project.details.year,
@@ -126,11 +128,26 @@ export default function ManagerPage() {
   const onProjectSubmit = async (data: ProjectFormValues) => {
     setIsSubmitting(true);
     try {
-        let imageUrl = editingProject?.imageUrl;
+        let finalImageUrl = editingProject?.imageUrl;
         if (data.imageUrl && typeof data.imageUrl !== 'string' && data.imageUrl.length > 0) {
-            imageUrl = await uploadImage(data.imageUrl[0]);
-        } else {
-            imageUrl = typeof data.imageUrl === 'string' ? data.imageUrl : (editingProject?.imageUrl || '');
+            finalImageUrl = await uploadImage(data.imageUrl[0]);
+        } else if (typeof data.imageUrl === 'string') {
+            finalImageUrl = data.imageUrl;
+        }
+
+        let finalSecondaryImageUrl: string | undefined = editingProject?.galleryImages?.[1]?.url;
+        if (data.secondaryImageUrl && typeof data.secondaryImageUrl !== 'string' && data.secondaryImageUrl.length > 0) {
+            finalSecondaryImageUrl = await uploadImage(data.secondaryImageUrl[0]);
+        } else if (typeof data.secondaryImageUrl === 'string') {
+            finalSecondaryImageUrl = data.secondaryImageUrl;
+        }
+
+        const galleryImages = [];
+        if (finalImageUrl) {
+            galleryImages.push({ url: finalImageUrl, alt: data.title, dataAiHint: 'placeholder' });
+        }
+        if (finalSecondaryImageUrl) {
+            galleryImages.push({ url: finalSecondaryImageUrl, alt: `${data.title} - secondary`, dataAiHint: 'placeholder' });
         }
 
         const projectData = {
@@ -144,8 +161,8 @@ export default function ManagerPage() {
             year: data.year,
             services: data.services,
           },
-          imageUrl,
-          galleryImages: editingProject?.galleryImages || (imageUrl ? [{ url: imageUrl, alt: data.title, dataAiHint: 'placeholder' }] : [])
+          imageUrl: finalImageUrl || '',
+          galleryImages: galleryImages.length > 0 ? galleryImages : (editingProject?.galleryImages || [])
         };
 
         if (editingProject) {
@@ -193,7 +210,7 @@ export default function ManagerPage() {
     setIsSubmitting(true);
     try {
         let imageUrl = editingService?.imageUrl;
-        if (data.imageUrl && data.imageUrl.length > 0) {
+        if (data.imageUrl && typeof data.imageUrl !== 'string' && data.imageUrl.length > 0) {
             imageUrl = await uploadImage(data.imageUrl[0]);
         }
         const serviceData = { ...data, imageUrl };
@@ -301,6 +318,13 @@ export default function ManagerPage() {
                  <FormField control={projectForm.control} name="imageUrl" render={({ field }) => (
                   <FormItem>
                     <FormLabel>Main Image</FormLabel>
+                    <FormControl><Input type="file" onChange={(e) => field.onChange(e.target.files)} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={projectForm.control} name="secondaryImageUrl" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Secondary Image</FormLabel>
                     <FormControl><Input type="file" onChange={(e) => field.onChange(e.target.files)} /></FormControl>
                     <FormMessage />
                   </FormItem>
