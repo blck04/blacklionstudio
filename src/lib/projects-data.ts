@@ -1,4 +1,23 @@
-export const projects = [
+export interface Project {
+    slug: string;
+    title: string;
+    category: string;
+    description: string;
+    imageUrl: string;
+    about: string;
+    details: {
+        client: string;
+        year: string;
+        services: string;
+    };
+    galleryImages: {
+        url: string;
+        alt: string;
+        dataAiHint?: string;
+    }[];
+}
+
+export const projects: Project[] = [
   {
     slug: 'the-rise-of-design',
     title: 'The Rise of Design',

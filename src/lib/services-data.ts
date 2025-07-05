@@ -1,4 +1,11 @@
-export const services = [
+export interface Service {
+    id: string;
+    title: string;
+    imageUrl: string;
+    details: string;
+}
+
+export const services: Service[] = [
   {
     id: 'branding',
     title: 'Branding',
