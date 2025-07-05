@@ -30,6 +30,9 @@ const projectSchema = z.object({
   category: z.string().min(1, "Category is required"),
   imageUrl: z.any(),
   about: z.string().min(10, "About section is required"),
+  client: z.string().min(1, "Client is required"),
+  year: z.string().min(4, "Year is required"),
+  services: z.string().min(1, "Services are required"),
 });
 
 const serviceSchema = z.object({
@@ -95,7 +98,7 @@ export default function ManagerPage() {
 
   const handleAddProject = () => {
     setEditingProject(null);
-    projectForm.reset({ slug: '', title: '', category: '', imageUrl: null, about: '' });
+    projectForm.reset({ slug: '', title: '', category: '', imageUrl: null, about: '', client: '', year: '', services: '' });
     setIsProjectDialogOpen(true);
   };
 
@@ -107,6 +110,9 @@ export default function ManagerPage() {
         category: project.category,
         imageUrl: project.imageUrl,
         about: project.about,
+        client: project.details.client,
+        year: project.details.year,
+        services: project.details.services,
     });
     setIsProjectDialogOpen(true);
   };
@@ -121,16 +127,25 @@ export default function ManagerPage() {
     setIsSubmitting(true);
     try {
         let imageUrl = editingProject?.imageUrl;
-        if (data.imageUrl && data.imageUrl.length > 0) {
+        if (data.imageUrl && typeof data.imageUrl !== 'string' && data.imageUrl.length > 0) {
             imageUrl = await uploadImage(data.imageUrl[0]);
+        } else {
+            imageUrl = typeof data.imageUrl === 'string' ? data.imageUrl : (editingProject?.imageUrl || '');
         }
 
         const projectData = {
-          ...data,
-          imageUrl,
+          slug: data.slug,
+          title: data.title,
+          category: data.category,
+          about: data.about,
           description: data.about.substring(0, 100) + '...',
-          details: editingProject?.details || { client: 'New Client', year: new Date().getFullYear().toString(), services: 'New Services' },
-          galleryImages: editingProject?.galleryImages || [{ url: imageUrl, alt: data.title, dataAiHint: 'placeholder' }]
+          details: {
+            client: data.client,
+            year: data.year,
+            services: data.services,
+          },
+          imageUrl,
+          galleryImages: editingProject?.galleryImages || (imageUrl ? [{ url: imageUrl, alt: data.title, dataAiHint: 'placeholder' }] : [])
         };
 
         if (editingProject) {
@@ -259,6 +274,27 @@ export default function ManagerPage() {
                   <FormItem>
                     <FormLabel>Category</FormLabel>
                     <FormControl><Input {...field} placeholder="e.g., Branding, Design" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={projectForm.control} name="client" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Client</FormLabel>
+                    <FormControl><Input {...field} placeholder="e.g., Awesome Corp" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={projectForm.control} name="year" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Year</FormLabel>
+                    <FormControl><Input {...field} placeholder="e.g., 2024" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={projectForm.control} name="services" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Services</FormLabel>
+                    <FormControl><Input {...field} placeholder="e.g., Web Design, Branding" /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
