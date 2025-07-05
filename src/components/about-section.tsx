@@ -31,7 +31,7 @@ export function AboutSection() {
               </h2>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-muted-foreground md:text-xl">
+              <p className="text-muted-foreground md:text-lg">
                 Black Lion Studio is a creative powerhouse dedicated to crafting digital experiences that truly resonate. We transform bold visions into precise, high-impact realities, specializing in strategic branding, intuitive UI/UX, and cutting-edge web development. Our meticulous craftsmanship and unwavering commitment to exceptional quality ensure every digital solution we deliver leaves an unforgettable mark.
               </p>
             </div>

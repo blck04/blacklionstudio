@@ -16,7 +16,7 @@ export function WorkSection() {
               </h2>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-muted-foreground md:text-xl text-balance">
+              <p className="text-muted-foreground md:text-lg text-balance">
                 A selection of projects that we're proud of.
               </p>
             </div>
