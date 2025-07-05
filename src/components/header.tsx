@@ -154,19 +154,16 @@ export function Header() {
                             Menu
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-[300px] bg-background/[.03] backdrop-blur-md p-0">
+                    <SheetContent side="right" className="w-[300px] bg-background/[.03] backdrop-blur-md p-0 border-none">
                         <SheetTitle className="sr-only">Menu</SheetTitle>
                         <div className="flex flex-col h-full">
-                            <div className="p-6 border-b flex justify-between items-center">
-                                <Logo showText={false} logoSrc={headerLogo} />
-                            </div>
-                            <nav className="flex flex-col gap-1 p-6">
+                            <nav className="flex flex-col gap-1 p-6 pt-24">
                                 {navLinks.map((link) => (
                                     <Link
                                         key={link.name}
                                         href={getHref(link)}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="py-3 text-4xl font-headline font-bold tracking-tighter transition-colors uppercase text-destructive-foreground"
+                                        className="py-3 text-6xl font-headline font-bold tracking-tighter transition-colors uppercase text-destructive-foreground"
                                     >
                                       <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
                                     </Link>
