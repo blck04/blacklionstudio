@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { projects as initialProjects, type Project } from '@/lib/projects-data';
-import { services as initialServices, type Service } from '@/lib/services-data';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -20,20 +18,23 @@ import { Footer } from '@/components/footer';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { auth, db, storage } from '@/lib/firebase';
+import type { Project } from '@/lib/projects-data';
+import type { Service } from '@/lib/services-data';
+import { collection, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const projectSchema = z.object({
   slug: z.string().min(1, "Slug is required").regex(/^[a-z0-9-]+$/, "Slug can only contain lowercase letters, numbers, and hyphens."),
   title: z.string().min(1, "Title is required"),
   category: z.string().min(1, "Category is required"),
-  imageUrl: z.string().url("Must be a valid URL"),
+  imageUrl: z.any(),
   about: z.string().min(10, "About section is required"),
 });
 
 const serviceSchema = z.object({
-  id: z.string().min(1, "ID is required").regex(/^[a-z0-9-]+$/, "ID can only contain lowercase letters, numbers, and hyphens."),
   title: z.string().min(1, "Title is required"),
-  imageUrl: z.string().url("Must be a valid URL"),
+  imageUrl: z.any(),
   details: z.string().min(10, "Details are required"),
 });
 
@@ -43,8 +44,10 @@ type ServiceFormValues = z.infer<typeof serviceSchema>;
 
 export default function ManagerPage() {
   const { toast } = useToast();
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
-  const [services, setServices] = useState<Service[]>(initialServices);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
@@ -56,16 +59,29 @@ export default function ManagerPage() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const fetchProjects = async () => {
+    const querySnapshot = await getDocs(collection(db, "projects"));
+    const projectsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Project[];
+    setProjects(projectsData);
+  };
+  
+  const fetchServices = async () => {
+    const querySnapshot = await getDocs(collection(db, "services"));
+    const servicesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Service[];
+    setServices(servicesData);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);
+        setIsDataLoading(true);
+        Promise.all([fetchProjects(), fetchServices()]).finally(() => setIsDataLoading(false));
       } else {
         router.push('/manager/login');
       }
     });
-
     return () => unsubscribe();
   }, [router]);
 
@@ -79,7 +95,7 @@ export default function ManagerPage() {
 
   const handleAddProject = () => {
     setEditingProject(null);
-    projectForm.reset({ slug: '', title: '', category: '', imageUrl: 'https://placehold.co/800x600.png', about: '' });
+    projectForm.reset({ slug: '', title: '', category: '', imageUrl: null, about: '' });
     setIsProjectDialogOpen(true);
   };
 
@@ -95,32 +111,60 @@ export default function ManagerPage() {
     setIsProjectDialogOpen(true);
   };
 
-  const onProjectSubmit = (data: ProjectFormValues) => {
-    if (editingProject) {
-      const updatedProject: Project = { ...editingProject, ...data };
-      setProjects(projects.map(p => p.slug === editingProject.slug ? updatedProject : p));
-      toast({ title: "Project Updated", description: "The project has been successfully updated." });
-    } else {
-      const newProject: Project = {
-        ...data,
-        description: data.about.substring(0, 100) + '...',
-        details: { client: 'New Client', year: new Date().getFullYear().toString(), services: 'New Services' },
-        galleryImages: [{ url: data.imageUrl, alt: data.title, dataAiHint: 'placeholder' }]
-      };
-      setProjects([newProject, ...projects]);
-      toast({ title: "Project Added", description: "The new project has been successfully added." });
+  const uploadImage = async (file: File) => {
+    const storageRef = ref(storage, `images/${Date.now()}_${file.name}`);
+    await uploadBytes(storageRef, file);
+    return await getDownloadURL(storageRef);
+  };
+
+  const onProjectSubmit = async (data: ProjectFormValues) => {
+    setIsSubmitting(true);
+    try {
+        let imageUrl = editingProject?.imageUrl;
+        if (data.imageUrl && data.imageUrl.length > 0) {
+            imageUrl = await uploadImage(data.imageUrl[0]);
+        }
+
+        const projectData = {
+          ...data,
+          imageUrl,
+          description: data.about.substring(0, 100) + '...',
+          details: editingProject?.details || { client: 'New Client', year: new Date().getFullYear().toString(), services: 'New Services' },
+          galleryImages: editingProject?.galleryImages || [{ url: imageUrl, alt: data.title, dataAiHint: 'placeholder' }]
+        };
+
+        if (editingProject) {
+            const projectRef = doc(db, "projects", editingProject.id);
+            await updateDoc(projectRef, projectData);
+            toast({ title: "Project Updated", description: "The project has been successfully updated." });
+        } else {
+            await addDoc(collection(db, "projects"), projectData);
+            toast({ title: "Project Added", description: "The new project has been successfully added." });
+        }
+        await fetchProjects();
+        setIsProjectDialogOpen(false);
+    } catch (error) {
+        console.error("Error saving project:", error);
+        toast({ variant: 'destructive', title: "Error", description: "Failed to save project." });
+    } finally {
+        setIsSubmitting(false);
     }
-    setIsProjectDialogOpen(false);
   };
   
-  const handleDeleteProject = (slug: string) => {
-    setProjects(projects.filter(p => p.slug !== slug));
-    toast({ variant: 'destructive', title: "Project Deleted", description: "The project has been removed." });
+  const handleDeleteProject = async (projectId: string) => {
+    try {
+        await deleteDoc(doc(db, "projects", projectId));
+        toast({ variant: 'destructive', title: "Project Deleted", description: "The project has been removed." });
+        await fetchProjects();
+    } catch (error) {
+        console.error("Error deleting project:", error);
+        toast({ variant: 'destructive', title: "Error", description: "Failed to delete project." });
+    }
   };
 
   const handleAddService = () => {
     setEditingService(null);
-    serviceForm.reset({ id: '', title: '', imageUrl: 'https://placehold.co/800x600.png', details: '' });
+    serviceForm.reset({ title: '', imageUrl: null, details: '' });
     setIsServiceDialogOpen(true);
   };
 
@@ -130,20 +174,42 @@ export default function ManagerPage() {
     setIsServiceDialogOpen(true);
   };
 
-  const onServiceSubmit = (data: ServiceFormValues) => {
-    if (editingService) {
-      setServices(services.map(s => s.id === editingService.id ? data : s));
-      toast({ title: "Service Updated", description: "The service has been successfully updated." });
-    } else {
-      setServices([data, ...services]);
-      toast({ title: "Service Added", description: "The new service has been successfully added." });
+  const onServiceSubmit = async (data: ServiceFormValues) => {
+    setIsSubmitting(true);
+    try {
+        let imageUrl = editingService?.imageUrl;
+        if (data.imageUrl && data.imageUrl.length > 0) {
+            imageUrl = await uploadImage(data.imageUrl[0]);
+        }
+        const serviceData = { ...data, imageUrl };
+
+        if (editingService) {
+            const serviceRef = doc(db, "services", editingService.id);
+            await updateDoc(serviceRef, serviceData);
+            toast({ title: "Service Updated", description: "The service has been successfully updated." });
+        } else {
+            await addDoc(collection(db, "services"), serviceData);
+            toast({ title: "Service Added", description: "The new service has been successfully added." });
+        }
+        await fetchServices();
+        setIsServiceDialogOpen(false);
+    } catch (error) {
+        console.error("Error saving service:", error);
+        toast({ variant: 'destructive', title: "Error", description: "Failed to save service." });
+    } finally {
+        setIsSubmitting(false);
     }
-    setIsServiceDialogOpen(false);
   };
   
-  const handleDeleteService = (id: string) => {
-    setServices(services.filter(s => s.id !== id));
-    toast({ variant: 'destructive', title: "Service Deleted", description: "The service has been removed." });
+  const handleDeleteService = async (serviceId: string) => {
+    try {
+        await deleteDoc(doc(db, "services", serviceId));
+        toast({ variant: 'destructive', title: "Service Deleted", description: "The service has been removed." });
+        await fetchServices();
+    } catch (error) {
+        console.error("Error deleting service:", error);
+        toast({ variant: 'destructive', title: "Error", description: "Failed to delete service." });
+    }
   };
 
   if (loading) {
@@ -198,8 +264,8 @@ export default function ManagerPage() {
                 )} />
                  <FormField control={projectForm.control} name="imageUrl" render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Main Image URL</FormLabel>
-                    <FormControl><Input {...field} placeholder="https://placehold.co/800x600.png" /></FormControl>
+                    <FormLabel>Main Image</FormLabel>
+                    <FormControl><Input type="file" onChange={(e) => field.onChange(e.target.files)} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
@@ -211,8 +277,11 @@ export default function ManagerPage() {
                   </FormItem>
                 )} />
                 <DialogFooter>
-                  <Button type="button" variant="ghost" onClick={() => setIsProjectDialogOpen(false)}>Cancel</Button>
-                  <Button type="submit">Save Project</Button>
+                  <Button type="button" variant="ghost" onClick={() => setIsProjectDialogOpen(false)} disabled={isSubmitting}>Cancel</Button>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Save Project
+                  </Button>
                 </DialogFooter>
               </form>
             </Form>
@@ -236,17 +305,10 @@ export default function ManagerPage() {
                     <FormMessage />
                   </FormItem>
                 )} />
-                 <FormField control={serviceForm.control} name="id" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>ID</FormLabel>
-                    <FormControl><Input {...field} disabled={!!editingService} placeholder="e.g., new-service" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
                 <FormField control={serviceForm.control} name="imageUrl" render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
-                    <FormControl><Input {...field} placeholder="https://placehold.co/800x600.png" /></FormControl>
+                    <FormLabel>Image</FormLabel>
+                    <FormControl><Input type="file" onChange={(e) => field.onChange(e.target.files)} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
@@ -258,8 +320,11 @@ export default function ManagerPage() {
                   </FormItem>
                 )} />
                 <DialogFooter>
-                  <Button type="button" variant="ghost" onClick={() => setIsServiceDialogOpen(false)}>Cancel</Button>
-                  <Button type="submit">Save Service</Button>
+                  <Button type="button" variant="ghost" onClick={() => setIsServiceDialogOpen(false)} disabled={isSubmitting}>Cancel</Button>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Save Service
+                  </Button>
                 </DialogFooter>
               </form>
             </Form>
@@ -277,49 +342,51 @@ export default function ManagerPage() {
             </Button>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {projects.map((project) => (
-                  <TableRow key={project.slug}>
-                    <TableCell className="font-medium">{project.title}</TableCell>
-                    <TableCell>{project.category}</TableCell>
-                    <TableCell className="text-right">
-                      <Button variant="ghost" size="icon" onClick={() => handleEditProject(project)}>
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                           <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
-                             <Trash2 className="h-4 w-4" />
-                           </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete the project "{project.title}".
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction className="bg-destructive hover:bg-destructive/90" onClick={() => handleDeleteProject(project.slug)}>
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </TableCell>
+             {isDataLoading ? <div className="flex justify-center items-center h-40"><Loader2 className="h-8 w-8 animate-spin" /></div> : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {projects.map((project) => (
+                    <TableRow key={project.id}>
+                      <TableCell className="font-medium">{project.title}</TableCell>
+                      <TableCell>{project.category}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="icon" onClick={() => handleEditProject(project)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                             <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
+                               <Trash2 className="h-4 w-4" />
+                             </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the project "{project.title}".
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction className="bg-destructive hover:bg-destructive/90" onClick={() => handleDeleteProject(project.id)}>
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+             )}
           </CardContent>
         </Card>
 
@@ -334,49 +401,51 @@ export default function ManagerPage() {
             </Button>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Details</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {services.map((service) => (
-                  <TableRow key={service.id}>
-                    <TableCell className="font-medium">{service.title}</TableCell>
-                    <TableCell className="text-muted-foreground max-w-md truncate">{service.details}</TableCell>
-                    <TableCell className="text-right">
-                      <Button variant="ghost" size="icon" onClick={() => handleEditService(service)}>
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                       <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                           <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
-                             <Trash2 className="h-4 w-4" />
-                           </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete the service "{service.title}".
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction className="bg-destructive hover:bg-destructive/90" onClick={() => handleDeleteService(service.id)}>
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </TableCell>
+            {isDataLoading ? <div className="flex justify-center items-center h-40"><Loader2 className="h-8 w-8 animate-spin" /></div> : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Details</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {services.map((service) => (
+                    <TableRow key={service.id}>
+                      <TableCell className="font-medium">{service.title}</TableCell>
+                      <TableCell className="text-muted-foreground max-w-md truncate">{service.details}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="icon" onClick={() => handleEditService(service)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                         <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                             <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
+                               <Trash2 className="h-4 w-4" />
+                             </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the service "{service.title}".
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction className="bg-destructive hover:bg-destructive/90" onClick={() => handleDeleteService(service.id)}>
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </CardContent>
         </Card>
       </main>

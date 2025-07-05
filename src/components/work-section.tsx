@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { projects } from '@/lib/projects-data';
+import type { Project } from '@/lib/projects-data';
 import { ScrollAnimation } from './scroll-animation';
 
-export function WorkSection() {
+interface WorkSectionProps {
+  projects: Project[];
+}
+
+export function WorkSection({ projects }: WorkSectionProps) {
   return (
     <section id="work" className="py-20 md:py-32 text-foreground border-t-2 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
@@ -24,7 +28,7 @@ export function WorkSection() {
         </ScrollAnimation>
         <div className="flex flex-col gap-20 md:gap-32">
           {projects.map((project, i) => (
-            <ScrollAnimation key={i} delay={i * 100}>
+            <ScrollAnimation key={project.id} delay={i * 100}>
               <Link href={`/work/${project.slug}`}>
                 <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end group">
                   <div className={cn(

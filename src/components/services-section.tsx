@@ -6,9 +6,13 @@ import { ScrollAnimation } from './scroll-animation';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { services } from '@/lib/services-data';
+import type { Service } from '@/lib/services-data';
 
-export function ServicesSection() {
+interface ServicesSectionProps {
+  services: Service[];
+}
+
+export function ServicesSection({ services }: ServicesSectionProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
@@ -37,7 +41,7 @@ export function ServicesSection() {
           {services.map((service, index) => {
             const isExpanded = expandedIndex === index;
             return (
-              <ScrollAnimation key={service.title} delay={index * 150}>
+              <ScrollAnimation key={service.id} delay={index * 150}>
                 <div
                   className={cn(
                     "group border-2 border-[#121212] rounded-[2rem] md:rounded-[3rem] p-4 md:p-8 transition-all duration-500 ease-in-out bg-card",

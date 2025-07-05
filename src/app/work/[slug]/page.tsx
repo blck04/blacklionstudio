@@ -1,4 +1,3 @@
-import { projects } from '@/lib/projects-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,9 +7,23 @@ import { ContactSection } from '@/components/contact-section';
 import { Separator } from '@/components/ui/separator';
 import { Footer } from '@/components/footer';
 import { cn } from '@/lib/utils';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import type { Project } from '@/lib/projects-data';
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
+async function getProjectBySlug(slug: string): Promise<Project | null> {
+    const q = query(collection(db, "projects"), where("slug", "==", slug));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+        return null;
+    }
+    const projectDoc = querySnapshot.docs[0];
+    return { id: projectDoc.id, ...projectDoc.data() } as Project;
+}
+
+
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const project = await getProjectBySlug(params.slug);
 
   if (!project) {
     notFound();
