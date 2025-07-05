@@ -57,7 +57,12 @@ export function HeroSection() {
       {/* Left Column (on desktop) / Bottom section (on mobile) */}
       <div className="relative md:w-[20vw] w-full p-8 md:p-4 flex flex-col gap-6 items-center justify-center text-center order-2 md:order-1 h-1/2 md:h-full">
         {/* Mobile Scroll Arrow */}
-        <div className="absolute left-8 bottom-8 z-10 md:hidden">
+        <Link
+          href="#about"
+          onClick={(e) => handleScrollTo(e, 'about')}
+          aria-label="Scroll to about section"
+          className="absolute left-8 bottom-8 z-10 md:hidden"
+        >
             <svg
               width="28"
               height="40"
@@ -81,7 +86,7 @@ export function HeroSection() {
                 strokeLinejoin="round"
               />
             </svg>
-        </div>
+        </Link>
 
         <div className="w-[20vw] md:w-[6vw]">
             <Image 
@@ -126,7 +131,7 @@ export function HeroSection() {
             ))}
         </nav>
         <div className="absolute hidden md:block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center md:left-auto md:translate-x-0 md:right-16 md:text-right">
-          <div className="font-headline text-6xl md:text-8xl lg:text-[10rem] lg:leading-none font-bold text-primary-foreground tracking-tighter">
+          <div className="font-headline text-6xl md:text-9xl lg:text-[9rem] lg:leading-none font-bold text-primary-foreground tracking-tighter">
             <div>
               <span>
                 BLACK
@@ -156,7 +161,12 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Arrow */}
-      <div className="absolute bottom-10 right-10 z-10 hidden md:block">
+      <Link
+        href="#about"
+        onClick={(e) => handleScrollTo(e, 'about')}
+        aria-label="Scroll to about section"
+        className="absolute bottom-10 right-10 z-10 hidden md:block"
+      >
         <svg
           width="28"
           height="40"
@@ -180,7 +190,7 @@ export function HeroSection() {
             strokeLinejoin="round"
           />
         </svg>
-      </div>
+      </Link>
     </section>
   );
 }
