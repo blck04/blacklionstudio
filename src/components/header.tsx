@@ -43,7 +43,6 @@ export function Header() {
     { name: 'Services', href: '#services' },
     { name: 'Portfolio', href: '#work' },
     { name: 'Contact', href: '#contact' },
-    { name: 'Manager', href: '/manager' },
   ];
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -150,7 +149,7 @@ export function Header() {
             <div className="lg:hidden">
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                     <SheetTrigger asChild>
-                        <Button variant="default" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
+                        <Button variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-background hover:text-accent-foreground border-foreground/50 hover:shadow-none">
                             Menu
                         </Button>
                     </SheetTrigger>
