@@ -11,12 +11,12 @@ export function AboutSection() {
     {
       value: "item-1",
       title: "Our Story",
-      content: "Founded on the principles of collaboration and innovation, BLACK LION STUDIO started as a small collective of passionate creatives. We believed that by blending artistic vision with technological expertise, we could create digital experiences that not only look beautiful but also function flawlessly and resonate deeply with users."
+      content: "Born from a shared commitment to redefine digital presence, Blacklion Studio emerged as a sanctuary for meticulous craftsmanship and bold innovation. Our journey began with a profound belief: that digital spaces should not merely exist, but truly resonate. We set out to blend strategic insight with artistic precision, transforming complex ideas into seamless, high-impact digital experiences. Over the years, we've cultivated a team of passionate creators, dedicated to pushing boundaries and consistently delivering unparalleled quality."
     },
     {
       value: "item-2",
       title: "Our Mission",
-      content: "Our mission is to make work meaningful. We strive to partner with brands and businesses that inspire us, helping them to tell their stories and connect with their audiences in authentic ways. We are committed to pushing the boundaries of design and technology to deliver solutions that drive growth and create lasting value."
+      content: "Our mission is to empower brands to not just compete, but to lead within the dynamic digital landscape. We are committed to crafting distinctive, high-impact digital experiences that elevate our clients' presence, foster deep connections with their audience, and drive measurable growth. Through a relentless pursuit of excellence and a blend of strategic foresight and creative mastery, we aim to ensure every digital interaction we craft becomes an unforgettable, resonating journey."
     }
   ];
 
@@ -46,7 +46,7 @@ export function AboutSection() {
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-muted-foreground md:text-lg">
+                  <p className="text-muted-foreground">
                     {item.content}
                   </p>
                 </AccordionContent>
