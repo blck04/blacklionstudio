@@ -17,6 +17,11 @@ export function AboutSection() {
       value: "item-2",
       title: "Our Mission",
       content: "Our mission is to empower brands to not just compete, but to lead within the dynamic digital landscape. We are committed to crafting distinctive, high-impact digital experiences that elevate our clients' presence, foster deep connections with their audience, and drive measurable growth. Through a relentless pursuit of excellence and a blend of strategic foresight and creative mastery, we aim to ensure every digital interaction we craft becomes an unforgettable, resonating journey."
+    },
+    {
+      value: "item-3",
+      title: "Why Choose Us",
+      content: "Choosing us means partnering with a team that values precision, innovation, and measurable results. We combine strategic thinking with creative excellence to deliver digital solutions that are not only beautiful but also effective. Our client-centric approach ensures your vision is at the heart of everything we do, resulting in a collaborative process and a final product that exceeds expectations. We are dedicated to your success, providing ongoing support and insights to help your brand thrive in the ever-evolving digital world."
     }
   ];
 
