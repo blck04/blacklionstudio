@@ -21,16 +21,16 @@ export function ServicesSection({ services }: ServicesSectionProps) {
 
   return (
     <section id="services" className="py-20 md:py-32 text-foreground border-t-2 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
         <ScrollAnimation>
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
             <div className="text-center md:order-last md:text-right">
-              <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-primary text-center md:text-right">
+              <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-tighter text-primary text-center md:text-right">
                 <span className="text-destructive">S</span>ERVICES
               </h2>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-muted-foreground text-balance text-center md:text-left">
+              <p className="text-muted-foreground text-balance text-center md:text-left 2xl:text-lg">
                 We use the power of design to solve complex problems and cultivate business solutions.
               </p>
             </div>
@@ -69,17 +69,17 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                             <X className="h-6 w-6" />
                           </Button>
                         )}
-                        <span className="text-xl md:text-2xl font-code text-destructive">
+                        <span className="text-xl md:text-2xl 2xl:text-3xl font-code text-destructive">
                           {`0${index + 1}`}
                         </span>
-                        <h3 className="font-headline text-3xl md:text-6xl font-bold tracking-tighter text-left">
+                        <h3 className="font-headline text-3xl md:text-6xl 2xl:text-7xl font-bold tracking-tighter text-left">
                           {service.title}
                         </h3>
                       </div>
 
                       <div className={cn("grid transition-all duration-500 ease-in-out", isExpanded ? "grid-rows-[1fr] opacity-100 mt-8" : "grid-rows-[0fr] opacity-0")}>
                           <div className="overflow-hidden">
-                              <p className="text-muted-foreground text-base md:text-lg text-center md:text-left">
+                              <p className="text-muted-foreground text-base md:text-lg 2xl:text-xl text-center md:text-left">
                                   {service.details}
                               </p>
                           </div>

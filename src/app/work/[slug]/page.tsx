@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             />
             <div className="absolute inset-0 bg-black/60" />
           </div>
-          <div className="container relative z-10 mx-auto px-4 md:px-6">
+          <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-screen-xl">
             <Link
               href="/#work"
               className="group mb-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-destructive transition-colors"
@@ -55,7 +55,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               Back to Portfolio
             </Link>
             <Separator className="mb-6 md:mb-8 bg-destructive-foreground/30" />
-            <h1 className="font-headline text-5xl font-bold tracking-tighter text-destructive-foreground md:text-7xl lg:text-9xl">
+            <h1 className="font-headline text-5xl font-bold tracking-tighter text-destructive-foreground md:text-7xl lg:text-9xl 2xl:text-[10rem]">
               <span className="text-destructive">{projectTitleUpper.charAt(0)}</span>{projectTitleUpper.slice(1)}
             </h1>
           </div>
@@ -87,18 +87,18 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         </section>
 
         <section className="pt-12 pb-20 md:pt-16 md:pb-32">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
             <div className="grid grid-cols-1 gap-12 md:gap-16 md:grid-cols-3">
               <div className="md:col-span-1">
-                <h2 className="font-headline text-2xl md:text-3xl font-bold">About the project</h2>
-                <div className="mt-4 space-y-2 text-muted-foreground">
+                <h2 className="font-headline text-2xl md:text-3xl font-bold 2xl:text-4xl">About the project</h2>
+                <div className="mt-4 space-y-2 text-muted-foreground 2xl:text-lg">
                     <p><strong>Client:</strong> {project.details.client}</p>
                     <p><strong>Year:</strong> {project.details.year}</p>
                     <p><strong>Services:</strong> {project.details.services}</p>
                 </div>
               </div>
               <div className="md:col-span-2">
-                <p className="text-lg text-foreground/90">
+                <p className="text-lg text-foreground/90 2xl:text-xl">
                   {project.about}
                 </p>
               </div>

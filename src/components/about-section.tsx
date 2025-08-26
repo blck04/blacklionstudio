@@ -27,16 +27,16 @@ export function AboutSection() {
 
   return (
     <section id="about" className="py-20 md:py-32 text-foreground overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
         <ScrollAnimation>
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
             <div className="text-center md:text-left">
-              <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-primary">
+              <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-tighter text-primary">
                 <span className="text-destructive">A</span>BOUT
               </h2>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground 2xl:text-lg">
                 Black Lion Studio is a creative powerhouse dedicated to crafting digital experiences that truly resonate. We transform bold visions into precise, high-impact realities, specializing in strategic branding, intuitive UI/UX, and cutting-edge web development. Our meticulous craftsmanship and unwavering commitment to exceptional quality ensure every digital solution we deliver leaves an unforgettable mark.
               </p>
             </div>
@@ -47,11 +47,11 @@ export function AboutSection() {
           {accordionItems.map((item, index) => (
             <ScrollAnimation delay={(index + 1) * 200} key={item.value}>
               <AccordionItem value={item.value}>
-                <AccordionTrigger className="text-xl md:text-3xl font-headline font-bold uppercase py-8 text-left">
+                <AccordionTrigger className="text-xl md:text-3xl 2xl:text-4xl font-headline font-bold uppercase py-8 text-left">
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground 2xl:text-lg">
                     {item.content}
                   </p>
                 </AccordionContent>

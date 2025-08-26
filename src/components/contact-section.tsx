@@ -7,11 +7,11 @@ import { ScrollAnimation } from './scroll-animation';
 export function ContactSection() {
   return (
     <section id="contact" className="py-20 md:py-32 text-foreground border-t-2 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
           <ScrollAnimation>
             <div className="flex flex-col gap-8">
-              <h2 className="font-headline font-bold tracking-tighter text-6xl md:text-8xl lg:text-9xl text-primary text-center md:text-left">
+              <h2 className="font-headline font-bold tracking-tighter text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] text-primary text-center md:text-left">
                 <span className="text-destructive">L</span>ET'S WORK TOGETHER
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
