@@ -28,7 +28,6 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
-import { Logo } from "@/components/logo";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -73,10 +72,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
-        <div className="mb-8 flex justify-center">
-            <Logo />
-        </div>
-        <Card>
+        <Card className="mt-8">
           <CardHeader>
             <CardTitle className="text-2xl">Manager Login</CardTitle>
             <CardDescription>
