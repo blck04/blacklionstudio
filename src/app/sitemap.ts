@@ -4,7 +4,7 @@ import { db } from '@/lib/firebase';
 import type { Project } from '@/lib/projects-data';
  
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://your-production-domain.com';
+  const baseUrl = 'https://blacklion.studio';
 
   // Fetch dynamic project routes
   const projectsCol = collection(db, 'projects');

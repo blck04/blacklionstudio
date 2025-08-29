@@ -63,7 +63,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
     '@type': 'Article',
     'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': `https://your-production-domain.com/work/${project.slug}`,
+      '@id': `https://blacklion.studio/work/${project.slug}`,
     },
     'headline': project.title,
     'description': project.about,
@@ -77,7 +77,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       'name': 'BLACK LION STUDIO',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://your-production-domain.com/LOGO-LIGHT-MODE.png',
+        'url': 'https://blacklion.studio/LOGO-LIGHT-MODE.png',
       },
     },
     'datePublished': new Date().toISOString(),

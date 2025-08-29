@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/manager/',
     },
-    sitemap: 'https://your-production-domain.com/sitemap.xml',
+    sitemap: 'https://blacklion.studio/sitemap.xml',
   }
 }
