@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import type { Metadata } from 'next';
 
 import { ContactSection } from '@/components/contact-section';
 import { Separator } from '@/components/ui/separator';
@@ -21,6 +22,32 @@ async function getProjectBySlug(slug: string): Promise<Project | null> {
     return { id: projectDoc.id, ...projectDoc.data() } as Project;
 }
 
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const project = await getProjectBySlug(params.slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    }
+  }
+
+  return {
+    title: project.title,
+    description: project.about.substring(0, 155),
+    openGraph: {
+      title: project.title,
+      description: project.about.substring(0, 155),
+      images: [
+        {
+          url: project.imageUrl,
+          width: 800,
+          height: 600,
+          alt: project.title,
+        },
+      ],
+    },
+  }
+}
 
 export default async function ProjectPage({ params }: { params: { slug: string } }) {
   const project = await getProjectBySlug(params.slug);
@@ -31,14 +58,43 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
   const projectTitleUpper = project.title.toUpperCase();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://your-production-domain.com/work/${project.slug}`,
+    },
+    'headline': project.title,
+    'description': project.about,
+    'image': project.imageUrl,
+    'author': {
+      '@type': 'Organization',
+      'name': 'BLACK LION STUDIO',
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'BLACK LION STUDIO',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://your-production-domain.com/LOGO-LIGHT-MODE.png',
+      },
+    },
+    'datePublished': new Date().toISOString(),
+  };
+
   return (
     <div className="flex flex-col min-h-screen text-foreground">
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       <main className="flex-1">
         <section className="relative w-full flex flex-col justify-center py-12 md:py-16">
           <div className="absolute inset-0">
             <Image
-              src="/project-img.jpg"
+              src={project.imageUrl}
               alt={project.title}
               fill
               priority

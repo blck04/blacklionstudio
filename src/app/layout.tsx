@@ -5,10 +5,34 @@ import { cn } from '@/lib/utils';
 import ScrollRestoration from '@/components/scroll-restoration';
 import { PageWrapper } from '@/components/page-wrapper';
 import { Header } from '@/components/header';
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
-  title: 'BLACK LION STUDIO',
-  description: 'We craft digital experiences that resonate.',
+  metadataBase: new URL('https://your-production-domain.com'),
+  title: {
+    default: 'BLACK LION STUDIO | We Craft Digital Experiences That Resonate.',
+    template: '%s | BLACK LION STUDIO',
+  },
+  description: 'A creative powerhouse dedicated to crafting digital experiences that truly resonate. We transform bold visions into precise, high-impact realities.',
+  openGraph: {
+    title: 'BLACK LION STUDIO',
+    description: 'A creative powerhouse dedicated to crafting digital experiences that truly resonate.',
+    url: 'https://your-production-domain.com',
+    siteName: 'BLACK LION STUDIO',
+    locale: 'en_US',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +52,22 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="/favicon.ico" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "BLACK LION STUDIO",
+            "url": "https://your-production-domain.com",
+            "logo": "https://your-production-domain.com/LOGO-LIGHT-MODE.png",
+            "sameAs": [
+              "https://www.facebook.com/",
+              "https://www.twitter.com/",
+              "https://www.instagram.com/"
+            ]
+          })}}
+        />
       </head>
       <body className={cn("font-body antialiased")}>
           <PageWrapper>
@@ -35,6 +75,7 @@ export default function RootLayout({
             <ScrollRestoration />
             {children}
             <Toaster />
+            <Analytics />
           </PageWrapper>
       </body>
     </html>
