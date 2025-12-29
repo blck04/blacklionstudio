@@ -10,7 +10,7 @@ interface WorkSectionProps {
 
 export function WorkSection({ projects }: WorkSectionProps) {
   return (
-    <section id="work" className="py-20 md:py-32 text-foreground border-t-2 overflow-hidden">
+    <section id="work" className="py-20 md:py-32 text-foreground border-t-2 overflow-x-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
         <ScrollAnimation>
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
@@ -30,7 +30,7 @@ export function WorkSection({ projects }: WorkSectionProps) {
           {projects.map((project, i) => {
             const isEven = i % 2 === 0;
             return (
-              <div key={project.id} className="overflow-hidden">
+              <div key={project.id}>
                 <Link href={`/work/${project.slug}`}>
                   <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end group">
                     <ScrollAnimation
