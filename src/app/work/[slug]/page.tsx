@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         <section className="relative w-full flex flex-col justify-center py-12 md:py-16">
           <div className="absolute inset-0">
             <Image
-              src={project.imageUrl}
+              src="/project-img.jpg"
               alt={project.title}
               fill
               priority
