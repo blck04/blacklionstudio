@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/70" />
+            <div className="absolute inset-0 bg-black/90" />
           </div>
           <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-screen-xl">
             <Link
