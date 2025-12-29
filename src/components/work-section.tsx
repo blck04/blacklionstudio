@@ -27,36 +27,45 @@ export function WorkSection({ projects }: WorkSectionProps) {
           </div>
         </ScrollAnimation>
         <div className="flex flex-col gap-20 md:gap-32">
-          {projects.map((project, i) => (
-            <ScrollAnimation key={project.id} delay={i * 100}>
-              <Link href={`/work/${project.slug}`}>
-                <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end group">
-                  <div className={cn(
-                    "flex flex-col text-center",
-                    i % 2 === 0 ? "md:order-last md:items-end md:text-right" : "md:text-left"
-                  )}>
-                    <h3 className={cn(
-                      "font-headline font-bold tracking-tighter text-4xl sm:text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl"
-                    )}>
-                      {project.title}
-                    </h3>
-                    <p className="mt-6 text-destructive uppercase tracking-widest text-sm font-bold 2xl:text-base">
-                      {project.category}
-                    </p>
+          {projects.map((project, i) => {
+            const isEven = i % 2 === 0;
+            return (
+              <div key={project.id} className="overflow-hidden">
+                <Link href={`/work/${project.slug}`}>
+                  <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end group">
+                    <ScrollAnimation
+                      animation={isEven ? 'fadeInRight' : 'fadeInLeft'}
+                      delay={100}
+                      className={cn(
+                        "flex flex-col text-center",
+                        isEven ? "md:order-last md:items-end md:text-right" : "md:text-left"
+                      )}>
+                      <h3 className={cn(
+                        "font-headline font-bold tracking-tighter text-4xl sm:text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl"
+                      )}>
+                        {project.title}
+                      </h3>
+                      <p className="mt-6 text-destructive uppercase tracking-widest text-sm font-bold 2xl:text-base">
+                        {project.category}
+                      </p>
+                    </ScrollAnimation>
+                    <ScrollAnimation
+                        animation={isEven ? 'fadeInLeft' : 'fadeInRight'}
+                        delay={100}
+                        className="relative overflow-hidden rounded-2xl md:rounded-3xl aspect-[4/3] shadow-[0_0_0_2px_hsl(var(--secondary)),0_0_0_4px_hsl(var(--destructive))]">
+                      <Image
+                        src={project.imageUrl}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      />
+                    </ScrollAnimation>
                   </div>
-                  <div className="relative overflow-hidden rounded-2xl md:rounded-3xl aspect-[4/3] shadow-[0_0_0_2px_hsl(var(--secondary)),0_0_0_4px_hsl(var(--destructive))]">
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-110"
-                    />
-                  </div>
-                </div>
-              </Link>
-            </ScrollAnimation>
-          ))}
+                </Link>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
