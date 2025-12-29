@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -100,7 +101,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/25" />
+            <div className="absolute inset-0 bg-black/[.35]" />
           </div>
           <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-screen-xl">
             <Link
