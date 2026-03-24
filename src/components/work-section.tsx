@@ -20,7 +20,7 @@ export function WorkSection({ projects }: WorkSectionProps) {
               </h2>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-muted-foreground text-balance 2xl:text-lg">
+              <p className="text-muted-foreground text-balance">
                 A selection of projects that we're proud of.
               </p>
             </div>
@@ -45,8 +45,7 @@ export function WorkSection({ projects }: WorkSectionProps) {
                       )}>
                         {project.title}
                       </h3>
-                      <p className="mt-6 text-destructive uppercase tracking-widest text-sm font-bold 2xl:text-base">
-                        {project.category}
+                      <p className="mt-6 text-destructive uppercase tracking-widest font-bold">                        {project.category}
                       </p>
                     </ScrollAnimation>
                     <ScrollAnimation

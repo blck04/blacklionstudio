@@ -36,7 +36,7 @@ export function AboutSection() {
               </h2>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-muted-foreground 2xl:text-lg">
+              <p className="text-muted-foreground">
                 Black Lion Studio is a creative powerhouse dedicated to crafting digital experiences that truly resonate. We transform bold visions into precise, high-impact realities, specializing in strategic branding, intuitive UI/UX, and cutting-edge web development. Our meticulous craftsmanship and unwavering commitment to exceptional quality ensure every digital solution we deliver leaves an unforgettable mark.
               </p>
             </div>
@@ -51,7 +51,7 @@ export function AboutSection() {
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-muted-foreground 2xl:text-lg">
+                  <p className="text-muted-foreground">
                     {item.content}
                   </p>
                 </AccordionContent>

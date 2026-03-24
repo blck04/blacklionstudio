@@ -14,7 +14,7 @@ export function Footer() {
                 <span className="text-destructive">B</span>LACK LION STUDIO
             </div>
           </div>
-          <p className="mt-[5px] text-center text-sm text-primary-foreground/80">
+          <p className="mt-[5px] text-center text-primary-foreground/80">
             © 2025 BLACK LION STUDIO
           </p>
         </div>

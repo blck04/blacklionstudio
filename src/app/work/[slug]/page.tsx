@@ -155,8 +155,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 </div>
               </div>
               <div className="md:col-span-2">
-                <p className="text-lg text-foreground/90 2xl:text-xl">
-                  {project.about}
+                <p className="text-foreground/90">                  {project.about}
                 </p>
               </div>
             </div>

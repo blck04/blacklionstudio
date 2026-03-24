@@ -49,8 +49,8 @@ export function HeroSection() {
       >
         
         {/* 1. LOGO AREA (Top-Left Cutout) */}
-        <div className="absolute top-0 left-0 w-[300px] h-[80px] flex items-center justify-start z-30">
-            <div className="flex items-center gap-4">
+        <div className="absolute top-0 left-0 w-[300px] h-[80px] flex items-start justify-start z-30">
+            <div className="flex items-center gap-4 pt-1">
                 <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
                     <div className="w-4 h-4 border-2 border-white rounded-sm rotate-45" />
                 </div>
@@ -61,18 +61,18 @@ export function HeroSection() {
         </div>
 
         {/* 2. ACTIONS AREA (Top-Right Cutout) - Uniform Nav Buttons */}
-        <div className="absolute top-0 right-0 w-[570px] h-[80px] flex items-center justify-end gap-4 z-30">
+        <div className="absolute top-0 right-0 w-[570px] h-[80px] flex items-start justify-end gap-4 z-30">
             {[
                 { name: 'About', id: 'about' },
                 { name: 'Services', id: 'services' },
                 { name: 'Work', id: 'work' },
-                { name: 'Contact', id: 'contact' },
+                { name: 'Get in Touch', id: 'contact' },
             ].map((link) => (
                 <Button 
                     key={link.id}
                     variant="outline" 
                     asChild
-                    className="rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] w-28 h-11 hover:bg-[#8A0000] hover:text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0"
+                    className="rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] w-28 h-11 hover:bg-[#8A0000] hover:text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0 mt-0.5"
                 >
                     <Link href={`#${link.id}`} onClick={(e) => handleScrollTo(e, link.id)}>
                         {link.name}
@@ -82,15 +82,47 @@ export function HeroSection() {
         </div>
 
         {/* 3. BRAND STATEMENT (Bottom-Right Cutout) */}
-        <div className="absolute bottom-0 right-0 w-[550px] h-[250px] flex flex-col items-start justify-center p-8 z-30 text-left">
-            <div className="space-y-4">
+        <div className="absolute bottom-0 right-0 w-[550px] h-[250px] flex items-start justify-between p-12 z-30 text-left">
+            <div className="space-y-4 max-w-[420px]">
                 <h3 className="font-headline text-4xl font-bold tracking-tighter uppercase leading-none text-black">
                     CRAFTING DIGITAL <span className="text-[#8A0000]">EXCELLENCE</span>
                 </h3>
-                <p className="text-black/70 text-sm font-mono leading-relaxed max-w-[500px] uppercase tracking-widest">
+                <p className="text-black/70 text-xs leading-relaxed uppercase tracking-widest">
                     WE TRANSFORM BOLD VISIONS INTO PRECISE, HIGH-IMPACT REALITIES. OUR STUDIO BLENDS ARCHITECTURAL PRECISION WITH CREATIVE SOUL TO BUILD EXPERIENCES THAT RESONATE. BY HARNESSING CUTTING-EDGE TECHNOLOGY AND REFINED DESIGN, WE ARCHITECT THE FUTURE OF DIGITAL NARRATIVES.
                 </p>
             </div>
+
+            {/* Scroll Arrow (to the right of text) */}
+            <Link
+                href="#about"
+                onClick={(e) => handleScrollTo(e, 'about')}
+                aria-label="Scroll to about section"
+                className="flex-shrink-0 pt-20 translate-x-6"
+            >
+                <svg
+                    width="28"
+                    height="40"
+                    viewBox="0 0 28 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-16 w-8 text-[#8A0000] animate-bounce"
+                >
+                    <path
+                        d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                    <path
+                        d="M14 1V33"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </Link>
         </div>
 
         {/* THE BLACK BENTO CARD */}

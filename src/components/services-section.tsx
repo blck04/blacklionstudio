@@ -30,7 +30,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
               </h2>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-muted-foreground text-balance text-center md:text-left 2xl:text-lg">
+              <p className="text-muted-foreground text-balance text-center md:text-left">
                 We use the power of design to solve complex problems and cultivate business solutions.
               </p>
             </div>
@@ -79,7 +79,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
 
                       <div className={cn("grid transition-all duration-500 ease-in-out", isExpanded ? "grid-rows-[1fr] opacity-100 mt-8" : "grid-rows-[0fr] opacity-0")}>
                           <div className="overflow-hidden">
-                              <p className="text-muted-foreground text-base md:text-lg 2xl:text-xl text-center md:text-left">
+                              <p className="text-muted-foreground text-center md:text-left">
                                   {service.details}
                               </p>
                           </div>

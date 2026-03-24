@@ -44,6 +44,9 @@
   * {
     @apply border-border;
   }
+  p {
+    @apply text-sm leading-relaxed;
+  }
   body {
     @apply bg-background text-foreground;
     background-image: url('/asfalt-dark.png');

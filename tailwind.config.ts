@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
+        body: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
         headline: ['"Formula Condensed"', 'sans-serif'],
         code: ['monospace'],
       },
