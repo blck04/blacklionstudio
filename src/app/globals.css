@@ -47,6 +47,8 @@
   body {
     @apply bg-background text-foreground;
     background-image: url('/asfalt-dark.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
   }
 }
 

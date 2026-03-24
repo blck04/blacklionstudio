@@ -1,197 +1,134 @@
-
 "use client";
 
-import { usePathname, useRouter } from 'next/navigation';
-import { Button } from "@/components/ui/button";
+import React, { useState, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from "@/components/ui/button";
+import { Search, ShoppingBag, Mail } from 'lucide-react';
+import MagnetLines from './magnet-lines';
 
 export function HeroSection() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
-  
-  const handleLetsTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const targetId = 'contact';
-    const targetElement = document.getElementById(targetId);
+  const [dimensions, setDimensions] = useState({ w: 1600, h: 900 });
 
-    if (targetElement) {
-        const headerOffset = 0; // No offset
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-    }
-  };
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      // Uniform 32px margin on all sides (matching p-8)
+      setDimensions({
+        w: window.innerWidth - 64,
+        h: window.innerHeight - 64
+      });
+    };
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    if (isHomePage) {
-        const element = document.getElementById(id);
-        if (element) {
-            const headerOffset = 0; // No offset
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-    
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth',
-            });
-        }
-    } else {
-        router.push(`/#${id}`);
-    }
-  };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Portfolio', href: '#work' },
-  ];
+  /**
+   * Dynamic Neo-Brutalist Bento Path
+   * All corners: 24px radius
+   * Top Cutouts: 80px height
+   */
+  const { w, h } = dimensions;
+  const R = 24;
+  const HT = 80;
+  const WL = 300;
+  const WA = 570;
+  const WB = 550;
+  const HB = 250;
+
+  const heroBentoPath = `path('M 0 ${HT + R} A ${R} ${R} 0 0 1 ${R} ${HT} L ${WL - R} ${HT} A ${R} ${R} 0 0 0 ${WL} ${HT - R} L ${WL} ${R} A ${R} ${R} 0 0 1 ${WL + R} 0 L ${w - WA - R} 0 A ${R} ${R} 0 0 1 ${w - WA} ${R} L ${w - WA} ${HT - R} A ${R} ${R} 0 0 0 ${w - WA + R} ${HT} L ${w - R} ${HT} A ${R} ${R} 0 0 1 ${w} ${HT + R} L ${w} ${h - HB - R} A ${R} ${R} 0 0 1 ${w - R} ${h - HB} L ${w - WB + R} ${h - HB} A ${R} ${R} 0 0 0 ${w - WB} ${h - HB + R} L ${w - WB} ${h - R} A ${R} ${R} 0 0 1 ${w - WB - R} ${h} L ${R} ${h} A ${R} ${R} 0 0 1 0 ${h - R} Z')`;
 
   return (
-    <section id="home" className="relative w-full h-svh flex flex-col md:flex-row items-center text-foreground overflow-hidden">
-      {/* Left Column (on desktop) / Bottom section (on mobile) */}
-      <div className="relative md:w-[20vw] w-full p-8 md:p-4 flex flex-col gap-6 items-center justify-center text-center order-2 md:order-1 h-1/2 md:h-full">
-        {/* Mobile Scroll Arrow */}
-        <Link
-          href="#about"
-          onClick={(e) => handleScrollTo(e, 'about')}
-          aria-label="Scroll to about section"
-          className="absolute left-8 bottom-8 z-10 md:hidden"
-        >
-            <svg
-              width="28"
-              height="40"
-              viewBox="0 0 28 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-7 text-muted-foreground animate-bounce"
-            >
-              <path
-                d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M14 1V33"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-        </Link>
-
-        <div className="w-[20vw] md:w-[6vw]">
-            <Image 
-                src="/LOGO-LIGHT-MODE.png"
-                alt="BLACK LION STUDIO Logo"
-                width={150}
-                height={40}
-                className="w-full h-auto"
-            />
-        </div>
-        <p className="text-muted-foreground text-xs md:text-sm">
-            In a world overflowing with digital noise, your brand deserves more than just a presence – it deserves a voice that cuts through and connects. We craft digital experiences that resonate, meticulously designing every detail to not only capture attention, but to genuinely engage your audience, build lasting connections, and drive measurable results. Let us transform your vision into an unforgettable online journey that leaves a lasting impact.
-        </p>
-        <Button asChild variant="default" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
-            <Link href="#contact" onClick={handleLetsTalkClick}>
-                Let's Talk
-            </Link>
-        </Button>
-      </div>
-
-      {/* Right Card with background image (on desktop) / Top section (on mobile) */}
-      <div
-        className="relative md:w-[80vw] w-full h-1/2 md:h-[95vh] order-1 md:order-2 md:rounded-l-3xl bg-cover bg-center flex justify-center items-center md:justify-start md:items-start p-4"
-        style={{ backgroundImage: "url('/bls-hero.png')" }}
+    <section id="home" className="relative w-full h-svh bg-background flex items-center justify-center overflow-hidden p-8">
+      
+      {/* RESPONSIVE CARD WRAPPER */}
+      <div 
+        className="relative w-full h-full flex-shrink-0 transition-all duration-300"
+        style={{ width: `${w}px`, height: `${h}px` }}
       >
-        {/* Desktop View */}
-        <nav className="hidden md:flex absolute top-4 left-4 justify-start items-center gap-4">
-            {navLinks.map((link) => (
-              <Button
-                key={link.name}
-                asChild
-                variant="ghost"
-                className="relative group py-2 w-32 text-primary-foreground hover:text-foreground uppercase tracking-wider text-xs md:text-sm font-bold transition-colors duration-300 rounded-full bg-black/20 backdrop-blur-md hover:bg-card border border-white/20 hover:border-2 hover:border-black"
-              >
-                <Link
-                  href={link.href}
-                  onClick={(e) => link.href.startsWith('#') && handleScrollTo(e, link.href.substring(1))}
+        
+        {/* 1. LOGO AREA (Top-Left Cutout) */}
+        <div className="absolute top-0 left-0 w-[300px] h-[80px] flex items-center justify-start z-30">
+            <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+                    <div className="w-4 h-4 border-2 border-white rounded-sm rotate-45" />
+                </div>
+                <span className="font-headline text-3xl font-bold tracking-tighter uppercase text-black">
+                    BLACK LION
+                </span>
+            </div>
+        </div>
+
+        {/* 2. ACTIONS AREA (Top-Right Cutout) - Uniform Nav Buttons */}
+        <div className="absolute top-0 right-0 w-[570px] h-[80px] flex items-center justify-end gap-4 z-30">
+            {[
+                { name: 'About', id: 'about' },
+                { name: 'Services', id: 'services' },
+                { name: 'Work', id: 'work' },
+                { name: 'Contact', id: 'contact' },
+            ].map((link) => (
+                <Button 
+                    key={link.id}
+                    variant="outline" 
+                    asChild
+                    className="rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] w-28 h-11 hover:bg-[#8A0000] hover:text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0"
                 >
-                  {link.name}
-                </Link>
-              </Button>
+                    <Link href={`#${link.id}`} onClick={(e) => handleScrollTo(e, link.id)}>
+                        {link.name}
+                    </Link>
+                </Button>
             ))}
-        </nav>
-        <div className="absolute hidden md:block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center md:left-auto md:translate-x-0 md:right-16 md:text-right">
-          <div className="font-headline text-6xl md:text-9xl lg:text-[9rem] lg:leading-none font-bold text-primary-foreground tracking-tighter">
-            <div>
-              <span>
-                BLACK
-              </span>
-            </div>
-            <div>
-              <span>
-                LION
-              </span>
-            </div>
-            <div>
-              <span>
-                STUDIO
-              </span>
-            </div>
-          </div>
         </div>
 
-        {/* Mobile View */}
-        <div className="flex flex-col items-center justify-center p-8 text-center md:hidden w-full h-full">
-            <div className="font-headline text-7xl font-bold text-primary-foreground tracking-tighter">
-                <div><span>BLACK</span></div>
-                <div><span>LION</span></div>
-                <div><span>STUDIO</span></div>
+        {/* 3. BRAND STATEMENT (Bottom-Right Cutout) */}
+        <div className="absolute bottom-0 right-0 w-[550px] h-[250px] flex flex-col items-start justify-center p-8 z-30 text-left">
+            <div className="space-y-4">
+                <h3 className="font-headline text-4xl font-bold tracking-tighter uppercase leading-none text-black">
+                    CRAFTING DIGITAL <span className="text-[#8A0000]">EXCELLENCE</span>
+                </h3>
+                <p className="text-black/70 text-sm font-mono leading-relaxed max-w-[500px] uppercase tracking-widest">
+                    WE TRANSFORM BOLD VISIONS INTO PRECISE, HIGH-IMPACT REALITIES. OUR STUDIO BLENDS ARCHITECTURAL PRECISION WITH CREATIVE SOUL TO BUILD EXPERIENCES THAT RESONATE. BY HARNESSING CUTTING-EDGE TECHNOLOGY AND REFINED DESIGN, WE ARCHITECT THE FUTURE OF DIGITAL NARRATIVES.
+                </p>
             </div>
+        </div>
+
+        {/* THE BLACK BENTO CARD */}
+        <div 
+          className="absolute inset-0 bg-black overflow-hidden"
+          style={{ 
+            clipPath: heroBentoPath,
+            WebkitClipPath: heroBentoPath
+          }}
+        >
+          {/* Hero Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image 
+                src="/bento-bg.png" 
+                alt="Hero Background" 
+                fill 
+                className="object-cover object-center"
+                priority
+            />
+          </div>
+
+          {/* Red Magnetic Capsules */}
+          <div className="absolute inset-0 z-10 pointer-events-none">
+            <MagnetLines 
+                rows={12} 
+                columns={20} 
+                containerSize="100%" 
+                lineColor="#8A0000" 
+                outlineThickness="4px"
+                style={{ opacity: 1 }}
+            />
+          </div>
+
+          {/* Dark Overlay (on top of image and capsules) */}
+          <div className="absolute inset-0 z-15 bg-black/70 pointer-events-none" />
         </div>
       </div>
 
-      {/* Scroll Arrow */}
-      <Link
-        href="#about"
-        onClick={(e) => handleScrollTo(e, 'about')}
-        aria-label="Scroll to about section"
-        className="absolute bottom-10 right-10 z-10 hidden md:block"
-      >
-        <svg
-          width="28"
-          height="40"
-          viewBox="0 0 28 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-10 w-7 text-primary-foreground/80 animate-bounce"
-        >
-          <path
-            d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M14 1V33"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Link>
     </section>
   );
 }
