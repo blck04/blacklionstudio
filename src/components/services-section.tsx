@@ -6,6 +6,7 @@ import { ScrollAnimation } from './scroll-animation';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Magnetic from './ui/magnetic';
 import type { Service } from '@/lib/services-data';
 
 interface ServicesSectionProps {
@@ -58,17 +59,19 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                     <div className="flex-grow flex flex-col justify-center">
                       <div className="flex items-center gap-4 md:gap-6 w-full">
                         {isExpanded && (
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="rounded-full h-12 w-12 bg-foreground text-background hover:bg-foreground/80 flex-shrink-0"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleToggle(index);
-                            }}
-                          >
-                            <X className="h-6 w-6" />
-                          </Button>
+                          <Magnetic>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="rounded-full h-12 w-12 bg-foreground text-background hover:bg-foreground/80 flex-shrink-0"
+                                onClick={(e) => {
+                                e.stopPropagation();
+                                handleToggle(index);
+                                }}
+                            >
+                                <X className="h-6 w-6" />
+                            </Button>
+                          </Magnetic>
                         )}
                         <span className="text-xl md:text-2xl 2xl:text-3xl font-code text-destructive">
                           {`0${index + 1}`}

@@ -7,6 +7,8 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useAuth } from "@/components/auth-provider";
+import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -40,6 +42,13 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/manager");
+    }
+  }, [user, router]);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -59,10 +68,21 @@ export default function LoginPage() {
       });
       router.push("/manager");
     } catch (error: any) {
+      console.error("Login error:", error);
+      let errorMessage = "The email or password you entered is incorrect.";
+      
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        errorMessage = "Invalid email or password.";
+      } else if (error.code === 'auth/too-many-requests') {
+        errorMessage = "Too many failed attempts. Please try again later.";
+      } else if (error.code === 'auth/network-request-failed') {
+        errorMessage = "Network error. Please check your connection.";
+      }
+
       toast({
         variant: "destructive",
         title: "Login Failed",
-        description: "The email or password you entered is incorrect.",
+        description: errorMessage,
       });
     } finally {
       setLoading(false);

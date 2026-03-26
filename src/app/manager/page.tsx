@@ -19,6 +19,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth, db, storage } from '@/lib/firebase';
+import { useAuth } from '@/components/auth-provider';
+import { AuthGuard } from '@/components/auth-guard';
 import type { Project } from '@/lib/projects-data';
 import type { Service } from '@/lib/services-data';
 import { collection, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
@@ -48,7 +50,6 @@ const journalSchema = z.object({
   author: z.string().min(1, "Author is required"),
   date: z.string().min(1, "Date is required"),
   imageUrl: z.any(),
-  excerpt: z.string().min(10, "Excerpt is required"),
   content: z.string().min(20, "Content is required"),
   tags: z.string().optional(),
 });
@@ -64,7 +65,6 @@ export interface JournalEntry {
     author: string;
     date: string;
     imageUrl: string;
-    excerpt: string;
     content: string;
     tags?: string[];
 }
@@ -72,6 +72,7 @@ export interface JournalEntry {
 
 export default function ManagerPage() {
   const { toast } = useToast();
+  const { user, logout } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [services, setServices] = useState<Service[]>([]);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
@@ -86,8 +87,6 @@ export default function ManagerPage() {
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [editingJournal, setEditingJournal] = useState<JournalEntry | null>(null);
 
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   const fetchProjects = async () => {
@@ -109,18 +108,11 @@ export default function ManagerPage() {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setLoading(false);
+    if (user) {
         setIsDataLoading(true);
         Promise.all([fetchProjects(), fetchServices(), fetchJournal()]).finally(() => setIsDataLoading(false));
-      } else {
-        router.push('/manager/login');
-      }
-    });
-    return () => unsubscribe();
-  }, [router]);
+    }
+  }, [user]);
 
   const projectForm = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
@@ -283,7 +275,7 @@ export default function ManagerPage() {
 
   const handleAddJournal = () => {
     setEditingJournal(null);
-    journalForm.reset({ slug: '', title: '', author: '', date: new Date().toISOString().split('T')[0], imageUrl: null, excerpt: '', content: '', tags: '' });
+    journalForm.reset({ slug: '', title: '', author: '', date: new Date().toISOString().split('T')[0], imageUrl: null, content: '', tags: '' });
     setIsJournalDialogOpen(true);
   };
 
@@ -295,7 +287,6 @@ export default function ManagerPage() {
         author: entry.author,
         date: entry.date,
         imageUrl: entry.imageUrl,
-        excerpt: entry.excerpt,
         content: entry.content,
         tags: entry.tags?.join(', ') || ''
     });
@@ -315,7 +306,6 @@ export default function ManagerPage() {
             author: data.author,
             date: data.date,
             imageUrl: imageUrl || '',
-            excerpt: data.excerpt,
             content: data.content,
             tags: data.tags ? data.tags.split(',').map(tag => tag.trim()) : []
         };
@@ -349,24 +339,21 @@ export default function ManagerPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center bg-background">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold tracking-tighter">Manager Dashboard</h1>
-          <Button variant="outline" asChild>
-            <Link href="/">Back to Site</Link>
-          </Button>
-        </div>
+    <AuthGuard>
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-4xl font-bold tracking-tighter">Manager Dashboard</h1>
+            <div className="flex gap-4">
+                <Button variant="outline" onClick={() => logout()}>
+                  Logout
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href="/">Back to Site</Link>
+                </Button>
+            </div>
+          </div>
 
         <Dialog open={isProjectDialogOpen} onOpenChange={setIsProjectDialogOpen}>
           <DialogContent className="sm:max-w-[625px] max-h-[90vh] overflow-y-auto">
@@ -538,13 +525,6 @@ export default function ManagerPage() {
                   <FormItem>
                     <FormLabel>Cover Image</FormLabel>
                     <FormControl><Input type="file" onChange={(e) => field.onChange(e.target.files)} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                <FormField control={journalForm.control} name="excerpt" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Excerpt (Summary)</FormLabel>
-                    <FormControl><Input {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
@@ -754,6 +734,7 @@ export default function ManagerPage() {
         </Card>
       </main>
       <Footer />
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

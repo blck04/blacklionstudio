@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import MagnetLines from './magnet-lines';
+import Magnetic from './ui/magnetic';
 
 export function HeroSection() {
   const [dimensions, setDimensions] = useState({ w: 1600, h: 900 });
@@ -85,19 +86,20 @@ export function HeroSection() {
                 { name: 'Journal', href: '/journal' },
                 { name: 'Get in Touch', href: '#contact' },
             ].map((link) => (
-                <Button 
-                    key={link.name}
-                    variant="outline" 
-                    asChild
-                    data-cursor="GO"
-                    className="group w-28 rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] h-11 hover:bg-[#8A0000] hover:text-white font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0 mt-0.5"
-                >
-                    <Link href={link.href} onClick={(e) => link.href.startsWith('#') ? handleScrollTo(e, link.href.substring(1)) : undefined}>
-                        <span className="transition-all duration-300 group-hover:scale-110 group-hover:font-black">
-                            {link.name}
-                        </span>
-                    </Link>
-                </Button>
+                <Magnetic key={link.name}>
+                    <Button 
+                        variant="outline" 
+                        asChild
+                        data-cursor="GO"
+                        className="group w-28 rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] h-11 hover:bg-[#8A0000] hover:text-white font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0 mt-0.5"
+                    >
+                        <Link href={link.href} onClick={(e) => link.href.startsWith('#') ? handleScrollTo(e, link.href.substring(1)) : undefined}>
+                            <span className="transition-all duration-300 group-hover:scale-110 group-hover:font-black">
+                                {link.name}
+                            </span>
+                        </Link>
+                    </Button>
+                </Magnetic>
             ))}
         </div>
 
@@ -113,44 +115,48 @@ export function HeroSection() {
                 <Link 
                     href="/process" 
                     data-cursor="GO"
-                    className="inline-block text-[#8A0000] font-black uppercase tracking-[0.2em] text-xs hover:underline transition-all mt-4"
+                    className="inline-block text-[#8A0000] font-black uppercase tracking-[0.2em] text-xs transition-all mt-1"
                 >
                     Learn more about our process →
                 </Link>
             </div>
 
-            {/* Scroll Arrow (to the right of text) */}
-            <Link
-                href="#about"
-                onClick={(e) => handleScrollTo(e, 'about')}
-                aria-label="Scroll to about section"
-                data-cursor="VIEW"
-                className="flex-shrink-0 pt-20 translate-x-6"
-            >
-                <svg
-                    width="28"
-                    height="40"
-                    viewBox="0 0 28 40"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-16 w-8 text-[#8A0000] animate-bounce"
-                >
-                    <path
-                        d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                    <path
-                        d="M14 1V33"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-            </Link>
+            {/* Scroll Arrow - Positioned precisely at bottom-right of the cutout */}
+            <div className="absolute bottom-10 right-4">
+                <Magnetic>
+                    <Link
+                        href="#about"
+                        onClick={(e) => handleScrollTo(e, 'about')}
+                        aria-label="Scroll to about section"
+                        data-cursor="VIEW"
+                        className="flex flex-col items-center justify-center transition-all duration-300"
+                    >
+                        <svg
+                            width="28"
+                            height="40"
+                            viewBox="0 0 28 40"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-16 w-8 text-[#8A0000] animate-bounce"
+                        >
+                            <path
+                                d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                            <path
+                                d="M14 1V33"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </Link>
+                </Magnetic>
+            </div>
         </div>
 
         {/* THE BLACK BENTO CARD */}
@@ -180,7 +186,7 @@ export function HeroSection() {
                 containerSize="100%" 
                 lineColor="#8A0000" 
                 outlineThickness="4px"
-                style={{ opacity: 1 }}
+                style={{ opacity: 0.75 }}
             />
           </div>
 

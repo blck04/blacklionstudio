@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import Magnetic from '@/components/ui/magnetic';
 
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -127,26 +128,29 @@ export function Header() {
         
         <nav className="hidden lg:flex justify-center items-center gap-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={getHref(link)}
-                data-cursor="GO"
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="relative group py-2 text-destructive uppercase tracking-wider text-base font-bold"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
-              </Link>
+              <Magnetic key={link.name}>
+                <Link
+                  href={getHref(link)}
+                  data-cursor="GO"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="relative group py-2 text-destructive uppercase tracking-wider text-base font-bold"
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
+                </Link>
+              </Magnetic>
             ))}
         </nav>
         
         <div className="flex-1 flex justify-end">
             <div className="hidden lg:flex items-center gap-2">
-                <Button asChild variant="default" data-cursor="GO" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
-                <Link href="#contact" onClick={handleLetsTalkClick}>
-                    Let's Talk
-                </Link>
-                </Button>
+                <Magnetic>
+                    <Button asChild variant="default" data-cursor="GO" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
+                    <Link href="#contact" onClick={handleLetsTalkClick}>
+                        Let's Talk
+                    </Link>
+                    </Button>
+                </Magnetic>
             </div>
             <div className="lg:hidden">
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>

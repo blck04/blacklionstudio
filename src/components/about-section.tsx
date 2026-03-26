@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion"
 import { ScrollAnimation } from "./scroll-animation";
 import Link from "next/link";
+import Magnetic from "./ui/magnetic";
 
 export function AboutSection() {
   const accordionItems = [
@@ -59,7 +60,7 @@ export function AboutSection() {
                   {item.link && (
                     <Link 
                       href={item.link.href}
-                      className="inline-block text-destructive font-bold uppercase tracking-widest text-xs hover:underline transition-all"
+                      className="inline-block text-destructive font-bold uppercase tracking-widest text-xs transition-all"
                     >
                       {item.link.text} →
                     </Link>

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Instagram, Twitter, Facebook, Phone, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { ScrollAnimation } from './scroll-animation';
+import Magnetic from './ui/magnetic';
 
 export function ContactSection() {
   return (
@@ -15,31 +16,41 @@ export function ContactSection() {
                 <span className="text-destructive">L</span>ET'S WORK TOGETHER
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                <Link href="tel:+15551234567" aria-label="Call us">
-                  <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
-                      <Phone className="group-hover:text-destructive" />
-                  </Button>
-                </Link>
-                <Link href="mailto:hello@blacklionstudio.com" aria-label="Email us">
-                  <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
-                      <Mail className="group-hover:text-destructive" />
-                  </Button>
-                </Link>
-                <Link href="#" aria-label="Facebook">
-                  <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
-                      <Facebook className="group-hover:text-destructive" />
-                  </Button>
-                </Link>
-                <Link href="#" aria-label="Twitter">
-                  <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
-                      <Twitter className="group-hover:text-destructive" />
-                  </Button>
-                </Link>
-                <Link href="#" aria-label="Instagram">
-                  <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
-                      <Instagram className="group-hover:text-destructive" />
-                  </Button>
-                </Link>
+                <Magnetic>
+                    <Link href="tel:+15551234567" aria-label="Call us">
+                    <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
+                        <Phone className="group-hover:text-destructive" />
+                    </Button>
+                    </Link>
+                </Magnetic>
+                <Magnetic>
+                    <Link href="mailto:hello@blacklionstudio.com" aria-label="Email us">
+                    <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
+                        <Mail className="group-hover:text-destructive" />
+                    </Button>
+                    </Link>
+                </Magnetic>
+                <Magnetic>
+                    <Link href="#" aria-label="Facebook">
+                    <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
+                        <Facebook className="group-hover:text-destructive" />
+                    </Button>
+                    </Link>
+                </Magnetic>
+                <Magnetic>
+                    <Link href="#" aria-label="Twitter">
+                    <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
+                        <Twitter className="group-hover:text-destructive" />
+                    </Button>
+                    </Link>
+                </Magnetic>
+                <Magnetic>
+                    <Link href="#" aria-label="Instagram">
+                    <Button size="icon" className="group rounded-full bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.3)] hover:bg-background hover:border hover:border-muted-foreground/50 hover:shadow-none">
+                        <Instagram className="group-hover:text-destructive" />
+                    </Button>
+                    </Link>
+                </Magnetic>
               </div>
             </div>
           </ScrollAnimation>

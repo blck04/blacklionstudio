@@ -76,7 +76,7 @@ export default async function JournalPage() {
         </section>
 
         {/* Journal Grid */}
-        <section className="border-t border-foreground/5 py-24 md:py-32">
+        <section className="border-t border-foreground/5 pt-12 pb-24 md:pt-16 md:pb-32">
           <div className="container mx-auto px-6 max-w-screen-xl">
             {entries.length > 0 ? (
               <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
@@ -100,12 +100,10 @@ export default async function JournalPage() {
                           <span className="flex items-center gap-1.5"><Calendar className="h-3 w-3" /> {entry.date}</span>
                           <span className="flex items-center gap-1.5"><User className="h-3 w-3" /> {entry.author}</span>
                        </div>
-                       <h2 className="font-headline text-2xl font-bold uppercase tracking-tight transition-colors group-hover:text-destructive md:text-3xl">
-                          {entry.title}
+                       <h2 className="font-headline text-2xl font-semibold uppercase leading-tight transition-colors group-hover:text-destructive md:text-3xl">
+                          <span className="text-destructive">{entry.title.split(' ')[0]}</span>
+                          {entry.title.includes(' ') && ' ' + entry.title.split(' ').slice(1).join(' ')}
                        </h2>
-                       <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">
-                          {entry.excerpt}
-                       </p>
                     </div>
                   </Link>
                 ))}

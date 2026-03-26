@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { Project } from '@/lib/projects-data';
 import { ScrollAnimation } from './scroll-animation';
+import Magnetic from './ui/magnetic';
 
 interface WorkSectionProps {
   projects: Project[];
@@ -41,9 +42,9 @@ export function WorkSection({ projects }: WorkSectionProps) {
                         isEven ? "md:order-last md:items-end md:text-right" : "md:text-left"
                       )}>
                       <h3 className={cn(
-                        "font-headline font-bold tracking-tighter text-4xl sm:text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl"
+                          "font-headline font-bold tracking-tighter text-4xl sm:text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl"
                       )}>
-                        {project.title}
+                          {project.title}
                       </h3>
                       <p className="mt-6 text-destructive uppercase tracking-widest font-bold">                        {project.category}
                       </p>

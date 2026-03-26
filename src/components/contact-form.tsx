@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import Magnetic from "./ui/magnetic";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -81,10 +82,12 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" size="lg" className="group rounded-full px-8 py-7 text-lg w-full">
-          Send Message
-          <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-        </Button>
+        <Magnetic>
+            <Button type="submit" size="lg" className="group rounded-full px-8 py-7 text-lg w-full">
+            Send Message
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+        </Magnetic>
       </form>
     </Form>
   );

@@ -6,6 +6,7 @@ import ScrollRestoration from '@/components/scroll-restoration';
 import { PageWrapper } from '@/components/page-wrapper';
 import { Header } from '@/components/header';
 import { Analytics } from "@vercel/analytics/react"
+import { AuthProvider } from '@/components/auth-provider';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://blacklion.studio'),
@@ -70,6 +71,7 @@ export default function RootLayout({
         />
       </head>
       <body className={cn("font-body antialiased")}>
+        <AuthProvider>
           <PageWrapper>
             <Header />
             <ScrollRestoration />
@@ -77,6 +79,7 @@ export default function RootLayout({
             <Toaster />
             <Analytics />
           </PageWrapper>
+        </AuthProvider>
       </body>
     </html>
   );
