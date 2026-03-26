@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 export function Logo({ 
   className, 
   showText = true, 
-  logoSrc = "/logo.png" 
+  logoSrc = "/BLS-NEW-LOGO.png" 
 }: { 
   className?: string; 
   showText?: boolean;
@@ -16,15 +16,17 @@ export function Logo({
       <Image
         src={logoSrc}
         alt="BLACK LION STUDIO Logo"
-        width={150}
-        height={40}
+        width={120}
+        height={32}
         className={cn(
-          "h-[70%] w-auto"
+          "h-[50%] w-auto"
         )}
       />
       {showText && (
         <span className="font-headline text-2xl md:text-5xl font-bold tracking-tighter uppercase text-foreground">
-          <span className="text-destructive">B</span>LACK LION STUDIO
+          <span className="text-destructive">B</span>
+          <span className="text-destructive">.</span>L
+          <span className="text-destructive">.</span>S
         </span>
       )}
     </Link>

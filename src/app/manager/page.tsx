@@ -42,22 +42,49 @@ const serviceSchema = z.object({
   details: z.string().min(10, "Details are required"),
 });
 
+const journalSchema = z.object({
+  slug: z.string().min(1, "Slug is required").regex(/^[a-z0-9-]+$/, "Slug can only contain lowercase letters, numbers, and hyphens."),
+  title: z.string().min(1, "Title is required"),
+  author: z.string().min(1, "Author is required"),
+  date: z.string().min(1, "Date is required"),
+  imageUrl: z.any(),
+  excerpt: z.string().min(10, "Excerpt is required"),
+  content: z.string().min(20, "Content is required"),
+  tags: z.string().optional(),
+});
+
 type ProjectFormValues = z.infer<typeof projectSchema>;
 type ServiceFormValues = z.infer<typeof serviceSchema>;
+type JournalFormValues = z.infer<typeof journalSchema>;
+
+export interface JournalEntry {
+    id: string;
+    slug: string;
+    title: string;
+    author: string;
+    date: string;
+    imageUrl: string;
+    excerpt: string;
+    content: string;
+    tags?: string[];
+}
 
 
 export default function ManagerPage() {
   const { toast } = useToast();
   const [projects, setProjects] = useState<Project[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+  const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
+  const [isJournalDialogOpen, setIsJournalDialogOpen] = useState(false);
   
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingService, setEditingService] = useState<Service | null>(null);
+  const [editingJournal, setEditingJournal] = useState<JournalEntry | null>(null);
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -75,13 +102,19 @@ export default function ManagerPage() {
     setServices(servicesData);
   };
 
+  const fetchJournal = async () => {
+    const querySnapshot = await getDocs(collection(db, "journal"));
+    const journalData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as JournalEntry[];
+    setJournalEntries(journalData);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);
         setIsDataLoading(true);
-        Promise.all([fetchProjects(), fetchServices()]).finally(() => setIsDataLoading(false));
+        Promise.all([fetchProjects(), fetchServices(), fetchJournal()]).finally(() => setIsDataLoading(false));
       } else {
         router.push('/manager/login');
       }
@@ -95,6 +128,10 @@ export default function ManagerPage() {
 
   const serviceForm = useForm<ServiceFormValues>({
     resolver: zodResolver(serviceSchema),
+  });
+
+  const journalForm = useForm<JournalFormValues>({
+    resolver: zodResolver(journalSchema),
   });
 
   const handleAddProject = () => {
@@ -244,6 +281,74 @@ export default function ManagerPage() {
     }
   };
 
+  const handleAddJournal = () => {
+    setEditingJournal(null);
+    journalForm.reset({ slug: '', title: '', author: '', date: new Date().toISOString().split('T')[0], imageUrl: null, excerpt: '', content: '', tags: '' });
+    setIsJournalDialogOpen(true);
+  };
+
+  const handleEditJournal = (entry: JournalEntry) => {
+    setEditingJournal(entry);
+    journalForm.reset({
+        slug: entry.slug,
+        title: entry.title,
+        author: entry.author,
+        date: entry.date,
+        imageUrl: entry.imageUrl,
+        excerpt: entry.excerpt,
+        content: entry.content,
+        tags: entry.tags?.join(', ') || ''
+    });
+    setIsJournalDialogOpen(true);
+  };
+
+  const onJournalSubmit = async (data: JournalFormValues) => {
+    setIsSubmitting(true);
+    try {
+        let imageUrl = editingJournal?.imageUrl;
+        if (data.imageUrl && typeof data.imageUrl !== 'string' && data.imageUrl.length > 0) {
+            imageUrl = await uploadImage(data.imageUrl[0]);
+        }
+        const journalData = {
+            slug: data.slug,
+            title: data.title,
+            author: data.author,
+            date: data.date,
+            imageUrl: imageUrl || '',
+            excerpt: data.excerpt,
+            content: data.content,
+            tags: data.tags ? data.tags.split(',').map(tag => tag.trim()) : []
+        };
+
+        if (editingJournal) {
+            const journalRef = doc(db, "journal", editingJournal.id);
+            await updateDoc(journalRef, journalData);
+            toast({ title: "Journal Entry Updated", description: "The entry has been successfully updated." });
+        } else {
+            await addDoc(collection(db, "journal"), journalData);
+            toast({ title: "Journal Entry Added", description: "The new entry has been successfully added." });
+        }
+        await fetchJournal();
+        setIsJournalDialogOpen(false);
+    } catch (error) {
+        console.error("Error saving journal entry:", error);
+        toast({ variant: 'destructive', title: "Error", description: "Failed to save journal entry." });
+    } finally {
+        setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteJournal = async (entryId: string) => {
+    try {
+        await deleteDoc(doc(db, "journal", entryId));
+        toast({ variant: 'destructive', title: "Journal Entry Deleted", description: "The entry has been removed." });
+        await fetchJournal();
+    } catch (error) {
+        console.error("Error deleting journal entry:", error);
+        toast({ variant: 'destructive', title: "Error", description: "Failed to delete entry." });
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex h-screen w-full items-center justify-center bg-background">
@@ -264,7 +369,7 @@ export default function ManagerPage() {
         </div>
 
         <Dialog open={isProjectDialogOpen} onOpenChange={setIsProjectDialogOpen}>
-          <DialogContent className="sm:max-w-[625px]">
+          <DialogContent className="sm:max-w-[625px] max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>{editingProject ? 'Edit Project' : 'Add Project'}</DialogTitle>
               <DialogDescription>
@@ -391,6 +496,84 @@ export default function ManagerPage() {
           </DialogContent>
         </Dialog>
 
+        <Dialog open={isJournalDialogOpen} onOpenChange={setIsJournalDialogOpen}>
+          <DialogContent className="sm:max-w-[625px] max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>{editingJournal ? 'Edit Journal Entry' : 'Add Journal Entry'}</DialogTitle>
+              <DialogDescription>
+                {editingJournal ? 'Update your thoughts and insights.' : 'Share a new insight with your audience.'}
+              </DialogDescription>
+            </DialogHeader>
+             <Form {...journalForm}>
+              <form onSubmit={journalForm.handleSubmit(onJournalSubmit)} className="space-y-4">
+                <FormField control={journalForm.control} name="title" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl><Input {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="slug" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Slug</FormLabel>
+                    <FormControl><Input {...field} disabled={!!editingJournal} placeholder="e.g., future-of-design" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="author" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Author</FormLabel>
+                    <FormControl><Input {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="date" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date</FormLabel>
+                    <FormControl><Input type="date" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="imageUrl" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Cover Image</FormLabel>
+                    <FormControl><Input type="file" onChange={(e) => field.onChange(e.target.files)} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="excerpt" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Excerpt (Summary)</FormLabel>
+                    <FormControl><Input {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="tags" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tags (Comma separated)</FormLabel>
+                    <FormControl><Input {...field} placeholder="e.g., Design, Tech, Studio" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={journalForm.control} name="content" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Content</FormLabel>
+                    <FormControl><Textarea {...field} className="min-h-64" /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <DialogFooter>
+                  <Button type="button" variant="ghost" onClick={() => setIsJournalDialogOpen(false)} disabled={isSubmitting}>Cancel</Button>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Save Journal Entry
+                  </Button>
+                </DialogFooter>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+
         <Card className="mb-12">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
@@ -450,7 +633,7 @@ export default function ManagerPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="mb-12">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
               <CardTitle>Manage Services</CardTitle>
@@ -495,6 +678,67 @@ export default function ManagerPage() {
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction className="bg-destructive hover:bg-destructive/90" onClick={() => handleDeleteService(service.id)}>
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Manage Journal</CardTitle>
+              <CardDescription>Share insights and updates.</CardDescription>
+            </div>
+            <Button onClick={handleAddJournal}>
+              <PlusCircle className="mr-2 h-4 w-4" /> Add Journal Entry
+            </Button>
+          </CardHeader>
+          <CardContent>
+            {isDataLoading ? <div className="flex justify-center items-center h-40"><Loader2 className="h-8 w-8 animate-spin" /></div> : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Author</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {journalEntries.map((entry) => (
+                    <TableRow key={entry.id}>
+                      <TableCell className="font-medium">{entry.title}</TableCell>
+                      <TableCell>{entry.author}</TableCell>
+                      <TableCell>{entry.date}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="icon" onClick={() => handleEditJournal(entry)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                         <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                             <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
+                               <Trash2 className="h-4 w-4" />
+                             </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the journal entry "{entry.title}".
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction className="bg-destructive hover:bg-destructive/90" onClick={() => handleDeleteJournal(entry.id)}>
                                 Delete
                               </AlertDialogAction>
                             </AlertDialogFooter>

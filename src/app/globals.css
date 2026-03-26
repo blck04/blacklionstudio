@@ -45,7 +45,7 @@
     @apply border-border;
   }
   p {
-    @apply text-sm leading-relaxed;
+    @apply text-xs leading-relaxed uppercase tracking-widest;
   }
   body {
     @apply bg-background text-foreground;

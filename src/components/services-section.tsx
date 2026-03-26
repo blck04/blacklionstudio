@@ -50,6 +50,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                       : "cursor-pointer hover:border-[#121212] hover:shadow-[0_0_25px_hsl(var(--primary)/0.3)]"
                   )}
                   onClick={() => !isExpanded && handleToggle(index)}
+                  data-cursor={isExpanded ? "" : "VIEW"}
                 >
                   <div className={cn(
                     "flex justify-between items-center gap-4 md:gap-8",
@@ -72,7 +73,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                         <span className="text-xl md:text-2xl 2xl:text-3xl font-code text-destructive">
                           {`0${index + 1}`}
                         </span>
-                        <h3 className="font-headline text-3xl md:text-6xl 2xl:text-7xl font-bold tracking-tighter text-left">
+                        <h3 className="font-headline text-3xl md:text-6xl 2xl:text-7xl font-bold tracking-tighter text-left uppercase">
                           {service.title}
                         </h3>
                       </div>

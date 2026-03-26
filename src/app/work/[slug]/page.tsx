@@ -78,7 +78,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       'name': 'BLACK LION STUDIO',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://blacklion.studio/LOGO-LIGHT-MODE.png',
+        'url': 'https://blacklion.studio/BLS-NEW-LOGO.png',
       },
     },
     'datePublished': new Date().toISOString(),

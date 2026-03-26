@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { ScrollAnimation } from "./scroll-animation";
+import Link from "next/link";
 
 export function AboutSection() {
   const accordionItems = [
@@ -21,7 +22,8 @@ export function AboutSection() {
     {
       value: "item-3",
       title: "Why Choose Us",
-      content: "Choosing us means partnering with a team that values precision, innovation, and measurable results. We combine strategic thinking with creative excellence to deliver digital solutions that are not only beautiful but also effective. Our client-centric approach ensures your vision is at the heart of everything we do, resulting in a collaborative process and a final product that exceeds expectations. We are dedicated to your success, providing ongoing support and insights to help your brand thrive in the ever-evolving digital world."
+      content: "Choosing us means partnering with a team that values precision, innovation, and measurable results. We combine strategic thinking with creative excellence to deliver digital solutions that are not only beautiful but also effective. Our client-centric approach ensures your vision is at the heart of everything we do, resulting in a collaborative process and a final product that exceeds expectations. We are dedicated to your success, providing ongoing support and insights to help your brand thrive in the ever-evolving digital world.",
+      link: { text: "Learn more about our process", href: "/process" }
     }
   ];
 
@@ -51,9 +53,17 @@ export function AboutSection() {
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground mb-4">
                     {item.content}
                   </p>
+                  {item.link && (
+                    <Link 
+                      href={item.link.href}
+                      className="inline-block text-destructive font-bold uppercase tracking-widest text-xs hover:underline transition-all"
+                    >
+                      {item.link.text} →
+                    </Link>
+                  )}
                 </AccordionContent>
               </AccordionItem>
             </ScrollAnimation>

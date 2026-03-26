@@ -31,7 +31,7 @@ export function WorkSection({ projects }: WorkSectionProps) {
             const isEven = i % 2 === 0;
             return (
               <div key={project.id}>
-                <Link href={`/work/${project.slug}`}>
+                <Link href={`/work/${project.slug}`} data-cursor="VIEW">
                   <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end group">
                     <ScrollAnimation
                       animation={isEven ? 'fadeInRight' : 'fadeInLeft'}

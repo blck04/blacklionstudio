@@ -4,7 +4,6 @@ import React, { useState, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
-import { Search, ShoppingBag, Mail } from 'lucide-react';
 import MagnetLines from './magnet-lines';
 
 export function HeroSection() {
@@ -24,6 +23,17 @@ export function HeroSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth',
+        });
+    }
+  };
+
   /**
    * Dynamic Neo-Brutalist Bento Path
    * All corners: 24px radius
@@ -33,14 +43,14 @@ export function HeroSection() {
   const R = 24;
   const HT = 80;
   const WL = 300;
-  const WA = 570;
+  const WA = 650;
   const WB = 550;
   const HB = 250;
 
   const heroBentoPath = `path('M 0 ${HT + R} A ${R} ${R} 0 0 1 ${R} ${HT} L ${WL - R} ${HT} A ${R} ${R} 0 0 0 ${WL} ${HT - R} L ${WL} ${R} A ${R} ${R} 0 0 1 ${WL + R} 0 L ${w - WA - R} 0 A ${R} ${R} 0 0 1 ${w - WA} ${R} L ${w - WA} ${HT - R} A ${R} ${R} 0 0 0 ${w - WA + R} ${HT} L ${w - R} ${HT} A ${R} ${R} 0 0 1 ${w} ${HT + R} L ${w} ${h - HB - R} A ${R} ${R} 0 0 1 ${w - R} ${h - HB} L ${w - WB + R} ${h - HB} A ${R} ${R} 0 0 0 ${w - WB} ${h - HB + R} L ${w - WB} ${h - R} A ${R} ${R} 0 0 1 ${w - WB - R} ${h} L ${R} ${h} A ${R} ${R} 0 0 1 0 ${h - R} Z')`;
 
   return (
-    <section id="home" className="relative w-full h-svh bg-background flex items-center justify-center overflow-hidden p-8">
+    <section id="home" className="relative w-full h-svh bg-background flex items-center justify-center overflow-hidden p-8" style={{ backgroundImage: "url('/asfalt-dark.png')", backgroundRepeat: 'repeat', backgroundAttachment: 'fixed' }}>
       
       {/* RESPONSIVE CARD WRAPPER */}
       <div 
@@ -49,33 +59,43 @@ export function HeroSection() {
       >
         
         {/* 1. LOGO AREA (Top-Left Cutout) */}
-        <div className="absolute top-0 left-0 w-[300px] h-[80px] flex items-start justify-start z-30">
-            <div className="flex items-center gap-4 pt-1">
-                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
-                    <div className="w-4 h-4 border-2 border-white rounded-sm rotate-45" />
+        <div className="absolute top-0 left-0 w-[300px] h-[80px] flex items-start justify-start z-30 p-0 overflow-hidden">
+            <Link href="/" data-cursor="GO" className="flex items-start gap-4 p-0 h-full">
+                <div className="h-[80px] w-auto flex-shrink-0 flex items-start">
+                    <img 
+                        src="/BLS-NEW-LOGO.png"
+                        alt="Black Lion Logo"
+                        className="h-[80%] w-auto object-contain block"
+                    />
                 </div>
-                <span className="font-headline text-3xl font-bold tracking-tighter uppercase text-black">
-                    BLACK LION
-                </span>
-            </div>
+                <div className="h-[80%] flex items-center">
+                    <span className="font-headline text-6xl font-bold tracking-tighter uppercase text-black leading-none mt-[8px]">
+                        B<span className="text-[#8A0000]">.</span>L<span className="text-[#8A0000]">.</span>S
+                    </span>
+                </div>
+            </Link>
         </div>
 
         {/* 2. ACTIONS AREA (Top-Right Cutout) - Uniform Nav Buttons */}
-        <div className="absolute top-0 right-0 w-[570px] h-[80px] flex items-start justify-end gap-4 z-30">
+        <div className="absolute top-0 right-0 w-[650px] h-[80px] flex items-start justify-end gap-3 z-30 px-6">
             {[
-                { name: 'About', id: 'about' },
-                { name: 'Services', id: 'services' },
-                { name: 'Work', id: 'work' },
-                { name: 'Get in Touch', id: 'contact' },
+                { name: 'About', href: '#about' },
+                { name: 'Services', href: '/#services' },
+                { name: 'Work', href: '/#work' },
+                { name: 'Journal', href: '/journal' },
+                { name: 'Get in Touch', href: '#contact' },
             ].map((link) => (
                 <Button 
-                    key={link.id}
+                    key={link.name}
                     variant="outline" 
                     asChild
-                    className="rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] w-28 h-11 hover:bg-[#8A0000] hover:text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0 mt-0.5"
+                    data-cursor="GO"
+                    className="group w-28 rounded-full border-2 border-[#8A0000] bg-transparent text-[#8A0000] h-11 hover:bg-[#8A0000] hover:text-white font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center p-0 mt-0.5"
                 >
-                    <Link href={`#${link.id}`} onClick={(e) => handleScrollTo(e, link.id)}>
-                        {link.name}
+                    <Link href={link.href} onClick={(e) => link.href.startsWith('#') ? handleScrollTo(e, link.href.substring(1)) : undefined}>
+                        <span className="transition-all duration-300 group-hover:scale-110 group-hover:font-black">
+                            {link.name}
+                        </span>
                     </Link>
                 </Button>
             ))}
@@ -87,9 +107,16 @@ export function HeroSection() {
                 <h3 className="font-headline text-4xl font-bold tracking-tighter uppercase leading-none text-black">
                     CRAFTING DIGITAL <span className="text-[#8A0000]">EXCELLENCE</span>
                 </h3>
-                <p className="text-black/70 text-xs leading-relaxed uppercase tracking-widest">
+                <p className="text-muted-foreground text-xs leading-relaxed uppercase tracking-widest">
                     WE TRANSFORM BOLD VISIONS INTO PRECISE, HIGH-IMPACT REALITIES. OUR STUDIO BLENDS ARCHITECTURAL PRECISION WITH CREATIVE SOUL TO BUILD EXPERIENCES THAT RESONATE. BY HARNESSING CUTTING-EDGE TECHNOLOGY AND REFINED DESIGN, WE ARCHITECT THE FUTURE OF DIGITAL NARRATIVES.
                 </p>
+                <Link 
+                    href="/process" 
+                    data-cursor="GO"
+                    className="inline-block text-[#8A0000] font-black uppercase tracking-[0.2em] text-xs hover:underline transition-all mt-4"
+                >
+                    Learn more about our process →
+                </Link>
             </div>
 
             {/* Scroll Arrow (to the right of text) */}
@@ -97,6 +124,7 @@ export function HeroSection() {
                 href="#about"
                 onClick={(e) => handleScrollTo(e, 'about')}
                 aria-label="Scroll to about section"
+                data-cursor="VIEW"
                 className="flex-shrink-0 pt-20 translate-x-6"
             >
                 <svg

@@ -42,6 +42,7 @@ export function Header() {
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Portfolio', href: '#work' },
+    { name: 'Journal', href: '/journal' },
     { name: 'Contact', href: '#contact' },
   ];
   
@@ -105,7 +106,7 @@ export function Header() {
     return `/${link.href}`; // It's a hash on another page
   };
   
-  const headerLogo = '/LOGO-LIGHT-MODE.png';
+  const headerLogo = '/BLS-NEW-LOGO.png';
 
 
   return (
@@ -113,8 +114,8 @@ export function Header() {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-500",
         "md:opacity-100 md:translate-y-0",
-        isHomePage && !scrolled && "md:opacity-0 md:-translate-y-full",
-        !isHomePage || scrolled
+        !scrolled && "md:opacity-0 md:-translate-y-full",
+        scrolled
           ? "bg-background/[.03] backdrop-blur-sm"
           : "bg-transparent"
       )}
@@ -129,6 +130,7 @@ export function Header() {
               <Link
                 key={link.name}
                 href={getHref(link)}
+                data-cursor="GO"
                 onClick={(e) => handleNavClick(e, link.href)}
                 className="relative group py-2 text-destructive uppercase tracking-wider text-base font-bold"
               >
@@ -140,7 +142,7 @@ export function Header() {
         
         <div className="flex-1 flex justify-end">
             <div className="hidden lg:flex items-center gap-2">
-                <Button asChild variant="default" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
+                <Button asChild variant="default" data-cursor="GO" className="rounded-full px-6 transition-all duration-300 shadow-[0_0_25px_hsl(var(--primary)/0.3)] border border-primary hover:bg-background hover:text-accent-foreground hover:border-foreground/50 hover:shadow-none">
                 <Link href="#contact" onClick={handleLetsTalkClick}>
                     Let's Talk
                 </Link>

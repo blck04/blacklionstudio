@@ -60,7 +60,7 @@ export default function RootLayout({
             "@type": "Organization",
             "name": "BLACK LION STUDIO",
             "url": "https://blacklion.studio",
-            "logo": "https://blacklion.studio/LOGO-LIGHT-MODE.png",
+            "logo": "https://blacklion.studio/BLS-NEW-LOGO.png",
             "sameAs": [
               "https://www.facebook.com/",
               "https://www.twitter.com/",
