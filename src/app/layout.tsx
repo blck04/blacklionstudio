@@ -4,10 +4,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import ScrollRestoration from '@/components/scroll-restoration';
 import { PageWrapper } from '@/components/page-wrapper';
-import { ConditionalHeader } from '@/components/conditional-header';
+import { Header } from '@/components/header';
 import { Analytics } from "@vercel/analytics/react"
 import { AuthProvider } from '@/components/auth-provider';
-import { SmoothScroll } from '@/components/smooth-scroll';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://blacklion.studio'),
@@ -73,15 +72,13 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased")}>
         <AuthProvider>
-          <SmoothScroll>
-            <ConditionalHeader />
-            <PageWrapper>
-              <ScrollRestoration />
-              {children}
-            </PageWrapper>
-            <Toaster />
-            <Analytics />
-          </SmoothScroll>
+          <Header />
+          <PageWrapper>
+            <ScrollRestoration />
+            {children}
+          </PageWrapper>
+          <Toaster />
+          <Analytics />
         </AuthProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@
 
 @layer base {
   html {
+    @apply scroll-smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
