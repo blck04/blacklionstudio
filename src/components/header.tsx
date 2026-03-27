@@ -20,18 +20,21 @@ export function Header() {
   const isManagerPage = pathname === '/manager';
 
   useEffect(() => {
-    if (isProjectPage || isManagerPage || isHomePage) {
-      const handleScroll = () => {
-        const isScrolled = window.scrollY > 20;
-        setScrolled(isScrolled);
-      };
-
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); // Check on mount
-      
-      return () => window.removeEventListener('scroll', handleScroll);
+    if (!isHomePage) {
+      setScrolled(true);
+      return;
     }
-  }, [pathname, isProjectPage, isManagerPage, isHomePage]);
+
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Check on mount
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname, isHomePage]);
 
 
   if (isProjectPage || isManagerPage) {

@@ -72,13 +72,13 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased")}>
         <AuthProvider>
+          <Header />
           <PageWrapper>
-            <Header />
             <ScrollRestoration />
             {children}
-            <Toaster />
-            <Analytics />
           </PageWrapper>
+          <Toaster />
+          <Analytics />
         </AuthProvider>
       </body>
     </html>
