@@ -136,7 +136,6 @@ export function Header() {
                   className="relative group py-2 text-destructive uppercase tracking-wider text-base font-bold"
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-0 block w-full h-[1px] bg-destructive scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
                 </Link>
               </Magnetic>
             ))}

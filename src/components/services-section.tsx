@@ -90,21 +90,21 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                       </div>
                     </div>
                     
-                    {!isExpanded && (
-                      <div className={cn(
-                        "overflow-hidden relative flex-shrink-0 transition-all duration-500 ease-in-out self-center w-5/12 h-24 md:w-48 md:h-[120px] rounded-full shadow-[0_0_0_2px_hsl(var(--secondary)),0_0_0_4px_hsl(var(--destructive))]"
-                      )}>
-                        <Image
-                          src={service.imageUrl}
-                          alt={service.title}
-                          fill
-                          className={cn(
-                              "object-cover w-full h-full transition-transform duration-500 ease-in-out",
-                              "group-hover:scale-110"
-                          )}
-                        />
-                      </div>
-                    )}
+                    <div className={cn(
+                      "overflow-hidden relative flex-shrink-0 transition-all duration-500 ease-in-out self-center rounded-full shadow-[0_0_0_2px_hsl(var(--secondary)),0_0_0_4px_hsl(var(--destructive))]",
+                      isExpanded ? "w-0 h-0 opacity-0 pointer-events-none" : "w-5/12 h-24 md:w-48 md:h-[120px] opacity-100"
+                    )}>
+                      <Image
+                        src={service.imageUrl}
+                        alt={service.title}
+                        fill
+                        className={cn(
+                            "object-cover w-full h-full transition-transform duration-500 ease-in-out",
+                            "group-hover:scale-110"
+                        )}
+                        priority
+                      />
+                    </div>
                   </div>
                 </div>
               </ScrollAnimation>

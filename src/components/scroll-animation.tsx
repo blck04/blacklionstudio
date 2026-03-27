@@ -73,7 +73,7 @@ export function ScrollAnimation({
     <div
       ref={ref}
       className={cn(
-        "transition-all ease-out duration-700",
+        "transition-[opacity,transform] ease-out duration-700",
         isInView ? currentAnimation.in : currentAnimation.out,
         className
       )}

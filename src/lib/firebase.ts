@@ -1,24 +1,32 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
-// Fallback to individual env vars if FIREBASE_WEBAPP_CONFIG is not available
-const firebaseConfig = process.env.FIREBASE_WEBAPP_CONFIG 
-  ? JSON.parse(process.env.FIREBASE_WEBAPP_CONFIG)
-  : {
-      apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-      authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-      messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-      appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-    };
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+};
+
+// On the server (e.g., during build or sitemap generation), 
+// override with FIREBASE_WEBAPP_CONFIG if available from Firebase App Hosting
+if (typeof window === 'undefined' && process.env.FIREBASE_WEBAPP_CONFIG) {
+  try {
+    const config = JSON.parse(process.env.FIREBASE_WEBAPP_CONFIG);
+    Object.assign(firebaseConfig, config);
+  } catch (e) {
+    console.error("Error parsing FIREBASE_WEBAPP_CONFIG:", e);
+  }
+}
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);

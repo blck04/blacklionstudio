@@ -123,39 +123,37 @@ export function HeroSection() {
 
             {/* Scroll Arrow - Positioned precisely at bottom-right of the cutout */}
             <div className="absolute bottom-10 right-4">
-                <Magnetic>
-                    <Link
-                        href="#about"
-                        onClick={(e) => handleScrollTo(e, 'about')}
-                        aria-label="Scroll to about section"
-                        data-cursor="VIEW"
-                        className="flex flex-col items-center justify-center transition-all duration-300"
+                <Link
+                    href="#about"
+                    onClick={(e) => handleScrollTo(e, 'about')}
+                    aria-label="Scroll to about section"
+                    data-cursor="VIEW"
+                    className="flex flex-col items-center justify-center transition-all duration-300"
+                >
+                    <svg
+                        width="28"
+                        height="40"
+                        viewBox="0 0 28 40"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-16 w-8 text-[#8A0000] animate-bounce"
                     >
-                        <svg
-                            width="28"
-                            height="40"
-                            viewBox="0 0 28 40"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-16 w-8 text-[#8A0000] animate-bounce"
-                        >
-                            <path
-                                d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
-                                stroke="currentColor"
-                                strokeWidth="3"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M14 1V33"
-                                stroke="currentColor"
-                                strokeWidth="3"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </Link>
-                </Magnetic>
+                        <path
+                            d="M1 21C1 21 12.5818 29.991 14 39C15.4182 29.991 27 21 27 21"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                        <path
+                            d="M14 1V33"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </Link>
             </div>
         </div>
 
