@@ -14,19 +14,16 @@ export function WorkSection({ projects }: WorkSectionProps) {
     <section id="work" className="py-20 md:py-32 text-foreground border-t-2 overflow-x-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
         <ScrollAnimation>
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
-            <div className="text-center md:text-left">
-              <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-tighter text-primary">
-                <span className="text-destructive">O</span>UR WORK
-              </h2>
-            </div>
-            <div className="text-center md:text-right">
-              <p className="text-muted-foreground text-balance">
-                A selection of projects that we're proud of.
-              </p>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end mb-16 md:mb-24">
+            <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-tighter text-primary leading-none m-0 p-0 text-center md:text-left">
+              <span className="text-destructive">O</span>UR WORK
+            </h2>
+            <p className="text-muted-foreground text-balance m-0 pb-[29px] text-center md:text-right text-xs leading-relaxed uppercase tracking-widest">
+              An archive of resonance. A curated selection of digital artifacts that redefine expectation. These projects represent the convergence of ruthless precision and artistic soul, each one a testament to our pursuit of the extraordinary in a world of digital noise.
+            </p>
           </div>
         </ScrollAnimation>
+
         <div className="flex flex-col gap-20 md:gap-32">
           {projects.map((project, i) => {
             const isEven = i % 2 === 0;

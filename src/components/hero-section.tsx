@@ -107,10 +107,10 @@ export function HeroSection() {
         <div className="absolute bottom-0 right-0 w-[550px] h-[250px] flex items-start justify-between p-12 z-30 text-left">
             <div className="space-y-4 max-w-[420px]">
                 <h3 className="font-headline text-4xl font-bold tracking-tighter uppercase leading-none text-black">
-                    CRAFTING DIGITAL <span className="text-[#8A0000]">EXCELLENCE</span>
+                    DEFINING THE DIGITAL <span className="text-[#8A0000]">AVANT-GARDE</span>
                 </h3>
                 <p className="text-muted-foreground text-xs leading-relaxed uppercase tracking-widest">
-                    WE TRANSFORM BOLD VISIONS INTO PRECISE, HIGH-IMPACT REALITIES. OUR STUDIO BLENDS ARCHITECTURAL PRECISION WITH CREATIVE SOUL TO BUILD EXPERIENCES THAT RESONATE. BY HARNESSING CUTTING-EDGE TECHNOLOGY AND REFINED DESIGN, WE ARCHITECT THE FUTURE OF DIGITAL NARRATIVES.
+                    WE TRANSCEND THE CONVENTIONAL. BLACK LION STUDIO ARCHITECTS DIGITAL SANCTUARIES WHERE PRECISION MEETS SOUL. WE DON'T JUST BUILD INTERFACES; WE PROVOKE RESONANCE AND DEFINE THE FUTURE OF NARRATIVE-DRIVEN DESIGN.
                 </p>
                 <Link 
                     href="/process" 
@@ -182,9 +182,9 @@ export function HeroSection() {
                 rows={12} 
                 columns={20} 
                 containerSize="100%" 
-                lineColor="#8A0000" 
+                lineColor="#600000" 
                 outlineThickness="4px"
-                style={{ opacity: 0.75 }}
+                style={{ opacity: 0.85 }}
             />
           </div>
 

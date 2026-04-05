@@ -1,29 +1,29 @@
-# About Black Lion Studio
+# About Black Lion Studio: The Vision
 
-## Our Mission
-To architect digital experiences that not only perform but truly resonate. We transform bold visions into precise, high-impact realities through a blend of strategic foresight and creative mastery.
+## The Vision
+To elevate the digital landscape through radical intentionality. We empower visionaries to lead by providing them with the architectural foundations and creative soul required to leave an indelible mark.
 
-## Our Values
-- **Architectural Precision**: Meticulous attention to every detail, from the first line of code to the final pixel.
-- **Creative Soul**: Infusing every project with a unique narrative and artistic vision.
-- **Unwavering Quality**: A commitment to excellence that ensures every touchpoint is high-impact and enduring.
+## Our Distinction
+- **Architectural Precision**: Ruthless attention to every structural detail, ensuring aesthetic elegance is underpinned by high-performance integrity.
+- **Creative Soul**: Infusing every project with a unique narrative and artistic provocation.
+- **Radical Intentionality**: A commitment to excellence where every pixel and every line of code is a deliberate choice.
 
-## The Black Lion Process
-Our workflow is a disciplined, multi-step journey designed to ensure clarity, creativity, and measurable results.
-1.  **Immersive Research**: Deeply understanding your brand's DNA.
-2.  **Strategic Design**: Crafting the blueprint for success.
-3.  **Meticulous Craft**: Building the final experience with zero compromise.
-4.  **Rigorous Launch**: Ensuring excellence at every step of deployment.
+## The Evolution: Our Process
+Our workflow is a disciplined journey of deconstruction and rebirth.
+1.  **DECONSTRUCTION**: Dismantling existing paradigms to uncover core truths.
+2.  **ARCHITECTURE**: Crafting the blueprint with ruthless precision.
+3.  **REALIZATION**: Engineering the final experience with uncompromising craft.
+4.  **ASCENSION**: Refining for maximum resonance and seamless transition into the digital consciousness.
 
 ---
 
 # Journal Structure & Roadmap
 
 ## Proposed Topics
-- **Design Philosophy**: The role of architectural precision in modern digital products.
-- **Technical Deep-Dives**: Why we choose React and Next.js for high-performance studio sites.
-- **Studio Insights**: Behind-the-scenes of our latest projects and collaborative sessions.
-- **Trends & Forecasts**: Our perspective on the evolving landscape of high-end UI/UX.
+- **Design Philosophy**: The role of radical intentionality in modern digital artifacts.
+- **Technical Evolution**: Why we architect with Next.js for high-performance studio sites.
+- **Studio Insights**: Behind-the-scenes of our most provocative projects.
+- **Trends & Forecasts**: Our perspective on the evolving landscape of high-end UI/UX and the digital avant-garde.
 
 ## Sample Journal Schema (for CMS)
 - **Title**: String

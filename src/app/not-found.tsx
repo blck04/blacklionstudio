@@ -28,10 +28,10 @@ export default function NotFound() {
             className="space-y-6"
           >
             <h2 className="font-headline text-4xl font-bold uppercase tracking-tighter text-foreground md:text-6xl">
-              LOST IN THE <span className="text-destructive">VOID</span>
+              BEYOND THE <span className="text-destructive">FRONTIER</span>
             </h2>
             <p className="mx-auto max-w-md text-muted-foreground">
-              The page you are looking for has been architected out of existence or moved to a new coordinate.
+              The coordinate you seek does not exist within this architecture. It has either been deconstructed or relocated to a new digital dimension.
             </p>
             <div className="pt-4">
               <Button asChild variant="outline" className="rounded-full border-2 border-primary px-8 h-12 hover:bg-primary hover:text-primary-foreground font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300">

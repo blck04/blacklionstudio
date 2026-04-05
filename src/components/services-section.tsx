@@ -24,19 +24,16 @@ export function ServicesSection({ services }: ServicesSectionProps) {
     <section id="services" className="py-20 md:py-32 text-foreground border-t-2 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-screen-xl">
         <ScrollAnimation>
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-24">
-            <div className="text-center md:order-last md:text-right">
-              <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-tighter text-primary text-center md:text-right">
-                <span className="text-destructive">S</span>ERVICES
-              </h2>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-muted-foreground text-balance text-center md:text-left">
-                We use the power of design to solve complex problems and cultivate business solutions.
-              </p>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end mb-16 md:mb-24">
+            <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-tighter text-primary text-center md:text-right leading-none m-0 p-0 md:order-last">
+              <span className="text-destructive">S</span>ERVICES
+            </h2>
+            <p className="text-muted-foreground text-balance text-center md:text-left m-0 pb-[29px] text-xs leading-relaxed uppercase tracking-widest">
+              We architect the invisible. Design is our tool for deconstructing complexity and rebuilding it into elegant, high-performance systems that drive evolution. Through strategic foresight and meticulous execution, we transform abstract potential into high-impact digital artifacts that redefine the standards of modern engagement.
+            </p>
           </div>
         </ScrollAnimation>
+
         
         <div className="flex flex-col gap-4">
           {services.map((service, index) => {
