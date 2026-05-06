@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
@@ -13,11 +13,8 @@ export function Header() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   const isHomePage = pathname === '/';
-  const isProjectPage = pathname.startsWith('/work/');
-  const isManagerPage = pathname === '/manager';
 
   useEffect(() => {
     if (!isHomePage) {
@@ -34,10 +31,10 @@ export function Header() {
     handleScroll(); // Check on mount
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname, isHomePage]);
+  }, [isHomePage]);
 
 
-  if (isProjectPage || isManagerPage) {
+  if (!isHomePage) {
     return null;
   }
 
@@ -51,7 +48,6 @@ export function Header() {
   ];
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // For page links like '/manager', let the Link component handle it.
     if (href.startsWith('/')) {
       setIsSheetOpen(false);
       return;
@@ -61,53 +57,38 @@ export function Header() {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
 
-    if (isHomePage) {
-        if (targetElement) {
-            const headerOffset = 0; // No offset
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth"
-            });
-        }
+    if (targetElement) {
+        const headerOffset = 0; // No offset
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
     } else {
-      router.push(`/${href}`);
+      window.location.assign(`/${href}`);
     }
     setIsSheetOpen(false);
   };
   
   const handleLetsTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (isHomePage) {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            const headerOffset = 0; // No offset
-            const elementPosition = contactSection.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-        }
-    } else {
-        router.push('/#contact');
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        const headerOffset = 0; // No offset
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
     }
     setIsSheetOpen(false);
   };
 
   const getHref = (link: { href: string }) => {
-    if (link.href.startsWith('/')) {
-      return link.href; // It's a page link
-    }
-    if (isHomePage) {
-      return link.href; // It's a hash on the home page
-    }
-    if (link.href === '#home') {
-      return '/'; // Special case for home
-    }
-    return `/${link.href}`; // It's a hash on another page
+    return link.href;
   };
   
   const headerLogo = '/BLS-NEW-LOGO.png';
@@ -117,6 +98,7 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-500",
+        isHomePage && "hidden md:block",
         "md:opacity-100 md:translate-y-0",
         !scrolled && "md:opacity-0 md:-translate-y-full",
         scrolled
@@ -157,32 +139,35 @@ export function Header() {
             <div className="lg:hidden">
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                     <SheetTrigger asChild>
-                        <Button variant="outline" className="rounded-full px-6 transition-all duration-300 hover:bg-background hover:text-accent-foreground border-foreground/50 hover:shadow-none">
+                        <Button
+                          variant="outline"
+                          className="inline-flex h-11 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center !font-headline text-lg !font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black"
+                        >
                             Menu
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-[300px] bg-background/[.03] backdrop-blur-md p-0 border-none">
-                        <SheetTitle className="sr-only">Menu</SheetTitle>
-                        <div className="flex flex-col h-full">
-                            <nav className="flex flex-col gap-1 p-6 pt-24">
+                    <SheetContent side="right" className="w-[280px] border-l border-white/10 bg-black/95 p-0 text-white">
+                        <SheetTitle className="sr-only">Mobile menu</SheetTitle>
+                        <div className="flex h-full flex-col px-6 pb-8 pt-20">
+                            <nav className="flex flex-col gap-3">
                                 {navLinks.map((link) => (
                                     <Link
                                         key={link.name}
                                         href={getHref(link)}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="py-3 text-6xl font-headline font-bold tracking-tighter transition-colors uppercase text-destructive-foreground"
+                                        className="font-headline text-4xl uppercase tracking-[0.08em] text-white transition-colors hover:text-[#8A0000]"
                                     >
-                                      <span className="text-destructive">{link.name.charAt(0)}</span>{link.name.slice(1)}
+                                      {link.name}
                                     </Link>
                                 ))}
                             </nav>
-                            <div className="mt-auto p-6">
-                                <Button asChild size="lg" className="w-full rounded-full">
-                                    <Link href="#contact" onClick={handleLetsTalkClick}>
-                                        Let's Talk
-                                    </Link>
-                                </Button>
-                            </div>
+                            <Link
+                              href="#contact"
+                              onClick={handleLetsTalkClick}
+                              className="mt-auto text-sm font-bold uppercase tracking-[0.25em] text-[#D10000]"
+                            >
+                              Let&apos;s talk
+                            </Link>
                         </div>
                     </SheetContent>
                 </Sheet>

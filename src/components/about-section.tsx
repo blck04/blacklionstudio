@@ -47,7 +47,7 @@ export function AboutSection() {
           {accordionItems.map((item, index) => (
             <ScrollAnimation delay={(index + 1) * 200} key={item.value}>
               <AccordionItem value={item.value}>
-                <AccordionTrigger className="text-xl md:text-3xl 2xl:text-4xl font-headline font-bold uppercase py-8 text-left">
+                <AccordionTrigger className="text-2xl md:text-3xl 2xl:text-4xl font-headline font-bold uppercase py-8 text-left">
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent>
