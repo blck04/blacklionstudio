@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { ArrowRight } from 'lucide-react';
 
 import { Button } from "@/components/ui/button";
@@ -16,29 +16,56 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { contactFormSchema, type ContactFormValues } from "@/lib/contact-form-schema";
 import Magnetic from "./ui/magnetic";
-
-const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  message: z.string().min(10, "Message must be at least 10 characters."),
-});
 
 export function ContactForm() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. We'll get back to you soon.",
-    });
-    form.reset();
+  async function onSubmit(values: ContactFormValues) {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const payload = (await response.json().catch(() => null)) as { message?: string } | null;
+
+      if (!response.ok) {
+        toast({
+          variant: "destructive",
+          title: "Message not sent",
+          description: payload?.message ?? "We couldn't send your message right now. Please try again.",
+        });
+        return;
+      }
+
+      toast({
+        title: "Message sent",
+        description: payload?.message ?? "Thanks for reaching out. We'll get back to you soon.",
+      });
+      form.reset();
+    } catch (error) {
+      console.error("Failed to submit contact form:", error);
+      toast({
+        variant: "destructive",
+        title: "Message not sent",
+        description: "We couldn't send your message right now. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -83,8 +110,8 @@ export function ContactForm() {
           )}
         />
         <Magnetic>
-            <Button type="submit" size="lg" className="group rounded-full px-8 py-7 text-lg w-full">
-            Send Message
+            <Button type="submit" size="lg" disabled={isSubmitting} className="group w-full rounded-full px-8 py-7 text-lg">
+            {isSubmitting ? "Sending..." : "Send Message"}
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
         </Magnetic>
