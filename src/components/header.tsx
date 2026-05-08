@@ -46,6 +46,14 @@ export function Header() {
     { name: 'Journal', href: '/journal' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  const mobileNavLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Work', href: '#work' },
+    { name: 'Journal', href: '/journal' },
+    { name: 'Contact', href: '#contact' },
+  ];
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('/')) {
@@ -87,10 +95,6 @@ export function Header() {
     setIsSheetOpen(false);
   };
 
-  const getHref = (link: { href: string }) => {
-    return link.href;
-  };
-  
   const headerLogo = '/BLS-NEW-LOGO.png';
 
 
@@ -113,7 +117,7 @@ export function Header() {
             {navLinks.map((link) => (
               <Magnetic key={link.name}>
                 <Link
-                  href={getHref(link)}
+                  href={link.href}
                   data-cursor="GO"
                   onClick={(e) => handleNavClick(e, link.href)}
                   className="relative group py-2 text-destructive uppercase tracking-wider text-base font-bold"
@@ -152,23 +156,23 @@ export function Header() {
                         <SheetTitle className="sr-only">Mobile menu</SheetTitle>
                         <div className="flex h-full flex-col px-6 pb-8 pt-20">
                             <nav className="flex flex-col gap-3">
-                                {navLinks.map((link) => (
+                                {mobileNavLinks.map((link) => (
                                     <Link
                                         key={link.name}
-                                        href={getHref(link)}
+                                        href={link.href}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="font-headline text-4xl uppercase tracking-[0.08em] text-white transition-colors hover:text-[#8A0000]"
+                                        className="font-headline text-3xl uppercase tracking-tight text-white transition-colors hover:text-[#8A0000] sm:text-4xl md:text-5xl"
                                     >
                                       {link.name}
                                     </Link>
                                 ))}
                             </nav>
                             <Link
-                              href="#contact"
-                              onClick={handleLetsTalkClick}
-                              className="mt-auto text-sm font-bold uppercase tracking-[0.25em] text-[#D10000]"
+                              href="/process"
+                              onClick={() => setIsSheetOpen(false)}
+                              className="mt-auto text-xs font-bold uppercase tracking-[0.25em] text-[#D10000] sm:text-sm md:text-base"
                             >
-                              Let&apos;s talk
+                              Our process
                             </Link>
                         </div>
                     </SheetContent>

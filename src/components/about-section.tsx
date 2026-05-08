@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/accordion"
 import { ScrollAnimation } from "./scroll-animation";
 import Link from "next/link";
-import Magnetic from "./ui/magnetic";
 
 export function AboutSection() {
   const accordionItems = [
