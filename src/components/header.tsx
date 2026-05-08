@@ -98,9 +98,7 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-500",
-        isHomePage && "hidden md:block",
-        "md:opacity-100 md:translate-y-0",
-        !scrolled && "md:opacity-0 md:-translate-y-full",
+        !scrolled && "pointer-events-none opacity-0 -translate-y-full",
         scrolled
           ? "bg-background/[.03] backdrop-blur-sm"
           : "bg-transparent"
@@ -141,9 +139,9 @@ export function Header() {
                     <SheetTrigger asChild>
                         <Button
                           variant="outline"
-                          className="inline-flex h-9 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center !font-headline text-lg !font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black"
+                          className="inline-flex h-9 items-center justify-center rounded-full border-2 border-black bg-[#8A0000] px-5 !py-0 text-center !font-headline text-lg uppercase tracking-[0.08em] text-black shadow-[0_0_20px_rgba(138,0,0,0.35)] backdrop-blur-sm transition-all duration-300 hover:bg-[#6f0000] hover:border-black hover:text-black"
                         >
-                            Menu
+                            <span className="mt-[4px] inline-block">Menu</span>
                         </Button>
                     </SheetTrigger>
                     <SheetContent

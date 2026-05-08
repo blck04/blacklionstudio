@@ -96,9 +96,9 @@ export function HeroSection() {
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
-                  className="inline-flex h-9 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center font-headline text-base font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm hover:bg-white hover:text-black sm:text-lg md:text-xl"
+                  className="inline-flex h-9 items-center justify-center rounded-full border-2 border-black bg-[#8A0000] px-5 !py-0 text-center font-headline text-base uppercase tracking-[0.08em] text-black shadow-[0_0_20px_rgba(138,0,0,0.35)] backdrop-blur-sm hover:bg-[#6f0000] hover:border-black hover:text-black sm:text-lg md:text-xl"
                 >
-                  Menu
+                  <span className="mt-[4px] inline-block">Menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent 
