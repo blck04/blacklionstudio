@@ -141,12 +141,16 @@ export function Header() {
                     <SheetTrigger asChild>
                         <Button
                           variant="outline"
-                          className="inline-flex h-11 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center !font-headline text-lg !font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black"
+                          className="inline-flex h-9 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center !font-headline text-lg !font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black"
                         >
                             Menu
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-[280px] border-l border-white/10 bg-black/95 p-0 text-white">
+                    <SheetContent
+                        side="right"
+                        onCloseAutoFocus={(e) => e.preventDefault()}
+                        className="w-[280px] border-l border-white/10 bg-black/95 p-0 text-white"
+                    >
                         <SheetTitle className="sr-only">Mobile menu</SheetTitle>
                         <div className="flex h-full flex-col px-6 pb-8 pt-20">
                             <nav className="flex flex-col gap-3">

@@ -39,8 +39,11 @@ export function HeroSection() {
     const element = document.getElementById(id);
     if (element) {
         setIsMenuOpen(false);
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset;
+
         window.scrollTo({
-          top: element.offsetTop,
+          top: offsetPosition,
           behavior: 'smooth',
         });
     }
@@ -67,8 +70,8 @@ export function HeroSection() {
       className="relative w-full overflow-hidden bg-background"
       style={{ backgroundImage: "url('/asfalt-dark.png')", backgroundRepeat: 'repeat', backgroundAttachment: 'fixed' }}
     >
-      <div className="flex min-h-svh flex-col md:hidden">
-        <div className="relative min-h-[50svh] flex-[0_0_50svh] overflow-hidden bg-black">
+      <div className="flex h-[100dvh] min-h-[100svh] max-h-[100dvh] flex-col overflow-hidden lg:hidden">
+        <div className="relative flex-[0_0_48%] overflow-hidden bg-black">
           <Image
             src="/bls-hero.png"
             alt="Black Lion Studio hero artwork"
@@ -93,19 +96,23 @@ export function HeroSection() {
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
-                  className="inline-flex h-11 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center font-headline text-lg font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm hover:bg-white hover:text-black"
+                  className="inline-flex h-9 items-center justify-center rounded-full border-2 border-white bg-black/20 px-5 text-center font-headline text-base font-bold uppercase tracking-[0.08em] text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm hover:bg-white hover:text-black sm:text-lg md:text-xl"
                 >
                   Menu
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] border-l border-white/10 bg-black/95 p-0 text-white">
+              <SheetContent 
+                side="right" 
+                onCloseAutoFocus={(e) => e.preventDefault()}
+                className="w-[280px] border-l border-white/10 bg-black/95 p-0 text-white"
+              >
                 <SheetTitle className="sr-only">Mobile menu</SheetTitle>
                 <div className="flex h-full flex-col px-6 pb-8 pt-20">
                   <nav className="flex flex-col gap-3">
                     {navLinks.map((link) => (
                       <Link
                         key={link.name}
-                        href={link.href.startsWith('#') ? `/${link.href}` : link.href}
+                        href={link.href}
                         onClick={(e) => {
                           if (link.href.startsWith('#')) {
                             handleScrollTo(e, link.href.substring(1));
@@ -113,7 +120,7 @@ export function HeroSection() {
                           }
                           setIsMenuOpen(false);
                         }}
-                        className="font-headline text-4xl uppercase tracking-tight text-white transition-colors hover:text-[#8A0000]"
+                        className="font-headline text-3xl uppercase tracking-tight text-white transition-colors hover:text-[#8A0000] sm:text-4xl md:text-5xl"
                       >
                         {link.name}
                       </Link>
@@ -122,7 +129,7 @@ export function HeroSection() {
                   <Link
                     href="/process"
                     onClick={() => setIsMenuOpen(false)}
-                    className="mt-auto text-sm font-bold uppercase tracking-[0.25em] text-[#D10000]"
+                    className="mt-auto text-xs font-bold uppercase tracking-[0.25em] text-[#D10000] sm:text-sm md:text-base"
                   >
                     Our process
                   </Link>
@@ -133,20 +140,20 @@ export function HeroSection() {
         </div>
 
         <div
-          className="flex flex-1 flex-col items-center justify-between border-t border-black/10 bg-background px-5 pb-10 pt-7 text-center"
+          className="flex min-h-0 flex-1 flex-col items-center justify-between border-t border-black/10 bg-background px-5 pb-6 pt-5 text-center sm:pb-8 sm:pt-6"
           style={{
             backgroundImage: "url('/asfalt-dark.png')",
             backgroundRepeat: 'repeat',
             backgroundAttachment: 'fixed',
           }}
         >
-          <div>
-            <h1 className="font-headline text-6xl font-bold uppercase leading-none tracking-tighter text-black">
+          <div className="min-h-0">
+            <h1 className="font-headline text-[2.85rem] font-bold uppercase leading-[0.9] tracking-tighter text-black sm:text-6xl md:text-7xl">
               <span className="block">Defining the Digital</span>
               <span className="mt-1 block text-[#8A0000]">Avant-Garde</span>
             </h1>
 
-            <p className="mx-auto mt-7 max-w-[19rem] font-mono text-[0.95rem] leading-[1.15] tracking-[0.12em] text-black">
+            <p className="mx-auto mt-5 max-w-[17.5rem] font-mono text-[0.72rem] leading-[1.25] tracking-[0.1em] text-black sm:mt-6 sm:max-w-[20rem] sm:text-[0.82rem] md:max-w-[30rem] md:text-[0.95rem]">
               WE TRANSCEND THE CONVENTIONAL. BLACK LION STUDIO ARCHITECTS DIGITAL SANCTUARIES WHERE PRECISION MEETS SOUL. WE DON&apos;T JUST BUILD INTERFACES; WE PROVOKE RESONANCE AND DEFINE THE FUTURE OF NARRATIVE-DRIVEN DESIGN.
             </p>
 
@@ -157,7 +164,7 @@ export function HeroSection() {
             onClick={(e) => handleScrollTo(e, 'about')}
             aria-label="Scroll to about section"
             data-cursor="VIEW"
-            className="mt-8 flex items-center justify-center"
+            className="mt-4 flex items-center justify-center sm:mt-6"
           >
             <svg
               width="28"
@@ -186,7 +193,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="relative hidden h-svh items-center justify-center overflow-hidden p-8 md:flex">
+      <div className="relative hidden h-svh items-center justify-center overflow-hidden p-8 lg:flex">
         <div
           className="relative h-full w-full flex-shrink-0 transition-all duration-300"
           style={{ width: `${w}px`, height: `${h}px` }}
@@ -208,7 +215,7 @@ export function HeroSection() {
             </Link>
           </div>
 
-          <div className="absolute top-0 right-0 z-30 flex h-[80px] w-[650px] items-start justify-end gap-3 px-6">
+          <div className="absolute top-0 right-0 z-30 flex h-[80px] w-[650px] items-center justify-end gap-6 px-6">
             {[
               { name: 'About', href: '#about' },
               { name: 'Services', href: '/#services' },
@@ -217,18 +224,14 @@ export function HeroSection() {
               { name: 'Get in Touch', href: '#contact' },
             ].map((link) => (
               <Magnetic key={link.name}>
-                <Button
-                  variant="outline"
-                  asChild
+                <Link
+                  href={link.href}
+                  onClick={(e) => link.href.startsWith('#') ? handleScrollTo(e, link.href.substring(1)) : undefined}
                   data-cursor="GO"
-                  className="group mt-0.5 flex h-11 w-28 items-center justify-center rounded-full border-2 border-[#8A0000] bg-transparent p-0 text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A0000] transition-all duration-300 hover:bg-[#8A0000] hover:text-white"
+                  className="font-headline text-[1.75rem] font-bold uppercase leading-none tracking-[0.06em] text-black transition-colors duration-300 hover:text-[#8A0000]"
                 >
-                  <Link href={link.href} onClick={(e) => link.href.startsWith('#') ? handleScrollTo(e, link.href.substring(1)) : undefined}>
-                    <span className="transition-all duration-300 group-hover:scale-110 group-hover:font-black">
-                      {link.name}
-                    </span>
-                  </Link>
-                </Button>
+                  {link.name}
+                </Link>
               </Magnetic>
             ))}
           </div>
