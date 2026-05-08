@@ -70,7 +70,7 @@ export function HeroSection() {
       className="relative w-full overflow-hidden bg-background"
       style={{ backgroundImage: "url('/asfalt-dark.png')", backgroundRepeat: 'repeat', backgroundAttachment: 'fixed' }}
     >
-      <div className="flex h-[100dvh] min-h-[100svh] max-h-[100dvh] flex-col overflow-hidden lg:hidden">
+      <div className="flex h-[100svh] flex-col overflow-hidden lg:hidden">
         <div className="relative flex-[0_0_48%] overflow-hidden bg-black">
           <Image
             src="/bls-hero.png"

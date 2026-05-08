@@ -51,13 +51,13 @@ export function AboutSection() {
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-muted-foreground mb-4 text-center md:text-left">
                     {item.content}
                   </p>
                   {item.link && (
                     <Link 
                       href={item.link.href}
-                      className="inline-block text-destructive font-bold uppercase tracking-widest text-xs transition-all"
+                      className="block w-fit mx-auto md:mx-0 text-destructive font-bold uppercase tracking-widest text-xs transition-all"
                     >
                       {item.link.text} →
                     </Link>
