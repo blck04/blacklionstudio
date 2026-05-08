@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import MagnetLines from './magnet-lines';
 import Magnetic from './ui/magnetic';
 
 export function HeroSection() {
@@ -298,6 +299,17 @@ export function HeroSection() {
                 fill
                 className="object-cover object-center"
                 priority
+              />
+            </div>
+            <div className="absolute inset-0 z-[5] bg-black/65 pointer-events-none" />
+            <div className="absolute inset-0 z-10 pointer-events-none">
+              <MagnetLines
+                rows={12}
+                columns={20}
+                containerSize="100%"
+                lineColor="#600000"
+                outlineThickness="4px"
+                style={{ opacity: 0.85 }}
               />
             </div>
           </div>
